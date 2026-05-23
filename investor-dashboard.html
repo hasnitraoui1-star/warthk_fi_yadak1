@@ -1,0 +1,791 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - مستثمر | ورثك فاليد - الحل السريع</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green-dark: #006633;
+            --green-light: #00A859;
+            --green-bg: #e6f5ee;
+            --red: #D21034;
+            --red-light: #fde8ec;
+            --white: #FFFFFF;
+            --off-white: #F8F9FA;
+            --gray-50: #F7F8FA;
+            --gray-100: #F0F2F5;
+            --gray-200: #E4E7EB;
+            --gray-300: #CBD2D9;
+            --gray-400: #9BA5B2;
+            --gray-500: #7B8794;
+            --gray-700: #3E4C59;
+            --gray-900: #1F2933;
+            --shadow-xs: 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.05);
+            --radius-sm: 8px;
+            --radius: 12px;
+            --radius-lg: 16px;
+            --transition: 0.2s ease;
+            --investor-accent: #1e5f74;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #f0f5f2 0%, #eaf5ee 100%);
+            min-height: 100vh;
+            color: var(--gray-900);
+            line-height: 1.6;
+        }
+
+        /* Top Navigation */
+        .top-nav {
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+            padding: 0 24px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: var(--shadow-xs);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--green-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 18px;
+        }
+
+        .logo-text-nav {
+            font-weight: 800;
+            font-size: 18px;
+            color: var(--green-dark);
+            letter-spacing: 0.5px;
+        }
+
+        .wilaya-tag {
+            display: inline-flex;
+            align-items: center;
+            background: var(--green-bg);
+            color: var(--green-dark);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+
+        .user-area {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .notification-bell {
+            position: relative;
+            cursor: pointer;
+            font-size: 22px;
+            color: var(--gray-700);
+            transition: color var(--transition);
+        }
+
+        .notification-bell:hover {
+            color: var(--green-dark);
+        }
+
+        .badge {
+            position: absolute;
+            top: -6px;
+            right: -8px;
+            background: var(--red);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 10px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .user-dropdown {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 6px 10px;
+            border-radius: var(--radius);
+            transition: background var(--transition);
+            background: var(--gray-50);
+        }
+
+        .user-dropdown:hover {
+            background: var(--gray-100);
+        }
+
+        .user-avatar {
+            width: 34px;
+            height: 34px;
+            background: var(--investor-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .user-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-name {
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--gray-900);
+            line-height: 1.2;
+        }
+
+        .user-role {
+            font-size: 11px;
+            color: #fff;
+            background: var(--investor-accent);
+            padding: 1px 8px;
+            border-radius: 20px;
+            display: inline-block;
+            width: fit-content;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 60px;
+            left: 24px;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            width: 200px;
+            z-index: 200;
+            overflow: hidden;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 16px;
+            color: var(--gray-700);
+            text-decoration: none;
+            font-weight: 500;
+            transition: background var(--transition);
+            font-size: 14px;
+        }
+
+        .dropdown-menu a:hover {
+            background: var(--gray-100);
+            color: var(--green-dark);
+        }
+
+        .dropdown-menu a.logout {
+            color: var(--red);
+            border-top: 1px solid var(--gray-200);
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        .page-header {
+            margin-bottom: 24px;
+        }
+
+        .greeting {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--gray-900);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .stat-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: transform var(--transition), box-shadow var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .icon-blue {
+            background: #e0f0ff;
+            color: #007bff;
+        }
+        .icon-green {
+            background: var(--green-bg);
+            color: var(--green-dark);
+        }
+        .icon-orange {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+        .icon-purple {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+
+        .stat-info h3 {
+            font-size: 14px;
+            color: var(--gray-500);
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--gray-900);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        @media (max-width: 900px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+
+        .card-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--gray-100);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-title {
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--gray-900);
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .property-item, .offer-item, .notification-item, .portfolio-item {
+            padding: 14px 0;
+            border-bottom: 1px solid var(--gray-100);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .property-item:last-child, .offer-item:last-child, .notification-item:last-child, .portfolio-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-title {
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 4px;
+        }
+
+        .item-meta {
+            font-size: 12px;
+            color: var(--gray-500);
+        }
+
+        .badge-status {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-active {
+            background: var(--green-bg);
+            color: var(--green-dark);
+        }
+
+        .status-pending {
+            background: #fff8e1;
+            color: #f57f17;
+        }
+
+        .status-closed {
+            background: var(--gray-100);
+            color: var(--gray-500);
+        }
+
+        .dinar {
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 18px;
+            border-radius: var(--radius);
+            font-weight: 700;
+            font-family: 'Cairo', sans-serif;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            transition: all var(--transition);
+            text-decoration: none;
+            background: var(--green-dark);
+            color: white;
+            box-shadow: var(--shadow-sm);
+            gap: 6px;
+        }
+
+        .btn:hover {
+            background: #005a2b;
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1.5px solid var(--green-dark);
+            color: var(--green-dark);
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background: rgba(0,102,51,0.05);
+        }
+
+        .btn-sm {
+            padding: 6px 14px;
+            font-size: 13px;
+        }
+
+        .text-muted {
+            color: var(--gray-500);
+            font-size: 13px;
+        }
+
+        .link {
+            color: var(--green-dark);
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .link:hover {
+            text-decoration: underline;
+        }
+
+        .quick-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 16px;
+            font-size: 12px;
+            color: var(--gray-400);
+            border-top: 1px solid var(--gray-200);
+            margin-top: 24px;
+        }
+
+        .investor-highlight {
+            color: var(--investor-accent);
+            font-weight: 700;
+        }
+    
+        /* Language Switcher */
+        .lang-switch {
+            display: flex;
+            gap: 6px;
+            margin-left: 16px;
+        }
+        .lang-btn {
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: none;
+            background: transparent;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            color: var(--gray-700);
+            transition: 0.2s;
+            font-family: 'Cairo', sans-serif;
+        }
+        .lang-btn.active {
+            background: var(--green-dark);
+            color: white;
+            box-shadow: 0 2px 6px rgba(0,102,51,0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <div class="logo-area">
+            <div class="logo-icon">و</div>
+            <span class="logo-text-nav" data-translate="brand">ورثك فاليد</span>
+            <span class="wilaya-tag">📍 قسنطينة</span>
+        </div>
+        <div class="user-area">
+            <div class="lang-switch">
+                <button class="lang-btn active" data-lang="ar" data-lang-switch onclick="changeLanguage('ar')">🇩🇿 العربية</button>
+                <button class="lang-btn" data-lang="fr" data-lang-switch onclick="changeLanguage('fr')">🇫🇷 Français</button>
+                <button class="lang-btn" data-lang="en" data-lang-switch onclick="changeLanguage('en')">🇬🇧 English</button>
+            </div>
+            <div class="notification-bell" id="notificationBell">
+                🔔
+                <span class="badge" id="notifBadge">4</span>
+            </div>
+            <div class="user-dropdown" id="userDropdown">
+                <div class="user-avatar">ل</div>
+                <div class="user-info">
+                    <span class="user-name">ليلى بن عمار</span>
+                    <span class="user-role" data-translate="role_investor_f">مستثمرة</span>
+                </div>
+                <span style="font-size:12px;">▼</span>
+            </div>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="#" data-translate="profile">الملف الشخصي</a>
+                <a href="#" data-translate="investor_portfolio">محفظتي الاستثمارية</a>
+                <a href="notifications.html" data-translate="notifications">الإشعارات</a>
+                <a href="#" class="logout" id="logoutBtn" data-translate="logout">تسجيل الخروج</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="page-header">
+            <h1 class="greeting" data-translate="investor_greeting">السلام عليكم، ليلى</h1>
+            <p class="text-muted" data-translate="investor_subtitle">نظرة عامة على استثماراتك وفرص السوق العقاري اليوم 17 ماي 2026.</p>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon icon-blue">🏠</div>
+                <div class="stat-info">
+                    <h3 data-translate="investor_stat_properties">عقارات في المحفظة</h3>
+                    <div class="stat-number">3</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon icon-green">💰</div>
+                <div class="stat-info">
+                    <h3 data-translate="investor_stat_total">إجمالي الاستثمارات</h3>
+                    <div class="stat-number dinar">18.500.000 دج</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon icon-orange">📈</div>
+                <div class="stat-info">
+                    <h3 data-translate="investor_stat_return">العائد المتوقع</h3>
+                    <div class="stat-number">12.4%</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon icon-purple">🤝</div>
+                <div class="stat-info">
+                    <h3 data-translate="investor_stat_offers">عروض قيد التفاوض</h3>
+                    <div class="stat-number">2</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Left Column: Portfolio & Available Opportunities -->
+            <div>
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title" data-translate="investor_portfolio">🏢 محفظتي العقارية</span>
+                        <a href="investment-portfolio.html" class="link" data-translate="investor_manage_portfolio">إدارة المحفظة</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="portfolio-item">
+                            <div>
+                                <div class="item-title">فيلا F4 - حي النخيل، قسنطينة</div>
+                                <div class="item-meta">تملك كامل • قيمة الشراء: 9.200.000 دج • عائد إيجاري 8%</div>
+                            </div>
+                            <span class="badge-status status-active" data-translate="invest_income_generating">مدرة للدخل</span>
+                        </div>
+                        <div class="portfolio-item">
+                            <div>
+                                <div class="item-title">أرض بناء 800م² - الخروب، قسنطينة</div>
+                                <div class="item-meta">شراكة تطوير • حصتي: 40% • قيمة متوقعة: 5.600.000 دج</div>
+                            </div>
+                            <span class="badge-status status-pending" data-translate="invest_under_development">قيد التطوير</span>
+                        </div>
+                        <div class="portfolio-item">
+                            <div>
+                                <div class="item-title">شقة F3 - حي سيدي مبروك، قسنطينة</div>
+                                <div class="item-meta">تمويل جماعي (Fundrise) • 50 سهم • عائد 11% سنوياً</div>
+                            </div>
+                            <span class="badge-status status-active">نشط</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title" data-translate="investor_opportunities">🔥 فرص استثمارية جديدة</span>
+                        <a href="marketplace.html" class="link" data-translate="investor_go_market">سوق العقارات</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="property-item">
+                            <div>
+                                <div class="item-title">فيلا F5 - حي المنظر الجميل، الجزائر العاصمة</div>
+                                <div class="item-meta">السعر: 14.800.000 دج • نموذج بيع مباشر • وكالة "الأمان العقاري"</div>
+                            </div>
+                            <a href="property-detail.html" class="btn btn-sm btn-outline" data-translate="details">فحص</a>
+                        </div>
+                        <div class="property-item">
+                            <div>
+                                <div class="item-title">محل تجاري 120م² - وسط مدينة وهران</div>
+                                <div class="item-meta">السعر: 11.200.000 دج • VEFA (على المخطط) • تسليم 2027</div>
+                            </div>
+                            <a href="investment-portfolio.html" class="btn btn-sm btn-outline" data-translate="details">تفاصيل VEFA</a>
+                        </div>
+                        <div class="property-item">
+                            <div>
+                                <div class="item-title">مشروع فلل 4 وحدات - البليدة</div>
+                                <div class="item-meta">شراكة تطوير: مساهمة 6.500.000 دج مقابل 30% من الأرباح</div>
+                            </div>
+                            <a href="fundrise-crowdfunding.html" class="btn btn-sm btn-outline" data-translate="fundrise_invest_now">استثمر</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title" data-translate="investor_my_offers">📊 العروض التي قدمتها</span>
+                        <a href="offer-negotiation.html" class="link" data-translate="investor_go_negotiation">مركز التفاوض</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="offer-item">
+                            <div>
+                                <div class="item-title">عرض على فيلا الأبيار - الجزائر العاصمة</div>
+                                <div class="item-meta">عرضي: 15.200.000 دج • الرد: عرض مضاد بـ 15.500.000 دج</div>
+                            </div>
+                            <span class="badge-status status-pending">قيد التفاوض</span>
+                        </div>
+                        <div class="offer-item">
+                            <div>
+                                <div class="item-title">عرض على أرض بئر توتة</div>
+                                <div class="item-meta">عرضي: 8.000.000 دج • قيد المراجعة من الوكالة</div>
+                            </div>
+                            <span class="badge-status status-pending">مقدم</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Notifications, Quick Actions & NDA -->
+            <div>
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">🔔 إشعاراتي</span>
+                        <span class="badge-status status-pending">4 جديدة</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="notification-item">
+                            <div>
+                                <div class="item-title">تم قبول عرضك!</div>
+                                <div class="item-meta">عرضك على شقة سيدي مبروك قوبل. انتقل للتفاوض النهائي.</div>
+                                <div class="text-muted" style="font-size:10px;">قبل ساعتين</div>
+                            </div>
+                        </div>
+                        <div class="notification-item">
+                            <div>
+                                <div class="item-title">غرفة بيانات متاحة</div>
+                                <div class="item-meta">تم فتح VDR للفيلا في حي النخيل بعد توقيع NDA.</div>
+                                <div class="text-muted" style="font-size:10px;">أمس</div>
+                            </div>
+                        </div>
+                        <div class="notification-item">
+                            <div>
+                                <div class="item-title">توزيع أرباح التمويل الجماعي</div>
+                                <div class="item-meta">مشروع Fundrise "الخروب" وزع 120.000 دج في محفظتك.</div>
+                                <div class="text-muted" style="font-size:10px;">قبل 3 أيام</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">⚡ إجراءات سريعة</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="quick-actions">
+                            <a href="marketplace.html" class="btn" style="width:100%;" data-translate="investor_browse_market">🏢 تصفح سوق العقارات</a>
+                            <a href="investment-simulator.html" class="btn btn-outline" style="width:100%;" data-translate="investor_simulate">📊 محاكاة استثمار</a>
+                            <a href="fundrise-crowdfunding.html" class="btn btn-outline" style="width:100%;" data-translate="investor_crowdfunding">🤝 تمويل جماعي</a>
+                            <a href="vdr-viewer.html" class="btn btn-outline" style="width:100%;" data-translate="investor_vdr">🔒 غرفة البيانات (VDR)</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title">📋 طلبات NDA النشطة</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="property-item">
+                            <div>
+                                <div class="item-title">فيلا المنظر الجميل</div>
+                                <div class="item-meta">تم توقيع NDA في 15 ماي • صلاحية 30 يوم</div>
+                            </div>
+                            <span class="badge-status status-active">ساري</span>
+                        </div>
+                        <div class="property-item">
+                            <div>
+                                <div class="item-title">مشروع البليدة (شراكة)</div>
+                                <div class="item-meta">بانتظار توقيعك على NDA للاطلاع على المخططات</div>
+                            </div>
+                            <a href="#" class="btn btn-sm" data-translate="investor_nda_sign">وقّع الآن</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer" data-translate="footer">
+        © 2025 ورثك فاليد - الحل السريع. جميع الحقوق محفوظة. الجزائر.
+    </div>
+
+    <script src="js/translations.js"></script>
+<script src="js/i18n.js"></script>
+<script>
+        (function() {
+            // Dropdown toggle
+            const userDropdown = document.getElementById('userDropdown');
+            const dropdownMenu = document.getElementById('dropdownMenu');
+            let dropdownOpen = false;
+
+            userDropdown.addEventListener('click', function(e) {
+                e.stopPropagation();
+                dropdownOpen = !dropdownOpen;
+                dropdownMenu.style.display = dropdownOpen ? 'block' : 'none';
+            });
+
+            document.addEventListener('click', function() {
+                dropdownOpen = false;
+                dropdownMenu.style.display = 'none';
+            });
+
+            // Notification bell
+            document.getElementById('notificationBell').addEventListener('click', function() {
+                window.location.href = 'notifications.html';
+            });
+
+            // Logout
+            document.getElementById('logoutBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                if (confirm(t('confirm_logout'))) {
+                    alert(t('msg_logout_success'));
+                    localStorage.clear();
+                    sessionStorage.clear();
+                    window.location.href = 'index.html';
+                }
+            });
+
+            // Simulate some dynamic interactions (e.g., accept NDA button)
+            const signNdaBtn = document.querySelector('.card-body .btn:not(.btn-outline)');
+            if (signNdaBtn && signNdaBtn.textContent.includes('وقّع الآن')) {
+                signNdaBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if (confirm(t('confirm_sign_nda'))) {
+                        signNdaBtn.textContent = 'تم التوقيع ✓'; signNdaBtn.setAttribute('data-translate', 'investor_nda_signed');
+                        signNdaBtn.disabled = true;
+                        signNdaBtn.style.background = 'var(--gray-300)';
+                        signNdaBtn.style.color = 'var(--gray-700)';
+                        alert(t('msg_nda_signed'));
+                    }
+                });
+            }
+
+            console.log('تم تحميل لوحة تحكم المستثمرة - ليلى بن عمار');
+        })();
+    </script>
+        </body>
+</html>

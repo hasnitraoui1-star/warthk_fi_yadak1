@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إدارة الإيرادات | ورثك فاليد - الحل السريع</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green-dark: #006633;
+            --green-light: #00A859;
+            --green-bg: #e6f5ee;
+            --red: #D21034;
+            --red-light: #fde8ec;
+            --white: #FFFFFF;
+            --off-white: #F8F9FA;
+            --gray-50: #F7F8FA;
+            --gray-100: #F0F2F5;
+            --gray-200: #E4E7EB;
+            --gray-300: #CBD2D9;
+            --gray-400: #9BA5B2;
+            --gray-500: #7B8794;
+            --gray-700: #3E4C59;
+            --gray-900: #1F2933;
+            --gold: #b8860b;
+            --gold-light: #fdf5e6;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.05);
+            --radius: 12px;
+            --radius-lg: 16px;
+            --transition: 0.2s ease;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #f0f5f2 0%, #faf9f5 100%);
+            min-height: 100vh;
+            color: var(--gray-900);
+            line-height: 1.6;
+        }
+
+        .top-nav {
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+            padding: 0 24px;
+            height: 64px;
+            display: flex; align-items: center; justify-content: space-between;
+            box-shadow: var(--shadow-sm); position: sticky; top: 0; z-index: 100;
+        }
+        .logo-area { display: flex; align-items: center; gap: 10px; }
+        .logo-icon {
+            width: 36px; height: 36px; background: var(--green-dark); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 18px;
+        }
+        .logo-text-nav { font-weight: 800; font-size: 18px; color: var(--green-dark); }
+        .wilaya-tag {
+            background: var(--gold-light); color: var(--gold); padding: 4px 12px; border-radius: 20px;
+            font-size: 13px; font-weight: 600; margin-right: 10px;
+        }
+        .user-area { display: flex; align-items: center; gap: 16px; }
+        .back-link { color: var(--green-dark); text-decoration: none; font-weight: 600; font-size: 14px; cursor: pointer; }
+        .back-link:hover { text-decoration: underline; }
+
+        .main-container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+        .page-header { margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        .greeting { font-size: 26px; font-weight: 800; color: var(--gray-900); }
+        .text-muted { color: var(--gray-500); font-size: 13px; }
+
+        .stats-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px; margin-bottom: 28px;
+        }
+        .stat-card {
+            background: var(--white); border-radius: var(--radius-lg); padding: 20px;
+            box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 16px;
+        }
+        .stat-icon {
+            width: 48px; height: 48px; border-radius: var(--radius);
+            display: flex; align-items: center; justify-content: center; font-size: 24px;
+        }
+        .stat-info h3 { font-size: 14px; color: var(--gray-500); font-weight: 500; margin-bottom: 4px; }
+        .stat-number { font-size: 24px; font-weight: 800; color: var(--gray-900); }
+        .dinar { font-family: 'Cairo', sans-serif; font-weight: 700; }
+
+        .filter-bar {
+            background: var(--white); border-radius: var(--radius-lg); padding: 16px 20px;
+            box-shadow: var(--shadow-sm); margin-bottom: 24px;
+            display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
+        }
+        .filter-group { display: flex; align-items: center; gap: 8px; flex: 1 1 180px; }
+        .filter-group label { font-weight: 600; font-size: 13px; white-space: nowrap; }
+        select, input {
+            padding: 10px 12px; border: 1.5px solid var(--gray-200); border-radius: var(--radius);
+            font-family: 'Cairo', sans-serif; font-size: 14px; background: var(--off-white);
+            width: 100%;
+        }
+        select:focus, input:focus { border-color: var(--gold); outline: none; box-shadow: 0 0 0 3px rgba(184,134,11,0.1); }
+
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 10px 18px; border-radius: var(--radius); font-weight: 700;
+            font-family: 'Cairo', sans-serif; font-size: 14px; cursor: pointer; border: none;
+            transition: all var(--transition); text-decoration: none; color: white;
+            background: var(--green-dark); box-shadow: var(--shadow-sm); gap: 6px;
+        }
+        .btn:hover { background: #005a2b; }
+        .btn-outline {
+            background: transparent; border: 1.5px solid var(--green-dark); color: var(--green-dark); box-shadow: none;
+        }
+        .btn-outline:hover { background: rgba(0,102,51,0.05); }
+        .btn-gold { background: var(--gold); }
+        .btn-gold:hover { background: #9c7300; }
+
+        .card {
+            background: var(--white); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);
+            overflow: hidden; margin-bottom: 24px;
+        }
+        .card-header {
+            padding: 16px 20px; border-bottom: 1px solid var(--gray-100);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .card-title { font-weight: 700; font-size: 18px; color: var(--gray-900); }
+        .card-body { padding: 20px; }
+
+        .revenue-item {
+            padding: 14px 0; border-bottom: 1px solid var(--gray-100);
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+        }
+        .revenue-item:last-child { border-bottom: none; }
+        .item-title { font-weight: 600; color: var(--gray-900); margin-bottom: 4px; }
+        .item-meta { font-size: 12px; color: var(--gray-500); }
+
+        .modal-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); z-index: 300; align-items: center; justify-content: center;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal {
+            background: white; border-radius: var(--radius-lg); width: 90%; max-width: 500px;
+            box-shadow: var(--shadow-lg); padding: 24px; max-height: 80vh; overflow-y: auto;
+        }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .modal-title { font-weight: 800; font-size: 20px; }
+        .close-btn { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--gray-500); }
+        .input-group { margin-bottom: 16px; }
+        label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 14px; }
+        input, select, textarea {
+            width: 100%; padding: 12px; border: 1.5px solid var(--gray-200); border-radius: var(--radius);
+            font-family: 'Cairo', sans-serif; font-size: 14px; background: var(--off-white);
+        }
+        input:focus, select:focus, textarea:focus { border-color: var(--gold); outline: none; box-shadow: 0 0 0 3px rgba(184,134,11,0.1); }
+
+        .footer { text-align: center; padding: 16px; font-size: 12px; color: var(--gray-400); border-top: 1px solid var(--gray-200); margin-top: 24px; }
+    
+        /* Language Switcher */
+        .lang-switch {
+            display: flex;
+            gap: 6px;
+            margin-left: 16px;
+        }
+        .lang-btn {
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: none;
+            background: transparent;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            color: var(--gray-700);
+            transition: 0.2s;
+            font-family: 'Cairo', sans-serif;
+        }
+        .lang-btn.active {
+            background: var(--green-dark);
+            color: white;
+            box-shadow: 0 2px 6px rgba(0,102,51,0.2);
+        }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="logo-area">
+            <div class="logo-icon">و</div>
+            <span class="logo-text-nav" data-translate="brand">ورثك فاليد</span>
+            <span class="wilaya-tag" data-translate="nav_revenue">💰 إدارة الإيرادات</span>
+        </div>
+        <div class="user-area">
+            <div class="lang-switch">
+                <button class="lang-btn active" data-lang="ar" data-lang-switch onclick="changeLanguage('ar')">🇩🇿 العربية</button>
+                <button class="lang-btn" data-lang="fr" data-lang-switch onclick="changeLanguage('fr')">🇫🇷 Français</button>
+                <button class="lang-btn" data-lang="en" data-lang-switch onclick="changeLanguage('en')">🇬🇧 English</button>
+            </div>
+            <a href="expert-dashboard.html" class="back-link" data-translate="back_to_dashboard">↩ لوحة التحكم</a>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="page-header">
+            <div>
+                <h1 class="greeting" data-translate="revenue_title">إدارة الإيرادات</h1>
+                <p class="text-muted" data-translate="revenue_subtitle">تتبع جميع إيرادات المنصة، فلترة حسب المصدر والفترة، وتسجيل إيرادات جديدة.</p>
+            </div>
+            <button class="btn btn-gold" id="addRevenueBtn" data-translate="revenue_add">➕ تسجيل إيراد جديد</button>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon" style="background:var(--gold-light); color:var(--gold);">💰</div>
+                <div class="stat-info"><h3 data-translate="revenue_stat_total">إجمالي الإيرادات</h3><div class="stat-number dinar">12.000.000 دج</div></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background:#e0f0ff; color:#007bff;">📋</div>
+                <div class="stat-info"><h3 data-translate="revenue_stat_transactions">عدد المعاملات</h3><div class="stat-number">48</div></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background:#fff3e0; color:#f57c00;">📈</div>
+                <div class="stat-info"><h3 data-translate="revenue_stat_month">هذا الشهر</h3><div class="stat-number dinar">2.800.000 دج</div></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background:var(--green-bg); color:var(--green-dark);">📊</div>
+                <div class="stat-info"><h3 data-translate="revenue_stat_avg">متوسط المعاملة</h3><div class="stat-number dinar">250.000 دج</div></div>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="filter-bar">
+            <div class="filter-group">
+                <label data-translate="revenue_source">المصدر</label>
+                <select id="filterSource">
+                    <option value="">الكل</option>
+                    <option>أتعاب محاماة</option>
+                    <option>عمولة وكالة</option>
+                    <option>رسوم VDR</option>
+                    <option>استشارات</option>
+                    <option>اشتراكات</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label data-translate="revenue_payment_method">وسيلة الدفع</label>
+                <select id="filterPayment">
+                    <option value="">الكل</option>
+                    <option>CCP</option>
+                    <option>بريدي موب</option>
+                    <option>تحويل بنكي</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>من</label>
+                <input type="date" id="dateFrom">
+            </div>
+            <div class="filter-group">
+                <label>إلى</label>
+                <input type="date" id="dateTo">
+            </div>
+            <button class="btn btn-outline" id="applyFilterBtn" data-translate="apply_filter">🔍 تطبيق</button>
+        </div>
+
+        <!-- Revenue List -->
+        <div class="card">
+            <div class="card-header"><span class="card-title" data-translate="revenue_list">📋 قائمة الإيرادات</span></div>
+            <div class="card-body" id="revenueList">
+                <!-- Dynamically filled -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Revenue Modal -->
+    <div class="modal-overlay" id="revenueModal">
+        <div class="modal">
+            <div class="modal-header">
+                <span class="modal-title">تسجيل إيراد جديد</span>
+                <button class="close-btn" id="closeRevenueModal">&times;</button>
+            </div>
+            <form id="revenueForm">
+                <div class="input-group">
+                    <label>الوصف / المصدر</label>
+                    <select id="revSource" required>
+                        <option>أتعاب محاماة</option>
+                        <option>عمولة وكالة</option>
+                        <option>رسوم VDR</option>
+                        <option>استشارات</option>
+                        <option>اشتراكات</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label data-translate="revenue_amount">المبلغ (دج)</label>
+                    <input type="number" id="revAmount" data-translate-placeholder="ph_enter_amount" placeholder="أدخل المبلغ" required min="1">
+                </div>
+                <div class="input-group">
+                    <label data-translate="revenue_payment_method">وسيلة الدفع</label>
+                    <select id="revPayment">
+                        <option>CCP</option>
+                        <option>بريدي موب</option>
+                        <option>تحويل بنكي</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>ملاحظات</label>
+                    <textarea id="revNotes" rows="2" data-translate-placeholder="ph_additional_notes" placeholder="أي ملاحظات إضافية..."></textarea>
+                </div>
+                <button type="submit" class="btn btn-gold" style="width:100%;" data-translate="save">💾 تسجيل</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="footer" data-translate="footer">
+        © 2025 ورثك فاليد - الحل السريع. جميع الحقوق محفوظة. الجزائر.
+    </div>
+
+    <script src="js/translations.js"></script>
+<script src="js/i18n.js"></script>
+<script>
+        (function() {
+            const revenues = [
+                { id:1, source:'أتعاب محاماة', description:'قضية الحسينية - وهران', amount:350000, date:'2026-05-12', payment:'CCP' },
+                { id:2, source:'عمولة وكالة', description:'صفقة فيلا الأبيار', amount:620000, date:'2026-05-10', payment:'بريدي موب' },
+                { id:3, source:'رسوم VDR', description:'غرفة بيانات PROP-042', amount:150000, date:'2026-05-08', payment:'تحويل بنكي' },
+                { id:4, source:'استشارات', description:'تقييم مالي لمشروع البليدة', amount:200000, date:'2026-05-05', payment:'CCP' },
+                { id:5, source:'اشتراكات', description:'اشتراك مستثمر سنوي', amount:480000, date:'2026-05-01', payment:'بريدي موب' },
+                { id:6, source:'أتعاب محاماة', description:'قضية شقة سطيف', amount:280000, date:'2026-04-25', payment:'CCP' }
+            ];
+
+            let filteredRevenues = [...revenues];
+            const revenueList = document.getElementById('revenueList');
+            const revenueModal = document.getElementById('revenueModal');
+
+            function renderRevenueList() {
+                if (filteredRevenues.length === 0) {
+                    revenueList.innerHTML = '<p style="text-align:center; color:var(--gray-400);">لا توجد إيرادات مطابقة.</p>';
+                    return;
+                }
+                revenueList.innerHTML = filteredRevenues.map(r => `
+                    <div class="revenue-item">
+                        <div>
+                            <div class="item-title">${r.source} - ${r.description}</div>
+                            <div class="item-meta">${r.date} · ${r.payment}</div>
+                        </div>
+                        <span style="font-weight:800; font-size:18px; color:var(--gold);">${r.amount.toLocaleString()} دج</span>
+                    </div>
+                `).join('');
+            }
+
+            function applyFilters() {
+                const source = document.getElementById('filterSource').value;
+                const payment = document.getElementById('filterPayment').value;
+                const from = document.getElementById('dateFrom').value;
+                const to = document.getElementById('dateTo').value;
+
+                filteredRevenues = revenues.filter(r => {
+                    return (!source || r.source === source) &&
+                           (!payment || r.payment === payment) &&
+                           (!from || r.date >= from) &&
+                           (!to || r.date <= to);
+                });
+                renderRevenueList();
+            }
+
+            document.getElementById('applyFilterBtn').addEventListener('click', applyFilters);
+
+            document.getElementById('addRevenueBtn').addEventListener('click', () => {
+                revenueModal.classList.add('active');
+            });
+            document.getElementById('closeRevenueModal').addEventListener('click', () => {
+                revenueModal.classList.remove('active');
+            });
+            window.addEventListener('click', (e) => {
+                if (e.target === revenueModal) revenueModal.classList.remove('active');
+            });
+
+            document.getElementById('revenueForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const source = document.getElementById('revSource').value;
+                const amount = parseFloat(document.getElementById('revAmount').value);
+                const payment = document.getElementById('revPayment').value;
+                const notes = document.getElementById('revNotes').value || '';
+                const newRev = {
+                    id: Date.now(),
+                    source,
+                    description: notes || source,
+                    amount,
+                    date: new Date().toISOString().split('T')[0],
+                    payment
+                };
+                revenues.unshift(newRev);
+                applyFilters();
+                revenueModal.classList.remove('active');
+                this.reset();
+            });
+
+            renderRevenueList();
+            console.log('صفحة إدارة الإيرادات جاهزة.');
+        
+
+            // Re-render dynamic content on language change
+            window.addEventListener('languageChanged', function(e) {
+            applyFilters();
+            });
+        })();
+    </script>
+</body>
+</html>

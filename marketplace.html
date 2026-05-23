@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سوق العقارات | ورثك فاليد - الحل السريع</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green-dark: #006633;
+            --green-light: #00A859;
+            --green-bg: #e6f5ee;
+            --red: #D21034;
+            --red-light: #fde8ec;
+            --white: #FFFFFF;
+            --off-white: #F8F9FA;
+            --gray-50: #F7F8FA;
+            --gray-100: #F0F2F5;
+            --gray-200: #E4E7EB;
+            --gray-300: #CBD2D9;
+            --gray-400: #9BA5B2;
+            --gray-500: #7B8794;
+            --gray-700: #3E4C59;
+            --gray-900: #1F2933;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.05);
+            --radius: 12px;
+            --radius-lg: 16px;
+            --transition: 0.2s ease;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: #f4f6f9;
+            min-height: 100vh;
+            color: var(--gray-900);
+            line-height: 1.6;
+        }
+
+        .top-nav {
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+            padding: 0 24px;
+            height: 64px;
+            display: flex; align-items: center; justify-content: space-between;
+            box-shadow: var(--shadow-sm); position: sticky; top: 0; z-index: 100;
+        }
+        .logo-area { display: flex; align-items: center; gap: 10px; }
+        .logo-icon {
+            width: 36px; height: 36px; background: var(--green-dark); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 18px;
+        }
+        .logo-text-nav { font-weight: 800; font-size: 18px; color: var(--green-dark); }
+        .wilaya-tag {
+            background: var(--green-bg); color: var(--green-dark); padding: 4px 12px; border-radius: 20px;
+            font-size: 13px; font-weight: 600; margin-right: 10px;
+        }
+        .user-area { display: flex; align-items: center; gap: 16px; }
+        .back-link { color: var(--green-dark); text-decoration: none; font-weight: 600; font-size: 14px; cursor: pointer; }
+        .back-link:hover { text-decoration: underline; }
+        .notification-bell { position: relative; cursor: pointer; font-size: 22px; color: var(--gray-700); }
+        .badge {
+            position: absolute; top: -6px; right: -8px; background: var(--red); color: white;
+            border-radius: 50%; width: 18px; height: 18px; font-size: 10px; font-weight: 700;
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .main-container { max-width: 1300px; margin: 0 auto; padding: 24px; }
+        .page-header { margin-bottom: 20px; }
+        .greeting { font-size: 26px; font-weight: 800; color: var(--gray-900); }
+        .text-muted { color: var(--gray-500); font-size: 13px; }
+
+        /* Filters */
+        .filter-bar {
+            background: var(--white); border-radius: var(--radius-lg); padding: 16px 20px;
+            box-shadow: var(--shadow-sm); margin-bottom: 24px;
+            display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
+        }
+        .filter-group { display: flex; align-items: center; gap: 8px; flex: 1 1 180px; }
+        .filter-group label { font-weight: 600; font-size: 13px; white-space: nowrap; }
+        select, input {
+            padding: 10px 12px; border: 1.5px solid var(--gray-200); border-radius: var(--radius);
+            font-family: 'Cairo', sans-serif; font-size: 14px; background: var(--off-white);
+            width: 100%;
+        }
+        select:focus, input:focus { border-color: var(--green-light); outline: none; box-shadow: 0 0 0 3px rgba(0,168,89,0.15); }
+        .btn-filter {
+            background: var(--green-dark); color: white; border: none; padding: 10px 18px; border-radius: var(--radius);
+            font-weight: 700; cursor: pointer; white-space: nowrap;
+        }
+        .btn-filter:hover { background: #005a2b; }
+
+        .results-header {
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;
+        }
+        .results-count { font-weight: 600; color: var(--gray-700); }
+
+        .properties-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .property-card {
+            background: var(--white); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);
+            overflow: hidden; transition: transform var(--transition), box-shadow var(--transition);
+            display: flex; flex-direction: column;
+        }
+        .property-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+        .property-image {
+            height: 180px; background: linear-gradient(135deg, #e2e8f0, #cbd5e1);
+            display: flex; align-items: center; justify-content: center; font-size: 40px; color: #64748b;
+        }
+        .property-body { padding: 16px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+        .property-type { font-size: 12px; background: var(--green-bg); color: var(--green-dark); padding: 2px 10px; border-radius: 20px; width: fit-content; font-weight: 600; }
+        .property-title { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+        .property-location { color: var(--gray-500); font-size: 13px; display: flex; align-items: center; gap: 4px; }
+        .property-price { font-size: 20px; font-weight: 800; color: var(--green-dark); margin-top: auto; }
+        .property-meta { display: flex; gap: 12px; font-size: 12px; color: var(--gray-500); flex-wrap: wrap; }
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 8px 16px; border-radius: var(--radius); font-weight: 700;
+            font-family: 'Cairo', sans-serif; font-size: 14px; cursor: pointer; border: none;
+            transition: all var(--transition); text-decoration: none; color: white; background: var(--green-dark); gap: 6px;
+        }
+        .btn:hover { background: #005a2b; }
+        .btn-outline { background: transparent; border: 1.5px solid var(--green-dark); color: var(--green-dark); }
+        .btn-outline:hover { background: rgba(0,102,51,0.05); }
+        .footer { text-align: center; padding: 16px; font-size: 12px; color: var(--gray-400); border-top: 1px solid var(--gray-200); margin-top: 24px; }
+    
+        /* Language Switcher */
+        .lang-switch {
+            display: flex;
+            gap: 6px;
+            margin-left: 16px;
+        }
+        .lang-btn {
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: none;
+            background: transparent;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            color: var(--gray-700);
+            transition: 0.2s;
+            font-family: 'Cairo', sans-serif;
+        }
+        .lang-btn.active {
+            background: var(--green-dark);
+            color: white;
+            box-shadow: 0 2px 6px rgba(0,102,51,0.2);
+        }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="logo-area">
+            <div class="logo-icon">و</div>
+            <span class="logo-text-nav" data-translate="brand">ورثك فاليد</span>
+            <span class="wilaya-tag" data-translate="nav_marketplace">🏢 سوق العقارات</span>
+        </div>
+        <div class="user-area">
+            <div class="lang-switch">
+                <button class="lang-btn active" data-lang="ar" data-lang-switch onclick="changeLanguage('ar')">🇩🇿 العربية</button>
+                <button class="lang-btn" data-lang="fr" data-lang-switch onclick="changeLanguage('fr')">🇫🇷 Français</button>
+                <button class="lang-btn" data-lang="en" data-lang-switch onclick="changeLanguage('en')">🇬🇧 English</button>
+            </div>
+            <a href="investor-dashboard.html" class="back-link" data-translate="back_to_dashboard">↩ لوحة التحكم</a>
+            <div class="notification-bell" id="notificationBell">
+                🔔
+                <span class="badge">2</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="page-header">
+            <h1 class="greeting" data-translate="marketplace_title">سوق العقارات</h1>
+            <p class="text-muted" data-translate="marketplace_subtitle">تصفح العقارات المتاحة للاستثمار في جميع أنحاء الجزائر.</p>
+        </div>
+
+        <!-- Filters -->
+        <div class="filter-bar">
+            <div class="filter-group">
+                <label data-translate="wilaya">الولاية</label>
+                <select id="filterWilaya">
+                    <option value="" data-translate="all">الكل</option>
+                    <option data-translate="wilaya_alger">الجزائر العاصمة</option>
+                    <option data-translate="wilaya_oran">وهران</option>
+                    <option data-translate="wilaya_constantine">قسنطينة</option>
+                    <option data-translate="wilaya_setif">سطيف</option>
+                    <option data-translate="wilaya_blida">البليدة</option>
+                    <option data-translate="wilaya_tlemcen">تلمسان</option>
+                    <option data-translate="wilaya_bejaja">بجاية</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label data-translate="marketplace_property_type">نوع العقار</label>
+                <select id="filterType">
+                    <option value="" data-translate="all">الكل</option>
+                    <option data-translate="marketplace_villa">فيلا</option>
+                    <option data-translate="marketplace_apartment">شقة</option>
+                    <option data-translate="marketplace_land">أرض</option>
+                    <option data-translate="marketplace_commercial">محل تجاري</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label data-translate="marketplace_price_min">السعر الأدنى</label>
+                <input type="number" id="filterPriceMin" data-translate-placeholder="ph_price_min" placeholder="0 دج">
+            </div>
+            <div class="filter-group">
+                <label data-translate="marketplace_price_max">السعر الأقصى</label>
+                <input type="number" id="filterPriceMax" data-translate-placeholder="ph_price_max" placeholder="50,000,000 دج">
+            </div>
+            <div class="filter-group">
+                <label data-translate="marketplace_model">النموذج</label>
+                <select id="filterModel">
+                    <option value="" data-translate="all">الكل</option>
+                    <option data-translate="marketplace_direct_sale">بيع مباشر</option>
+                    <option data-translate="marketplace_dev_partnership">شراكة تطوير</option>
+                    <option data-translate="marketplace_vefa">VEFA</option>
+                    <option data-translate="marketplace_crowdfunding_model">تمويل جماعي</option>
+                </select>
+            </div>
+            <button class="btn-filter" id="applyFilters" data-translate="marketplace_search_btn">🔍 بحث</button>
+        </div>
+
+        <div class="results-header">
+            <span class="results-count" id="resultsCount" data-translate="marketplace_results_count">عرض 9 عقارات</span>
+            <span data-translate="marketplace_sort">ترتيب حسب: <strong>الأحدث</strong></span>
+        </div>
+
+        <!-- Properties Grid -->
+        <div class="properties-grid" id="propertiesGrid">
+            <!-- Dynamically filled -->
+        </div>
+    </div>
+
+    <div class="footer" data-translate="footer">
+        © 2026 ورثك فاليد - الحل السريع. جميع الحقوق محفوظة. الجزائر.
+    </div>
+
+    <script src="js/translations.js"></script>
+<script src="js/i18n.js"></script>
+<script>
+        (function() {
+            const properties = [
+                { id:1, type:"فيلا", title:"فيلا F4 - الأبيار", location:"الجزائر العاصمة", price:15500000, model:"بيع مباشر", area:"280 م²", rooms:4, image:"🏡" },
+                { id:2, type:"أرض", title:"أرض بناء 500م² - بئر توتة", location:"الجزائر العاصمة", price:8200000, model:"بيع مباشر", area:"500 م²", rooms:"-", image:"🌳" },
+                { id:3, type:"شقة", title:"شقة F3 - حي الموز", location:"قسنطينة", price:6900000, model:"شراكة تطوير", area:"110 م²", rooms:3, image:"🏢" },
+                { id:4, type:"فيلا", title:"فيلا F5 - حي النخيل", location:"قسنطينة", price:14800000, model:"بيع مباشر", area:"320 م²", rooms:5, image:"🏡" },
+                { id:5, type:"محل تجاري", title:"محل 120م² - وسط المدينة", location:"وهران", price:11200000, model:"VEFA", area:"120 م²", rooms:"-", image:"🏪" },
+                { id:6, type:"أرض", title:"أرض فلاحية 1 هكتار - البليدة", location:"البليدة", price:9500000, model:"بيع مباشر", area:"1 هكتار", rooms:"-", image:"🌾" },
+                { id:7, type:"شقة", title:"شقة F2 - سيدي مبروك", location:"قسنطينة", price:4200000, model:"تمويل جماعي", area:"75 م²", rooms:2, image:"🏢" },
+                { id:8, type:"فيلا", title:"فيلا F3 - حي السلام", location:"سطيف", price:8700000, model:"بيع مباشر", area:"200 م²", rooms:3, image:"🏡" },
+                { id:9, type:"أرض", title:"أرض بناء 300م² - تلمسان", location:"تلمسان", price:6100000, model:"شراكة تطوير", area:"300 م²", rooms:"-", image:"🌳" }
+            ];
+
+            const grid = document.getElementById('propertiesGrid');
+            const resultsCount = document.getElementById('resultsCount');
+
+            function renderProperties(filteredProperties) {
+                grid.innerHTML = filteredProperties.map(p => `
+                    <div class="property-card">
+                        <div class="property-image">${p.image}</div>
+                        <div class="property-body">
+                            <span class="property-type">${p.type} · ${p.model}</span>
+                            <h3 class="property-title">${p.title}</h3>
+                            <div class="property-location">📍 ${p.location}</div>
+                            <div class="property-meta">
+                                <span>📐 ${p.area}</span>
+                                <span data-translate="marketplace_rooms">🛏️ ${p.rooms} غرف</span>
+                            </div>
+                            <div class="property-price">${p.price.toLocaleString()} دج</div>
+                            <a href="property-detail.html" class="btn" style="margin-top:8px;" data-translate="marketplace_view_details">عرض التفاصيل</a>
+                        </div>
+                    </div>
+                `).join('');
+                resultsCount.textContent = `عرض ${filteredProperties.length} عقارات`;
+            }
+
+            function applyFilters() {
+                const wilaya = document.getElementById('filterWilaya').value;
+                const type = document.getElementById('filterType').value;
+                const model = document.getElementById('filterModel').value;
+                const priceMin = parseInt(document.getElementById('filterPriceMin').value) || 0;
+                const priceMax = parseInt(document.getElementById('filterPriceMax').value) || 999999999;
+
+                const filtered = properties.filter(p => {
+                    return (!wilaya || p.location.includes(wilaya)) &&
+                           (!type || p.type === type) &&
+                           (!model || p.model === model) &&
+                           (p.price >= priceMin && p.price <= priceMax);
+                });
+                renderProperties(filtered);
+            }
+
+            document.getElementById('applyFilters').addEventListener('click', applyFilters);
+            document.getElementById('notificationBell').addEventListener('click', () => {
+                window.location.href = 'notifications.html';
+            });
+
+            renderProperties(properties);
+            console.log('سوق العقارات جاهز.');
+        
+
+            // Re-render dynamic content on language change
+            window.addEventListener('languageChanged', function(e) {
+            applyFilters();
+            });
+        })();
+    </script>
+        </body>
+</html>

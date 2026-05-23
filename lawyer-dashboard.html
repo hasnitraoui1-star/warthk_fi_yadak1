@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - محامي | ورثك فاليد - الحل السريع</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green-dark: #006633;
+            --green-light: #00A859;
+            --green-bg: #e6f5ee;
+            --red: #D21034;
+            --red-light: #fde8ec;
+            --white: #FFFFFF;
+            --off-white: #F8F9FA;
+            --gray-50: #F7F8FA;
+            --gray-100: #F0F2F5;
+            --gray-200: #E4E7EB;
+            --gray-300: #CBD2D9;
+            --gray-400: #9BA5B2;
+            --gray-500: #7B8794;
+            --gray-700: #3E4C59;
+            --gray-900: #1F2933;
+            --shadow-xs: 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.05);
+            --radius-sm: 8px;
+            --radius: 12px;
+            --radius-lg: 16px;
+            --transition: 0.2s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #f0f5f2 0%, #eaf5ee 100%);
+            min-height: 100vh;
+            color: var(--gray-900);
+            line-height: 1.6;
+        }
+
+        /* Top Navigation - same as heir dashboard */
+        .top-nav {
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+            padding: 0 24px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: var(--shadow-xs);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--green-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 18px;
+        }
+
+        .logo-text-nav {
+            font-weight: 800;
+            font-size: 18px;
+            color: var(--green-dark);
+            letter-spacing: 0.5px;
+        }
+
+        .wilaya-tag {
+            display: inline-flex;
+            align-items: center;
+            background: var(--green-bg);
+            color: var(--green-dark);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+
+        .user-area {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .notification-bell {
+            position: relative;
+            cursor: pointer;
+            font-size: 22px;
+            color: var(--gray-700);
+            transition: color var(--transition);
+        }
+
+        .notification-bell:hover {
+            color: var(--green-dark);
+        }
+
+        .badge {
+            position: absolute;
+            top: -6px;
+            right: -8px;
+            background: var(--red);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 10px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .user-dropdown {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 6px 10px;
+            border-radius: var(--radius);
+            transition: background var(--transition);
+            background: var(--gray-50);
+        }
+
+        .user-dropdown:hover {
+            background: var(--gray-100);
+        }
+
+        .user-avatar {
+            width: 34px;
+            height: 34px;
+            background: #1e5f74; /* different color for lawyer */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .user-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-name {
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--gray-900);
+            line-height: 1.2;
+        }
+
+        .user-role {
+            font-size: 11px;
+            color: #1e5f74;
+            background: #e0f0f7;
+            padding: 1px 8px;
+            border-radius: 20px;
+            display: inline-block;
+            width: fit-content;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 60px;
+            left: 24px;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            width: 200px;
+            z-index: 200;
+            overflow: hidden;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 16px;
+            color: var(--gray-700);
+            text-decoration: none;
+            font-weight: 500;
+            transition: background var(--transition);
+            font-size: 14px;
+        }
+
+        .dropdown-menu a:hover {
+            background: var(--gray-100);
+            color: var(--green-dark);
+        }
+
+        .dropdown-menu a.logout {
+            color: var(--red);
+            border-top: 1px solid var(--gray-200);
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        .page-header {
+            margin-bottom: 24px;
+        }
+
+        .greeting {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--gray-900);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .stat-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: transform var(--transition), box-shadow var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .icon-blue {
+            background: #e0f0ff;
+            color: #007bff;
+        }
+
+        .icon-green {
+            background: var(--green-bg);
+            color: var(--green-dark);
+        }
+
+        .icon-orange {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+
+        .icon-red {
+            background: var(--red-light);
+            color: var(--red);
+        }
+
+        .stat-info h3 {
+            font-size: 14px;
+            color: var(--gray-500);
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--gray-900);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        @media (max-width: 900px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+
+        .card-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--gray-100);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-title {
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--gray-900);
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .case-item, .request-item, .notification-item {
+            padding: 14px 0;
+            border-bottom: 1px solid var(--gray-100);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .case-item:last-child, .request-item:last-child, .notification-item:last-child {
+            border-bottom: none;
+        }
+
+        .case-title {
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 4px;
+        }
+
+        .case-meta {
+            font-size: 12px;
+            color: var(--gray-500);
+        }
+
+        .badge-status {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-active {
+            background: var(--green-bg);
+            color: var(--green-dark);
+        }
+
+        .status-pending {
+            background: #fff8e1;
+            color: #f57f17;
+        }
+
+        .status-closed {
+            background: var(--gray-100);
+            color: var(--gray-500);
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 18px;
+            border-radius: var(--radius);
+            font-weight: 700;
+            font-family: 'Cairo', sans-serif;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            transition: all var(--transition);
+            text-decoration: none;
+            background: var(--green-dark);
+            color: white;
+            box-shadow: var(--shadow-sm);
+            gap: 6px;
+        }
+
+        .btn:hover {
+            background: #005a2b;
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1.5px solid var(--green-dark);
+            color: var(--green-dark);
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background: rgba(0,102,51,0.05);
+        }
+
+        .btn-sm {
+            padding: 6px 14px;
+            font-size: 13px;
+        }
+
+        .text-muted {
+            color: var(--gray-500);
+            font-size: 13px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 20px;
+            color: var(--gray-400);
+        }
+
+        .dinar {
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+        }
+
+        .link {
+            color: var(--green-dark);
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .link:hover {
+            text-decoration: underline;
+        }
+
+        .quick-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 16px;
+            font-size: 12px;
+            color: var(--gray-400);
+            border-top: 1px solid var(--gray-200);
+            margin-top: 24px;
+        }
+
+        .request-actions {
+            display: flex;
+            gap: 8px;
+        }
+    
+        /* Language Switcher */
+        .lang-switch {
+            display: flex;
+            gap: 6px;
+            margin-left: 16px;
+        }
+        .lang-btn {
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: none;
+            background: transparent;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            color: var(--gray-700);
+            transition: 0.2s;
+            font-family: 'Cairo', sans-serif;
+        }
+        .lang-btn.active {
+            background: var(--green-dark);
+            color: white;
+            box-shadow: 0 2px 6px rgba(0,102,51,0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation (same style, different user) -->
+    <nav class="top-nav">
+        <div class="logo-area">
+            <div class="logo-icon">و</div>
+            <span class="logo-text-nav" data-translate="brand">ورثك فاليد</span>
+            <span class="wilaya-tag">📍 <span data-translate="loc_oran">وهران</span></span>
+        </div>
+        <div class="user-area">
+            <div class="lang-switch">
+                <button class="lang-btn active" data-lang="ar" data-lang-switch onclick="changeLanguage('ar')">🇩🇿 العربية</button>
+                <button class="lang-btn" data-lang="fr" data-lang-switch onclick="changeLanguage('fr')">🇫🇷 Français</button>
+                <button class="lang-btn" data-lang="en" data-lang-switch onclick="changeLanguage('en')">🇬🇧 English</button>
+            </div>
+            <div class="notification-bell" id="notificationBell">
+                🔔
+                <span class="badge" id="notifBadge">5</span>
+            </div>
+            <div class="user-dropdown" id="userDropdown">
+                <div class="user-avatar">ك</div>
+                <div class="user-info">
+                    <span class="user-name" data-translate="lawyer_kamel">الأستاذ كمال بومدين</span>
+                    <span class="user-role" data-translate="role_lawyer">محامي</span>
+                </div>
+                <span style="font-size:12px;">▼</span>
+            </div>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="#" data-translate="profile">الملف الشخصي</a>
+                <a href="#" data-translate="settings">الإعدادات</a>
+                <a href="notifications.html" data-translate="notifications">الإشعارات</a>
+                <a href="#" class="logout" id="logoutBtn" data-translate="logout">تسجيل الخروج</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="page-header">
+            <h1 class="greeting" data-translate="lawyer_greeting">السلام عليكم، أستاذ كمال</h1>
+            <p class="text-muted" data-translate="lawyer_subtitle">نظرة عامة على قضاياك وطلبات التعيين الجديدة. اليوم هو 17 ماي 2026.</p>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon icon-blue">📋</div>
+                <div class="stat-info">
+                    <h3 data-translate="lawyer_stat_active">قضايا جارية</h3>
+                    <div class="stat-number">4</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon icon-green">✅</div>
+                <div class="stat-info">
+                    <h3 data-translate="lawyer_stat_closed">قضايا مغلقة</h3>
+                    <div class="stat-number">11</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon icon-orange">💰</div>
+                <div class="stat-info">
+                    <h3 data-translate="lawyer_stat_fees">أتعاب مستحقة</h3>
+                    <div class="stat-number dinar">320.000 دج</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon icon-red">👤</div>
+                <div class="stat-info">
+                    <h3 data-translate="lawyer_stat_new_clients">موكلين جدد</h3>
+                    <div class="stat-number">3</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Left Column: Active Cases & New Requests -->
+            <div>
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title" data-translate="lawyer_my_cases">📁 قضاياي النشطة</span>
+                        <a href="lawyer-case-detail.html" class="link" data-translate="heir_manage_cases">إدارة القضايا</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="case-item">
+                            <div>
+                                <div class="case-title" data-translate="case_houss_title">تركة عقار الحسينية - وهران</div>
+                                <div class="case-meta" data-translate="case_houss_meta">الوارث: محمد بن صالح • آخر جلسة: 12 ماي 2026</div>
+                            </div>
+                            <span class="badge-status status-active" data-translate="case_status_litigation">جاري المرافعة</span>
+                        </div>
+                        <div class="case-item">
+                            <div>
+                                <div class="case-title" data-translate="case_agri_title">ميراث أرض فلاحية - البليدة</div>
+                                <div class="case-meta" data-translate="case_agri_meta">الوارثة: فاطمة زروقي • تم تقديم الاستئناف</div>
+                            </div>
+                            <span class="badge-status status-active" data-translate="case_status_appeal">استئناف</span>
+                        </div>
+                        <div class="case-item">
+                            <div>
+                                <div class="case-title" data-translate="case_apt_title">قضية شقة - سطيف</div>
+                                <div class="case-meta" data-translate="case_apt_meta">الوارث: أحمد بوسعادة • قيد التحضير</div>
+                            </div>
+                            <span class="badge-status status-pending" data-translate="case_status_preparing">قيد الإعداد</span>
+                        </div>
+                        <div class="case-item">
+                            <div>
+                                <div class="case-title" data-translate="case_shop_title">تركة محل تجاري - تلمسان</div>
+                                <div class="case-meta" data-translate="case_shop_meta">الوارثة: مريم قادري • انتظار حكم</div>
+                            </div>
+                            <span class="badge-status status-pending" data-translate="case_status_awaiting_verdict">بانتظار الحكم</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title" data-translate="lawyer_new_requests">🆕 طلبات التعيين الجديدة</span>
+                        <span class="badge-status status-pending">3 طلبات</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="request-item">
+                            <div>
+                                <div class="case-title" data-translate="req_lawyer_title_1">وريث يبحث عن محامي - قضية عقار بالجزائر العاصمة</div>
+                                <div class="case-meta" data-translate="req_lawyer_meta_1">الوارث: كريم مرزوق • قيمة التركة: 7.500.000 دج</div>
+                            </div>
+                            <div class="request-actions">
+                                <button class="btn btn-sm" data-translate="accept">قبول</button>
+                                <button class="btn btn-sm btn-outline" data-translate="reject">رفض</button>
+                            </div>
+                        </div>
+                        <div class="request-item">
+                            <div>
+                                <div class="case-title" data-translate="req_lawyer_title_2">قضية إرث معقدة - بجاية</div>
+                                <div class="case-meta" data-translate="req_lawyer_meta_2">الوارثة: نورة شعبان • عدد الورثة: 5</div>
+                            </div>
+                            <div class="request-actions">
+                                <button class="btn btn-sm" data-translate="accept">قبول</button>
+                                <button class="btn btn-sm btn-outline" data-translate="reject">رفض</button>
+                            </div>
+                        </div>
+                        <div class="request-item">
+                            <div>
+                                <div class="case-title" data-translate="req_lawyer_title_3">نزاع تركة أرض - تيبازة</div>
+                                <div class="case-meta" data-translate="req_lawyer_meta_3">الوارث: عبد القادر حمدي • مطلوب محامي مختص</div>
+                            </div>
+                            <div class="request-actions">
+                                <button class="btn btn-sm" data-translate="accept">قبول</button>
+                                <button class="btn btn-sm btn-outline" data-translate="reject">رفض</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Notifications & Quick Actions -->
+            <div>
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title" data-translate="latest_notifications">🔔 آخر الإشعارات</span>
+                        <span class="badge-status status-pending">5</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="notification-item">
+                            <div>
+                                <div class="case-title" data-translate="notif_session_tmrw">موعد جلسة غداً</div>
+                                <div class="case-meta" data-translate="notif_session_meta">قضية الحسينية - محكمة وهران 9:00 صباحاً</div>
+                                <div class="text-muted" style="font-size:10px;" data-translate="time_1h_ago">قبل ساعة</div>
+                            </div>
+                        </div>
+                        <div class="notification-item">
+                            <div>
+                                <div class="case-title" data-translate="notif_doc_uploaded">مستند جديد مرفوع</div>
+                                <div class="case-meta" data-translate="notif_doc_meta">الوارث محمد رفع عقد ملكية جديد</div>
+                                <div class="text-muted" style="font-size:10px;" data-translate="time_3h_ago">قبل 3 ساعات</div>
+                            </div>
+                        </div>
+                        <div class="notification-item">
+                            <div>
+                                <div class="case-title" data-translate="notif_license_renew">تذكير بتجديد الرخصة</div>
+                                <div class="case-meta" data-translate="notif_license_meta">رخصة المحاماة تنتهي في 30 جوان 2026</div>
+                                <div class="text-muted" style="font-size:10px;" data-translate="time_yesterday">أمس</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title" data-translate="quick_actions">⚡ إجراءات سريعة</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="quick-actions">
+                            <a href="lawyer-case-detail.html" class="btn" style="width:100%;" data-translate="lawyer_open_case">📂 فتح قضية جديدة</a>
+                            <a href="chat.html" class="btn btn-outline" style="width:100%;" data-translate="lawyer_chat_clients">💬 محادثة مع الموكلين</a>
+                            <a href="risk-assessment.html" class="btn btn-outline" style="width:100%;" data-translate="lawyer_risk_assess">📊 تقييم مخاطر قضية</a>
+                            <a href="notifications.html" class="btn btn-outline" style="width:100%;" data-translate="lawyer_all_notifications">🔔 جميع الإشعارات</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title" data-translate="lawyer_upcoming_dates">📅 أقرب المواعيد</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="case-item">
+                            <div>
+                                <div class="case-title" data-translate="apt_court">جلسة محكمة وهران</div>
+                                <div class="case-meta" data-translate="apt_court_meta">18 ماي 2026 - 09:00 - قضية الحسينية</div>
+                            </div>
+                        </div>
+                        <div class="case-item">
+                            <div>
+                                <div class="case-title" data-translate="apt_expert">اجتماع مع خبير عقاري</div>
+                                <div class="case-meta" data-translate="apt_expert_meta">20 ماي 2026 - 14:00 - مكتب المحامي</div>
+                            </div>
+                        </div>
+                        <div class="case-item">
+                            <div>
+                                <div class="case-title" data-translate="apt_client">موعد مع الموكل فاطمة زروقي</div>
+                                <div class="case-meta" data-translate="apt_client_meta">22 ماي 2026 - 11:00 - عبر الفيديو</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer" data-translate="footer">
+        © 2025 ورثك فاليد - الحل السريع. جميع الحقوق محفوظة. الجزائر.
+    </div>
+
+    <script src="js/translations.js?v=5"></script>
+<script src="js/i18n.js"></script>
+<script>
+        (function() {
+            // Dropdown toggle
+            const userDropdown = document.getElementById('userDropdown');
+            const dropdownMenu = document.getElementById('dropdownMenu');
+            let dropdownOpen = false;
+
+            userDropdown.addEventListener('click', function(e) {
+                e.stopPropagation();
+                dropdownOpen = !dropdownOpen;
+                dropdownMenu.style.display = dropdownOpen ? 'block' : 'none';
+            });
+
+            document.addEventListener('click', function() {
+                dropdownOpen = false;
+                dropdownMenu.style.display = 'none';
+            });
+
+            // Notification bell
+            document.getElementById('notificationBell').addEventListener('click', function() {
+                window.location.href = 'notifications.html';
+            });
+
+            // Logout
+            document.getElementById('logoutBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                if (confirm(t('confirm_logout'))) {
+                    alert(t('msg_logout_success'));
+                    localStorage.clear();
+                    sessionStorage.clear();
+                    window.location.href = 'index.html';
+                }
+            });
+
+            // Simulate accepting a request (just demo)
+            const acceptButtons = document.querySelectorAll('.request-actions .btn:not(.btn-outline)');
+            acceptButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const requestItem = this.closest('.request-item');
+                    if (confirm(t('confirm_accept_case'))) {
+                        requestItem.style.opacity = '0.5';
+                        this.textContent = 'تم القبول';
+                        this.disabled = true;
+                        this.nextElementSibling.style.display = 'none';
+                    }
+                });
+            });
+
+            const rejectButtons = document.querySelectorAll('.request-actions .btn-outline');
+            rejectButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const requestItem = this.closest('.request-item');
+                    if (confirm(t('confirm_reject_case'))) {
+                        requestItem.style.opacity = '0.5';
+                        this.textContent = 'تم الرفض';
+                        this.disabled = true;
+                        this.previousElementSibling.style.display = 'none';
+                    }
+                });
+            });
+
+            console.log('تم تحميل لوحة تحكم المحامي - الأستاذ كمال بومدين');
+        })();
+    </script>
+        </body>
+</html>

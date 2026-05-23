@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ورثك فاليد - الحل السريع | تسجيل الدخول</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green-dark: #006633;
+            --green-light: #00A859;
+            --red: #D21034;
+            --white: #FFFFFF;
+            --off-white: #F8F9FA;
+            --gray-100: #F0F2F5;
+            --gray-200: #E4E7EB;
+            --gray-300: #CBD2D9;
+            --gray-500: #7B8794;
+            --gray-700: #3E4C59;
+            --gray-900: #1F2933;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.05);
+            --radius: 12px;
+            --transition: 0.2s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: var(--white);
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            color: var(--gray-900);
+            line-height: 1.6;
+        }
+
+        .welcome-panel {
+            flex: 1;
+            background: linear-gradient(135deg, #004d26 0%, #006633 40%, #008A4C 100%);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-panel::before {
+            content: '';
+            position: absolute;
+            top: -150px;
+            right: -150px;
+            width: 500px;
+            height: 500px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 50%;
+        }
+
+        .welcome-panel::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 400px;
+            height: 400px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 50%;
+        }
+
+        .logo-main {
+            font-size: 80px;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            margin-bottom: 16px;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .logo-tagline {
+            font-size: 24px;
+            font-weight: 400;
+            opacity: 0.9;
+            z-index: 1;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .welcome-illustration {
+            font-size: 120px;
+            z-index: 1;
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+
+        .welcome-features {
+            list-style: none;
+            z-index: 1;
+            font-size: 18px;
+            line-height: 2.2;
+            text-align: center;
+        }
+
+        .welcome-features li::before {
+            content: "✓ ";
+            font-weight: bold;
+            color: #a3e9c0;
+        }
+
+        .login-panel {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            background: var(--off-white);
+            overflow-y: auto;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 420px;
+        }
+
+        .form-step {
+            display: none;
+            animation: fadeSlideIn 0.35s ease;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        @keyframes fadeSlideIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--gray-900);
+            text-align: center;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--gray-500);
+            font-size: 14px;
+            margin-bottom: 24px;
+        }
+
+        .input-group {
+            margin-bottom: 18px;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 6px;
+            color: var(--gray-700);
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 15px;
+            font-family: 'Cairo', sans-serif;
+            border: 1.5px solid var(--gray-200);
+            border-radius: var(--radius);
+            background: white;
+            transition: all var(--transition);
+            outline: none;
+            color: var(--gray-900);
+        }
+
+        input:focus, select:focus {
+            border-color: var(--green-light);
+            box-shadow: 0 0 0 3px rgba(0,168,89,0.15);
+            background: white;
+        }
+
+        .input-with-icon {
+            position: relative;
+        }
+
+        .input-with-icon input {
+            padding-left: 44px;
+        }
+
+        .input-with-icon .icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray-500);
+            font-size: 18px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 14px 20px;
+            font-size: 16px;
+            font-weight: 700;
+            font-family: 'Cairo', sans-serif;
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            transition: all var(--transition);
+            text-decoration: none;
+            background: var(--green-dark);
+            color: white;
+            letter-spacing: 0.5px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn:hover {
+            background: #005a2b;
+            box-shadow: 0 4px 12px rgba(0,102,51,0.3);
+            transform: translateY(-1px);
+        }
+
+        .link {
+            color: var(--green-dark);
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .link:hover { text-decoration: underline; }
+
+        .text-center { text-align: center; }
+        .mt-3 { margin-top: 16px; }
+        .mt-4 { margin-top: 24px; }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            color: var(--gray-300);
+            font-size: 13px;
+        }
+        .divider::before, .divider::after {
+            content: ''; flex: 1; height: 1px; background: var(--gray-200);
+        }
+        .divider::before { margin-left: 12px; }
+        .divider::after { margin-right: 12px; }
+
+        .method-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            background: var(--gray-100);
+            border-radius: var(--radius);
+            padding: 4px;
+        }
+        .method-tab {
+            flex: 1;
+            padding: 10px 8px;
+            text-align: center;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--gray-700);
+        }
+        .method-tab.active {
+            background: white;
+            color: var(--green-dark);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .alert {
+            padding: 12px 16px;
+            border-radius: var(--radius);
+            font-size: 14px;
+            margin-bottom: 16px;
+            display: none;
+        }
+        .alert-success {
+            background: #e6f7ee;
+            color: #0a5c2a;
+            border: 1px solid #b8e6cc;
+            display: block;
+        }
+        .alert-error {
+            background: #fde8ec;
+            color: #9e1c30;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+
+        .timer-text {
+            font-size: 13px;
+            color: var(--gray-500);
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+                overflow-y: auto;
+            }
+            .welcome-panel {
+                flex: none;
+                padding: 30px 20px;
+                min-height: 40vh;
+            }
+            .logo-main {
+                font-size: 50px;
+            }
+            .logo-tagline {
+                font-size: 18px;
+            }
+            .welcome-illustration {
+                font-size: 80px;
+            }
+            .welcome-features {
+                font-size: 16px;
+            }
+            .login-panel {
+                flex: none;
+                padding: 20px;
+            }
+        }
+        /* Language Switcher on Login */
+        .login-lang-switch {
+            position: absolute; top: 20px; left: 20px; z-index: 10;
+            display: flex;
+            gap: 6px;
+        }
+        .login-lang-btn {
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: none;
+            background: transparent;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            color: rgba(255,255,255,0.7);
+            transition: 0.2s;
+            font-family: 'Cairo', sans-serif;
+        }
+        .login-lang-btn.active {
+            background: rgba(255,255,255,0.25);
+            color: white;
+        }
+        .login-lang-btn:hover:not(.active) {
+            background: rgba(255,255,255,0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- القسم الترحيبي -->
+    <div class="welcome-panel">
+        <div class="login-lang-switch">
+            <button class="login-lang-btn active" data-lang="ar" data-lang-switch onclick="changeLanguage('ar')">🇩🇿 العربية</button>
+            <button class="login-lang-btn" data-lang="fr" data-lang-switch onclick="changeLanguage('fr')">🇫🇷 Français</button>
+                        <button class="login-lang-btn" data-lang="en" data-lang-switch onclick="changeLanguage('en')">🇬🇧 English</button>
+        </div>
+        <div class="logo-main" data-translate="brand">ورثك فاليد</div>
+        <div class="logo-tagline" data-translate="tagline">الحل السريع - منصة التركات والعقارات</div>
+        <div class="welcome-illustration">🏛️</div>
+        <ul class="welcome-features">
+            <li data-translate="feature_transparency">إدارة التركات بكل شفافية</li>
+            <li data-translate="feature_investment">استثمار عقاري آمن ومربح</li>
+            <li data-translate="feature_vdr">غرفة بيانات افتراضية مشفرة</li>
+            <li data-translate="feature_support">دعم نفسي وقانوني متكامل</li>
+        </ul>
+    </div>
+
+    <!-- قسم تسجيل الدخول -->
+    <div class="login-panel">
+        <div class="login-container">
+            <!-- Step 1: Login Form -->
+            <div id="step-login" class="form-step active">
+                <h2 data-translate="login_title">تسجيل الدخول</h2>
+                <p class="subtitle" data-translate="login_subtitle">مرحباً بعودتك! أدخل بيانات حسابك</p>
+
+                <div id="login-alert" class="alert"></div>
+
+                <form id="login-form" autocomplete="off">
+                    <div class="input-group">
+                        <label for="login-email" data-translate="login_email">البريد الإلكتروني</label>
+                        <div class="input-with-icon">
+                            <span class="icon">✉️</span>
+                            <input type="email" id="login-email" data-translate-placeholder="login_email" placeholder="example@mail.dz" required dir="ltr">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="login-password" data-translate="login_password">كلمة المرور</label>
+                        <div class="input-with-icon">
+                            <span class="icon">🔒</span>
+                            <input type="password" id="login-password" data-translate-placeholder="ph_password" placeholder="••••••••" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn" data-translate="login_btn">دخول</button>
+                </form>
+
+                <div class="text-center mt-3">
+                    <span class="link" id="forgot-password-link" data-translate="login_forgot">نسيت كلمة المرور؟</span>
+                </div>
+
+                <div class="divider" data-translate="or">أو</div>
+
+                <div class="text-center">
+                    <p style="font-size:14px; color: var(--gray-700);" data-translate="login_no_account">ليس لديك حساب؟</p>
+                    <a href="#" class="link" id="register-link" style="font-weight:700;" data-translate="login_register">إنشاء حساب جديد</a>
+                </div>
+            </div>
+
+            <!-- Step 2: Forgot Password - Choose Method -->
+            <div id="step-forgot-method" class="form-step">
+                <h2 data-translate="forgot_title">استعادة كلمة المرور</h2>
+                <p class="subtitle" data-translate="forgot_subtitle">اختر طريقة استلام رمز الأمان</p>
+
+                <div class="method-tabs" id="recovery-method-tabs">
+                    <div class="method-tab active" data-method="email" data-translate="forgot_email_tab">📧 البريد الإلكتروني</div>
+                    <div class="method-tab" data-method="sms" data-translate="forgot_sms_tab">📱 رسالة SMS</div>
+                </div>
+
+                <form id="forgot-method-form">
+                    <div id="email-method" class="method-content">
+                        <div class="input-group">
+                            <label for="recovery-email" data-translate="forgot_registered_email">البريد الإلكتروني المسجل</label>
+                            <input type="email" id="recovery-email" data-translate-placeholder="ph_email" placeholder="example@mail.dz" required dir="ltr">
+                        </div>
+                    </div>
+
+                    <div id="sms-method" class="method-content" style="display:none;">
+                        <div class="input-group">
+                            <label for="recovery-phone" data-translate="forgot_phone">رقم الهاتف</label>
+                            <div style="display:flex; gap:8px;">
+                                <select style="width:100px;" id="country-code">
+                                    <option value="+213">+213 🇩🇿</option>
+                                </select>
+                                <input type="tel" id="recovery-phone" data-translate-placeholder="ph_phone" placeholder="05 50 12 34 56" required style="flex:1;" dir="ltr">
+                            </div>
+                            <small style="color:var(--gray-500);">مثال: 0550123456</small>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn mt-3" data-translate="forgot_send_code">إرسال رمز الأمان</button>
+                </form>
+
+                <div class="text-center mt-3">
+                    <span class="link" id="back-to-login-from-method" data-translate="forgot_back">العودة لتسجيل الدخول</span>
+                </div>
+            </div>
+
+            <!-- Step 3: Enter Security Code -->
+            <div id="step-enter-code" class="form-step">
+                <h2 data-translate="code_title">أدخل رمز الأمان</h2>
+                <p class="subtitle" id="code-sent-message" data-translate="code_sent_email" data-vars='{"dest":""}'>تم إرسال رمز مكون من 6 أرقام إلى بريدك الإلكتروني</p>
+
+                <div id="code-alert" class="alert"></div>
+
+                <form id="code-form">
+                    <div class="input-group">
+                        <label for="security-code" data-translate="code_label">رمز الأمان</label>
+                        <input type="text" id="security-code" data-translate-placeholder="ph_security_code" placeholder="123456" maxlength="6" required inputmode="numeric" pattern="[0-9]{6}" style="text-align:center; font-size:24px; letter-spacing:8px; font-weight:700;" dir="ltr">
+                    </div>
+                    <button type="submit" class="btn" data-translate="code_verify">تحقق من الرمز</button>
+                </form>
+
+                <p class="timer-text" id="timer-text" data-translate="code_resend_timer" data-vars='{"count":"60"}'>يمكنك إعادة إرسال الرمز بعد 60 ثانية</p>
+                <div class="text-center mt-2">
+                    <span class="link" id="resend-code" style="display:none;" data-translate="code_resend">إعادة إرسال الرمز</span>
+                </div>
+                <div class="text-center mt-3">
+                    <span class="link" id="back-to-method-from-code" data-translate="code_change_method">تغيير طريقة الاستعادة</span>
+                </div>
+            </div>
+
+            <!-- Step 4: Set New Password -->
+            <div id="step-new-password" class="form-step">
+                <h2 data-translate="newpass_title">تعيين كلمة مرور جديدة</h2>
+                <p class="subtitle" data-translate="newpass_subtitle">أدخل كلمة مرور جديدة قوية</p>
+
+                <div id="password-alert" class="alert"></div>
+
+                <form id="new-password-form">
+                    <div class="input-group">
+                        <label for="new-password" data-translate="newpass_label">كلمة المرور الجديدة</label>
+                        <input type="password" id="new-password" data-translate-placeholder="ph_password_hint" placeholder="8 أحرف على الأقل" required minlength="8">
+                    </div>
+                    <div class="input-group">
+                        <label for="confirm-password" data-translate="newpass_confirm">تأكيد كلمة المرور</label>
+                        <input type="password" id="confirm-password" data-translate-placeholder="ph_confirm_password" placeholder="أعد كتابة كلمة المرور" required minlength="8">
+                    </div>
+                    <button type="submit" class="btn" data-translate="newpass_save">حفظ كلمة المرور</button>
+                </form>
+                <div class="text-center mt-3">
+                    <span class="link" id="go-to-login-after-reset" data-translate="forgot_back">العودة لتسجيل الدخول</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+            <script src="js/translations.js"></script>
+<script src="js/i18n.js"></script>
+<script>
+        (function() {
+            const stepLogin = document.getElementById('step-login');
+            const stepForgotMethod = document.getElementById('step-forgot-method');
+            const stepEnterCode = document.getElementById('step-enter-code');
+            const stepNewPassword = document.getElementById('step-new-password');
+
+            const loginForm = document.getElementById('login-form');
+            const loginAlert = document.getElementById('login-alert');
+            const forgotPasswordLink = document.getElementById('forgot-password-link');
+            const registerLink = document.getElementById('register-link');
+
+            const forgotMethodForm = document.getElementById('forgot-method-form');
+            const methodTabs = document.querySelectorAll('#recovery-method-tabs .method-tab');
+            const emailMethodDiv = document.getElementById('email-method');
+            const smsMethodDiv = document.getElementById('sms-method');
+            const backToLoginFromMethod = document.getElementById('back-to-login-from-method');
+            let selectedRecoveryMethod = 'email';
+
+            const codeForm = document.getElementById('code-form');
+            const codeAlert = document.getElementById('code-alert');
+            const codeSentMessage = document.getElementById('code-sent-message');
+            const timerTextEl = document.getElementById('timer-text');
+            const resendCodeLink = document.getElementById('resend-code');
+            const backToMethodFromCode = document.getElementById('back-to-method-from-code');
+            let countdownInterval = null;
+            let countdownValue = 60;
+            let currentSecurityCode = '123456';
+
+            const newPasswordForm = document.getElementById('new-password-form');
+            const passwordAlert = document.getElementById('password-alert');
+            const goToLoginAfterReset = document.getElementById('go-to-login-after-reset');
+
+            function showStep(step) {
+                [stepLogin, stepForgotMethod, stepEnterCode, stepNewPassword].forEach(s => s.classList.remove('active'));
+                step.classList.add('active');
+                if (loginAlert) loginAlert.className = 'alert';
+                if (codeAlert) codeAlert.className = 'alert';
+                if (passwordAlert) passwordAlert.className = 'alert';
+            }
+
+            function showAlert(container, message, type) {
+                container.textContent = message;
+                container.className = 'alert alert-' + type;
+            }
+
+            function goToLogin() {
+                showStep(stepLogin);
+                loginForm.reset();
+            }
+
+            function goToEnterCode(method, destination) {
+                showStep(stepEnterCode);
+                if (method === 'email') {
+                    codeSentMessage.setAttribute('data-translate', 'code_sent_email');
+                    codeSentMessage.setAttribute('data-vars', JSON.stringify({dest: destination}));
+                    codeSentMessage.textContent = WarthukI18n.t('code_sent_email', {dest: destination});
+                } else {
+                    codeSentMessage.setAttribute('data-translate', 'code_sent_sms');
+                    codeSentMessage.setAttribute('data-vars', JSON.stringify({dest: destination}));
+                    codeSentMessage.textContent = WarthukI18n.t('code_sent_sms', {dest: destination});
+                }
+                startCountdown();
+                document.getElementById('security-code').value = '';
+                currentSecurityCode = '123456';
+            }
+
+            function startCountdown() {
+                if (countdownInterval) clearInterval(countdownInterval);
+                countdownValue = 60;
+                timerTextEl.setAttribute('data-vars', JSON.stringify({count: countdownValue}));
+                timerTextEl.textContent = WarthukI18n.t('code_resend_timer', {count: countdownValue});
+                resendCodeLink.style.display = 'none';
+                timerTextEl.style.display = 'block';
+                countdownInterval = setInterval(function() {
+                    countdownValue--;
+                    timerTextEl.setAttribute('data-vars', JSON.stringify({count: countdownValue}));
+                    timerTextEl.textContent = WarthukI18n.t('code_resend_timer', {count: countdownValue});
+                    if (countdownValue <= 0) {
+                        clearInterval(countdownInterval);
+                        timerTextEl.style.display = 'none';
+                        resendCodeLink.style.display = 'inline';
+                    }
+                }, 1000);
+            }
+
+            function stopCountdown() {
+                if (countdownInterval) {
+                    clearInterval(countdownInterval);
+                    countdownInterval = null;
+                }
+            }
+
+            methodTabs.forEach(function(tab) {
+                tab.addEventListener('click', function() {
+                    methodTabs.forEach(function(t) { t.classList.remove('active'); });
+                    this.classList.add('active');
+                    selectedRecoveryMethod = this.dataset.method;
+                    if (selectedRecoveryMethod === 'email') {
+                        emailMethodDiv.style.display = 'block';
+                        smsMethodDiv.style.display = 'none';
+                    } else {
+                        emailMethodDiv.style.display = 'none';
+                        smsMethodDiv.style.display = 'block';
+                    }
+                });
+            });
+
+            forgotPasswordLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                showStep(stepForgotMethod);
+                document.querySelector('#recovery-method-tabs .method-tab[data-method="email"]').click();
+            });
+
+            registerLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert(t('msg_signup_coming_soon'));
+            });
+
+            backToLoginFromMethod.addEventListener('click', function(e) {
+                e.preventDefault();
+                goToLogin();
+            });
+
+            backToMethodFromCode.addEventListener('click', function(e) {
+                e.preventDefault();
+                stopCountdown();
+                showStep(stepForgotMethod);
+            });
+
+            goToLoginAfterReset.addEventListener('click', function(e) {
+                e.preventDefault();
+                goToLogin();
+            });
+
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                var email = document.getElementById('login-email').value.trim();
+                var password = document.getElementById('login-password').value;
+                if (!email || !password) {
+                    showAlert(loginAlert, 'الرجاء إدخال البريد الإلكتروني وكلمة المرور.', 'error');
+                    return;
+                }
+                if (email.includes('@') && password.length >= 4) {
+                    showAlert(loginAlert, 'تم تسجيل الدخول بنجاح! جاري التحويل...', 'success');
+                    setTimeout(function() {
+                        if (email.includes('admin')) {
+                            window.location.href = 'manager-dashboard.html';
+                        } else if (email.includes('lawyer')) {
+                            window.location.href = 'lawyer-dashboard.html';
+                        } else if (email.includes('investor')) {
+                            window.location.href = 'investor-dashboard.html';
+                        } else {
+                            window.location.href = 'case-detail.html';
+                        }
+                    }, 1500);
+                } else {
+                    showAlert(loginAlert, 'البريد الإلكتروني أو كلمة المرور غير صحيحة. حاول مجدداً.', 'error');
+                }
+            });
+
+            forgotMethodForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                var destination = '';
+                if (selectedRecoveryMethod === 'email') {
+                    var email = document.getElementById('recovery-email').value.trim();
+                    if (!email || !email.includes('@')) {
+                        alert(t('msg_valid_email'));
+                        return;
+                    }
+                    destination = email;
+                } else {
+                    var phone = document.getElementById('recovery-phone').value.trim();
+                    if (!phone || phone.length < 9) {
+                        alert(t('msg_valid_phone'));
+                        return;
+                    }
+                    var countryCode = document.getElementById('country-code').value;
+                    destination = countryCode + ' ' + phone;
+                }
+                alert(tv('msg_code_sent_to', {dest: destination}));
+                goToEnterCode(selectedRecoveryMethod, destination);
+            });
+
+            codeForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                var enteredCode = document.getElementById('security-code').value.trim();
+                if (enteredCode === currentSecurityCode) {
+                    showAlert(codeAlert, 'الرمز صحيح! يمكنك الآن تعيين كلمة مرور جديدة.', 'success');
+                    stopCountdown();
+                    setTimeout(function() {
+                        showStep(stepNewPassword);
+                        document.getElementById('new-password').value = '';
+                        document.getElementById('confirm-password').value = '';
+                    }, 800);
+                } else {
+                    showAlert(codeAlert, 'الرمز غير صحيح. تأكد من الرمز وحاول مجدداً.', 'error');
+                }
+            });
+
+            resendCodeLink.addEventListener('click', function(e) {
+                e.preventDefault();
+                alert(t('msg_code_resent'));
+                startCountdown();
+            });
+
+            newPasswordForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                var newPass = document.getElementById('new-password').value;
+                var confirmPass = document.getElementById('confirm-password').value;
+                if (newPass.length < 8) {
+                    showAlert(passwordAlert, 'كلمة المرور يجب أن تكون 8 أحرف على الأقل.', 'error');
+                    return;
+                }
+                if (newPass !== confirmPass) {
+                    showAlert(passwordAlert, 'كلمتا المرور غير متطابقتين.', 'error');
+                    return;
+                }
+                showAlert(passwordAlert, 'تم تغيير كلمة المرور بنجاح! يمكنك الآن تسجيل الدخول.', 'success');
+                setTimeout(function() {
+                    goToLogin();
+                }, 2000);
+            });
+
+            window.addEventListener('beforeunload', function() {
+                stopCountdown();
+            });
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التقارير التنفيذية | ورثك فاليد - الحل السريع</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --green-dark:#006633; --green-light:#00A859; --green-bg:#e6f5ee; --red:#D21034; --red-light:#fde8ec; --white:#FFFFFF; --off-white:#F8F9FA; --gray-50:#F7F8FA; --gray-100:#F0F2F5; --gray-200:#E4E7EB; --gray-300:#CBD2D9; --gray-400:#9BA5B2; --gray-500:#7B8794; --gray-700:#3E4C59; --gray-900:#1F2933; --admin-accent:#2c3e50; --shadow-sm:0 1px 3px rgba(0,0,0,0.06),0 1px 2px rgba(0,0,0,0.04); --shadow-md:0 4px 6px rgba(0,0,0,0.07),0 2px 4px rgba(0,0,0,0.06); --shadow-lg:0 10px 25px rgba(0,0,0,0.1),0 4px 10px rgba(0,0,0,0.05); --radius:12px; --radius-lg:16px; --transition:0.2s ease; }
+        * { box-sizing:border-box; margin:0; padding:0; }
+        body { font-family:'Cairo',sans-serif; background:linear-gradient(135deg,#f0f5f2 0%,#eaf5ee 100%); min-height:100vh; color:var(--gray-900); line-height:1.6; }
+        .top-nav { background:var(--white); border-bottom:1px solid var(--gray-200); padding:0 24px; height:64px; display:flex; align-items:center; justify-content:space-between; box-shadow:var(--shadow-sm); position:sticky; top:0; z-index:100; }
+        .logo-area { display:flex; align-items:center; gap:10px; }
+        .logo-icon { width:36px; height:36px; background:var(--green-dark); border-radius:50%; display:flex; align-items:center; justify-content:center; color:white; font-weight:800; font-size:18px; }
+        .logo-text-nav { font-weight:800; font-size:18px; color:var(--green-dark); }
+        .admin-badge { background:var(--admin-accent); color:white; padding:4px 12px; border-radius:20px; font-size:13px; font-weight:600; margin-right:10px; }
+        .user-area { display:flex; align-items:center; gap:16px; }
+        .back-link { color:var(--green-dark); text-decoration:none; font-weight:600; font-size:14px; cursor:pointer; }
+        .back-link:hover { text-decoration:underline; }
+        .main-container { max-width:1300px; margin:0 auto; padding:24px; }
+        .page-header { margin-bottom:20px; }
+        .greeting { font-size:26px; font-weight:800; color:var(--gray-900); }
+        .text-muted { color:var(--gray-500); font-size:13px; }
+        .filter-bar { background:var(--white); border-radius:var(--radius-lg); padding:12px 20px; box-shadow:var(--shadow-sm); margin-bottom:24px; display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+        .filter-group { display:flex; align-items:center; gap:8px; }
+        select,input { padding:8px 12px; border:1.5px solid var(--gray-200); border-radius:var(--radius); font-family:'Cairo',sans-serif; font-size:14px; background:var(--off-white); }
+        select:focus,input:focus { border-color:var(--green-light); outline:none; }
+        .btn { padding:10px 18px; border-radius:var(--radius); font-weight:700; font-family:'Cairo',sans-serif; font-size:14px; cursor:pointer; border:none; background:var(--green-dark); color:white; }
+        .btn:hover { background:#005a2b; }
+        .btn-outline { background:transparent; border:1.5px solid var(--green-dark); color:var(--green-dark); }
+        .btn-outline:hover { background:rgba(0,102,51,0.05); }
+        .dashboard-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:24px; }
+        @media (max-width:800px) { .dashboard-grid { grid-template-columns:1fr; } }
+        .card { background:var(--white); border-radius:var(--radius-lg); box-shadow:var(--shadow-sm); overflow:hidden; margin-bottom:24px; }
+        .card-header { padding:16px 20px; border-bottom:1px solid var(--gray-100); font-weight:700; font-size:18px; display:flex; justify-content:space-between; align-items:center; }
+        .card-body { padding:20px; }
+        .stat-row { display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid var(--gray-100); }
+        .stat-row:last-child { border-bottom:none; }
+        .stat-label { font-weight:600; color:var(--gray-700); }
+        .stat-value { font-weight:800; font-size:18px; }
+        .positive { color:var(--green-dark); }
+        .chart-container { display:flex; align-items:end; gap:16px; height:160px; margin-top:12px; }
+        .chart-bar-group { flex:1; display:flex; flex-direction:column; align-items:center; }
+        .chart-bar { width:100%; border-radius:8px 8px 0 0; transition:height 0.4s ease; display:flex; align-items:flex-end; justify-content:center; color:white; font-size:11px; font-weight:600; padding-bottom:4px; }
+        .chart-label { font-size:11px; color:var(--gray-500); margin-top:6px; }
+        .bar-green { background:linear-gradient(to top,var(--green-dark),var(--green-light)); }
+        .bar-blue { background:linear-gradient(to top,#0077b6,#48cae4); }
+        .table-mini { width:100%; border-collapse:collapse; }
+        .table-mini th,.table-mini td { padding:10px; text-align:right; border-bottom:1px solid var(--gray-100); font-size:13px; }
+        .table-mini th { background:var(--gray-50); font-weight:700; }
+        .footer { text-align:center; padding:16px; font-size:12px; color:var(--gray-400); border-top:1px solid var(--gray-200); margin-top:24px; }
+    
+        /* Language Switcher */
+        .lang-switch {
+            display: flex;
+            gap: 6px;
+            margin-left: 16px;
+        }
+        .lang-btn {
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: none;
+            background: transparent;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            color: var(--gray-700);
+            transition: 0.2s;
+            font-family: 'Cairo', sans-serif;
+        }
+        .lang-btn.active {
+            background: var(--green-dark);
+            color: white;
+            box-shadow: 0 2px 6px rgba(0,102,51,0.2);
+        }
+    </style>
+</head>
+<body>
+    <nav class="top-nav"><div class="logo-area"><div class="logo-icon">و</div><span class="logo-text-nav" data-translate="brand">ورثك فاليد</span><span class="admin-badge" data-translate="nav_reports">📊 تقارير تنفيذية</span></div><div class="user-area">
+            <div class="lang-switch">
+                <button class="lang-btn active" data-lang="ar" data-lang-switch onclick="changeLanguage('ar')">🇩🇿 العربية</button>
+                <button class="lang-btn" data-lang="fr" data-lang-switch onclick="changeLanguage('fr')">🇫🇷 Français</button>
+                <button class="lang-btn" data-lang="en" data-lang-switch onclick="changeLanguage('en')">🇬🇧 English</button>
+            </div><a href="manager-dashboard.html" class="back-link" data-translate="back_to_dashboard">↩ لوحة التحكم</a></div></nav>
+    <div class="main-container">
+        <div class="page-header"><h1 class="greeting" data-translate="reports_title">التقارير التنفيذية</h1><p class="text-muted" data-translate="reports_subtitle">ملخص أداء المنصة وحجم التداول والعقارات والقضايا خلال الفترة المحددة.</p></div>
+        <div class="filter-bar"><div class="filter-group"><label>من:</label><input type="date" id="dateFrom" value="2026-01-01"></div><div class="filter-group"><label>إلى:</label><input type="date" id="dateTo" value="2026-05-17"></div><button class="btn btn-outline" id="applyPeriodBtn" data-translate="reports_apply_period">📅 تطبيق الفترة</button><button class="btn" id="exportBtn" style="margin-right:auto;" data-translate="reports_export_pdf">📥 تصدير PDF</button></div>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:24px;">
+            <div class="card" style="flex:1;min-width:180px;"><div class="card-body" style="text-align:center;"><div style="font-size:28px;font-weight:800;color:var(--green-dark);">87</div><div style="color:var(--gray-500);">قضية جارية</div></div></div>
+            <div class="card" style="flex:1;min-width:180px;"><div class="card-body" style="text-align:center;"><div style="font-size:28px;font-weight:800;color:#0077b6;">153</div><div style="color:var(--gray-500);">عقار معروض</div></div></div>
+            <div class="card" style="flex:1;min-width:180px;"><div class="card-body" style="text-align:center;"><div style="font-size:28px;font-weight:800;color:#b8860b;">98.5M دج</div><div style="color:var(--gray-500);">حجم التداول</div></div></div>
+            <div class="card" style="flex:1;min-width:180px;"><div class="card-body" style="text-align:center;"><div style="font-size:28px;font-weight:800;color:var(--red);">12.4%</div><div style="color:var(--gray-500);">متوسط العائد</div></div></div>
+        </div>
+        <div class="dashboard-grid">
+            <div class="card"><div class="card-header" data-translate="reports_monthly_revenue">💰 الإيرادات الشهرية (دج)</div><div class="card-body"><div class="chart-container" id="revenueChart"></div></div></div>
+            <div class="card"><div class="card-header" data-translate="reports_cases_by_wilaya">📋 توزيع القضايا حسب الولاية</div><div class="card-body"><div class="chart-container" id="casesChart"></div></div></div>
+            <div class="card"><div class="card-header" data-translate="reports_top_properties">🏠 أكثر العقارات طلباً</div><div class="card-body"><table class="table-mini"><thead><tr><th>العقار</th><th>الولاية</th><th>العروض</th><th>السعر</th></tr></thead><tbody id="topPropertiesTable"></tbody></table></div></div>
+            <div class="card"><div class="card-header" data-translate="reports_revenue_details">💼 تفاصيل الإيرادات</div><div class="card-body"><div class="stat-row"><span class="stat-label">أتعاب المحامين</span><span class="stat-value">4.2M دج</span></div><div class="stat-row"><span class="stat-label">عمولات الوكالات</span><span class="stat-value">3.1M دج</span></div><div class="stat-row"><span class="stat-label">رسوم غرف البيانات VDR</span><span class="stat-value">1.5M دج</span></div><div class="stat-row"><span class="stat-label">استشارات مالية ونفسية</span><span class="stat-value">0.8M دج</span></div><div class="stat-row"><span class="stat-label">اشتراكات المستثمرين</span><span class="stat-value">2.4M دج</span></div><div class="stat-row" style="font-weight:800;background:var(--gray-50);padding:10px;"><span>الإجمالي</span><span class="positive">12.0M دج</span></div></div></div>
+        </div>
+    </div>
+    <div class="footer" data-translate="footer">© 2026 ورثك فاليد - الحل السريع. جميع الحقوق محفوظة. الجزائر.</div>
+    <script src="js/translations.js"></script>
+<script src="js/i18n.js"></script>
+<script>
+        (function(){
+            const revenueData=[{month:'جانفي',amount:1.8},{month:'فيفري',amount:2.1},{month:'مارس',amount:2.4},{month:'أفريل',amount:2.9},{month:'ماي',amount:2.8}];
+            const maxRev=Math.max(...revenueData.map(d=>d.amount));
+            document.getElementById('revenueChart').innerHTML=revenueData.map(d=>{const h=(d.amount/maxRev)*130;return`<div class="chart-bar-group"><div class="chart-bar bar-green" style="height:${h}px;">${d.amount}M</div><div class="chart-label">${d.month}</div></div>`;}).join('');
+            const casesData=[{wilaya:'الجزائر',count:45},{wilaya:'وهران',count:30},{wilaya:'قسنطينة',count:22},{wilaya:'سطيف',count:18},{wilaya:'البليدة',count:15}];
+            const maxCases=Math.max(...casesData.map(d=>d.count));
+            document.getElementById('casesChart').innerHTML=casesData.map(d=>{const h=(d.count/maxCases)*130;return`<div class="chart-bar-group"><div class="chart-bar bar-blue" style="height:${h}px;">${d.count}</div><div class="chart-label">${d.wilaya}</div></div>`;}).join('');
+            const topProps=[{name:'فيلا الأبيار',wilaya:'الجزائر',offers:12,price:'15.5M'},{name:'أرض بئر توتة',wilaya:'الجزائر',offers:8,price:'8.2M'},{name:'شقة حي الموز',wilaya:'قسنطينة',offers:7,price:'6.9M'},{name:'محل وهران',wilaya:'وهران',offers:6,price:'11.2M'}];
+            document.getElementById('topPropertiesTable').innerHTML=topProps.map(p=>`<tr><td>${p.name}</td><td>${p.wilaya}</td><td>${p.offers}</td><td>${p.price} دج</td></tr>`).join('');
+            document.getElementById('applyPeriodBtn').addEventListener('click',function(){alert(t('msg_report_applied'));});
+            document.getElementById('exportBtn').addEventListener('click',function(){alert(t('msg_export_report_pdf'));});
+
+            window.addEventListener('languageChanged', function(e) {
+                // Re-render revenue chart
+                document.getElementById('revenueChart').innerHTML = revenueData.map(function(d) {
+                    var h = (d.amount / maxRev) * 130;
+                    return '<div class="chart-bar-group"><div class="chart-bar bar-green" style="height:' + h + 'px;">' + d.amount + 'M</div><div class="chart-label">' + t('month_' + d.month, d.month) + '</div></div>';
+                }).join('');
+                // Re-render cases chart
+                document.getElementById('casesChart').innerHTML = casesData.map(function(d) {
+                    var h = (d.count / maxCases) * 130;
+                    return '<div class="chart-bar-group"><div class="chart-bar bar-blue" style="height:' + h + 'px;">' + d.count + '</div><div class="chart-label">' + d.wilaya + '</div></div>';
+                }).join('');
+                // Re-render top properties table
+                document.getElementById('topPropertiesTable').innerHTML = topProps.map(function(p) {
+                    return '<tr><td>' + p.name + '</td><td>' + p.wilaya + '</td><td>' + p.offers + '</td><td>' + p.price + ' ' + t('currency_dzd', 'دج') + '</td></tr>';
+                }).join('');
+            });
+        })();
+    </script>
+        </body>
+</html>

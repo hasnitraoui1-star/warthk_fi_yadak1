@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تقييم المخاطر | ورثك فاليد - الحل السريع</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green-dark: #006633;
+            --green-light: #00A859;
+            --green-bg: #e6f5ee;
+            --red: #D21034;
+            --red-light: #fde8ec;
+            --white: #FFFFFF;
+            --off-white: #F8F9FA;
+            --gray-50: #F7F8FA;
+            --gray-100: #F0F2F5;
+            --gray-200: #E4E7EB;
+            --gray-300: #CBD2D9;
+            --gray-400: #9BA5B2;
+            --gray-500: #7B8794;
+            --gray-700: #3E4C59;
+            --gray-900: #1F2933;
+            --gold: #b8860b;
+            --gold-light: #fdf5e6;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.05);
+            --radius: 12px;
+            --radius-lg: 16px;
+            --transition: 0.2s ease;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Cairo', sans-serif; background: linear-gradient(135deg, #f0f5f2 0%, #faf9f5 100%); min-height: 100vh; color: var(--gray-900); line-height: 1.6; }
+        .top-nav { background: var(--white); border-bottom: 1px solid var(--gray-200); padding: 0 24px; height: 64px; display: flex; align-items: center; justify-content: space-between; box-shadow: var(--shadow-sm); position: sticky; top: 0; z-index: 100; }
+        .logo-area { display: flex; align-items: center; gap: 10px; }
+        .logo-icon { width: 36px; height: 36px; background: var(--green-dark); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 18px; }
+        .logo-text-nav { font-weight: 800; font-size: 18px; color: var(--green-dark); }
+        .wilaya-tag { background: var(--gold-light); color: var(--gold); padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; margin-right: 10px; }
+        .user-area { display: flex; align-items: center; gap: 16px; }
+        .back-link { color: var(--green-dark); text-decoration: none; font-weight: 600; font-size: 14px; cursor: pointer; }
+        .back-link:hover { text-decoration: underline; }
+        .main-container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+        .page-header { margin-bottom: 24px; }
+        .greeting { font-size: 26px; font-weight: 800; color: var(--gray-900); }
+        .text-muted { color: var(--gray-500); font-size: 13px; }
+        .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        @media (max-width: 800px) { .grid-2col { grid-template-columns: 1fr; } }
+        .card { background: var(--white); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); overflow: hidden; margin-bottom: 24px; }
+        .card-header { padding: 16px 20px; border-bottom: 1px solid var(--gray-100); display: flex; justify-content: space-between; align-items: center; }
+        .card-title { font-weight: 700; font-size: 18px; color: var(--gray-900); }
+        .card-body { padding: 20px; }
+        .input-group { margin-bottom: 16px; }
+        label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 14px; color: var(--gray-700); }
+        input, select, textarea { width: 100%; padding: 12px 14px; border: 1.5px solid var(--gray-200); border-radius: var(--radius); font-family: 'Cairo', sans-serif; font-size: 14px; background: var(--off-white); }
+        input:focus, select:focus, textarea:focus { border-color: var(--gold); outline: none; box-shadow: 0 0 0 3px rgba(184,134,11,0.1); }
+        .input-row { display: flex; gap: 12px; }
+        .input-row .input-group { flex: 1; }
+        .btn { display: inline-flex; align-items: center; justify-content: center; padding: 12px 20px; border-radius: var(--radius); font-weight: 700; font-family: 'Cairo', sans-serif; font-size: 15px; cursor: pointer; border: none; transition: all var(--transition); text-decoration: none; color: white; box-shadow: var(--shadow-sm); gap: 8px; }
+        .btn-primary { background: var(--gold); }
+        .btn-primary:hover { background: #9c7300; box-shadow: var(--shadow-md); transform: translateY(-1px); }
+        .risk-result { text-align: center; padding: 20px; border-radius: var(--radius); margin-top: 16px; }
+        .risk-high { background: var(--red-light); color: var(--red); border: 1px solid #f5c6cb; }
+        .risk-medium { background: #fff3e0; color: #f57c00; border: 1px solid #ffe0b2; }
+        .risk-low { background: var(--green-bg); color: var(--green-dark); border: 1px solid #b8e6cc; }
+        .risk-score { font-size: 48px; font-weight: 800; }
+        .risk-label { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+        .assessment-item { padding: 14px 0; border-bottom: 1px solid var(--gray-100); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+        .assessment-item:last-child { border-bottom: none; }
+        .item-title { font-weight: 600; color: var(--gray-900); margin-bottom: 4px; }
+        .item-meta { font-size: 12px; color: var(--gray-500); }
+        .badge-status { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+        .status-high { background: var(--red-light); color: var(--red); }
+        .status-medium { background: #fff3e0; color: #f57c00; }
+        .status-low { background: var(--green-bg); color: var(--green-dark); }
+        .progress-bar { height: 10px; background: var(--gray-200); border-radius: 5px; margin-top: 6px; overflow: hidden; }
+        .progress-fill { height: 100%; border-radius: 5px; transition: width 0.5s ease; }
+        .fill-red { background: var(--red); }
+        .fill-orange { background: #f57c00; }
+        .fill-green { background: var(--green-light); }
+        .footer { text-align: center; padding: 16px; font-size: 12px; color: var(--gray-400); border-top: 1px solid var(--gray-200); margin-top: 24px; }
+    
+        /* Language Switcher */
+        .lang-switch {
+            display: flex;
+            gap: 6px;
+            margin-left: 16px;
+        }
+        .lang-btn {
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: none;
+            background: transparent;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            color: var(--gray-700);
+            transition: 0.2s;
+            font-family: 'Cairo', sans-serif;
+        }
+        .lang-btn.active {
+            background: var(--green-dark);
+            color: white;
+            box-shadow: 0 2px 6px rgba(0,102,51,0.2);
+        }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="logo-area">
+            <div class="logo-icon">و</div>
+            <span class="logo-text-nav" data-translate="brand">ورثك فاليد</span>
+            <span class="wilaya-tag" data-translate="nav_risk">⚠️ تقييم المخاطر</span>
+        </div>
+        <div class="user-area">
+            <div class="lang-switch">
+                <button class="lang-btn active" data-lang="ar" data-lang-switch onclick="changeLanguage('ar')">🇩🇿 العربية</button>
+                <button class="lang-btn" data-lang="fr" data-lang-switch onclick="changeLanguage('fr')">🇫🇷 Français</button>
+                <button class="lang-btn" data-lang="en" data-lang-switch onclick="changeLanguage('en')">🇬🇧 English</button>
+            </div>
+            <a href="expert-dashboard.html" class="back-link" data-translate="back_to_dashboard">↩ لوحة التحكم</a>
+        </div>
+    </nav>
+    <div class="main-container">
+        <div class="page-header">
+            <h1 class="greeting" data-translate="risk_title">تقييم المخاطر المالية والعقارية</h1>
+            <p class="text-muted" data-translate="risk_subtitle">قم بتقييم مخاطر القضايا والعقارات بناءً على معايير مالية وقانونية وسوقية.</p>
+        </div>
+        <div class="grid-2col">
+            <div>
+                <div class="card">
+                    <div class="card-header"><span class="card-title" data-translate="risk_new">📋 تقييم جديد</span></div>
+                    <div class="card-body">
+                        <form id="riskForm">
+                            <div class="input-group"><label data-translate="risk_case_property">القضية / العقار</label><select id="caseSelect" required><option value="">اختر...</option><option>تركة عقار الحسينية - وهران</option><option>أرض فلاحية البليدة</option><option>شقة سطيف</option><option>محل تجاري تلمسان</option></select></div>
+                            <div class="input-group"><label data-translate="risk_type">نوع التقييم</label><select id="assessmentType"><option data-translate="risk_financial">مالي</option><option data-translate="risk_legal">قانوني</option><option data-translate="risk_market">سوقي</option><option data-translate="risk_comprehensive">شامل</option></select></div>
+                            <div class="input-row"><div class="input-group"><label data-translate="risk_legal_score">المخاطر القانونية (1-10)</label><input type="number" id="legalRisk" min="1" max="10" value="5" required></div><div class="input-group"><label data-translate="risk_financial_score">المخاطر المالية (1-10)</label><input type="number" id="financialRisk" min="1" max="10" value="5" required></div></div>
+                            <div class="input-row"><div class="input-group"><label data-translate="risk_market_score">مخاطر السوق (1-10)</label><input type="number" id="marketRisk" min="1" max="10" value="5" required></div><div class="input-group"><label data-translate="risk_operational_score">مخاطر التشغيل (1-10)</label><input type="number" id="operationalRisk" min="1" max="10" value="5" required></div></div>
+                            <div class="input-group"><label data-translate="risk_expert_notes">ملاحظات الخبير</label><textarea id="expertNotes" rows="3" data-translate-placeholder="ph_assessment_notes" placeholder="ملاحظاتك المهنية حول التقييم..."></textarea></div>
+                            <button type="submit" class="btn btn-primary" style="width:100%;" data-translate="risk_calculate">📊 حساب وتقديم التقييم</button>
+                        </form>
+                        <div id="riskResult" style="display:none;"></div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="card"><div class="card-header"><span class="card-title" data-translate="risk_recent">📋 آخر التقييمات</span></div><div class="card-body" id="assessmentsList"></div></div>
+                <div class="card"><div class="card-header"><span class="card-title" data-translate="risk_summary">📊 ملخص المخاطر</span></div><div class="card-body"><div style="margin-bottom:12px;"><span data-translate="risk_high">عالية المخاطر</span><div class="progress-bar"><div class="progress-fill fill-red" style="width:25%;"></div></div></div><div style="margin-bottom:12px;"><span data-translate="risk_medium">متوسطة المخاطر</span><div class="progress-bar"><div class="progress-fill fill-orange" style="width:45%;"></div></div></div><div><span data-translate="risk_low">منخفضة المخاطر</span><div class="progress-bar"><div class="progress-fill fill-green" style="width:30%;"></div></div></div></div></div>
+            </div>
+        </div>
+    </div>
+    <div class="footer" data-translate="footer">© 2026 ورثك فاليد - الحل السريع. جميع الحقوق محفوظة. الجزائر.</div>
+    <script src="js/translations.js"></script>
+<script src="js/i18n.js"></script>
+<script>
+        (function() {
+            const assessments = [
+                { id:1, case: 'تركة عقار الحسينية', type:'مالي', score:82, level:'high', date:'2026-05-10', notes:'نزاع على الملكية، مخاطر عالية.' },
+                { id:2, case: 'أرض فلاحية البليدة', type:'قانوني', score:45, level:'medium', date:'2026-05-05', notes:'أوراق شبه مكتملة.' },
+                { id:3, case: 'شقة سطيف', type:'سوقي', score:15, level:'low', date:'2026-05-01', notes:'موقع ممتاز، طلب مرتفع.' }
+            ];
+            const form = document.getElementById('riskForm');
+            const riskResult = document.getElementById('riskResult');
+            const assessmentsList = document.getElementById('assessmentsList');
+            function getFillClass(level) { return level === 'high' ? 'fill-red' : level === 'medium' ? 'fill-orange' : 'fill-green'; }
+            function getStatusClass(level) { return level === 'high' ? 'status-high' : level === 'medium' ? 'status-medium' : 'status-low'; }
+            function getLevelLabel(level) { return level === 'high' ? 'مرتفعة' : level === 'medium' ? 'متوسطة' : 'منخفضة'; }
+            function renderAssessments() {
+                assessmentsList.innerHTML = assessments.map(a => `<div class="assessment-item"><div><div class="item-title">${a.case}</div><div class="item-meta">${a.type} · ${a.date} · ${a.notes}</div><div class="progress-bar" style="margin-top:6px;"><div class="progress-fill ${getFillClass(a.level)}" style="width:${a.score}%;"></div></div></div><span class="badge-status ${getStatusClass(a.level)}">${a.score}% - ${getLevelLabel(a.level)}</span></div>`).join('');
+            }
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const legal = parseInt(document.getElementById('legalRisk').value) || 5;
+                const financial = parseInt(document.getElementById('financialRisk').value) || 5;
+                const market = parseInt(document.getElementById('marketRisk').value) || 5;
+                const operational = parseInt(document.getElementById('operationalRisk').value) || 5;
+                const caseName = document.getElementById('caseSelect').value || 'قضية غير محددة';
+                const type = document.getElementById('assessmentType').value;
+                const notes = document.getElementById('expertNotes').value;
+                const weightedScore = Math.round((legal * 0.35 + financial * 0.30 + market * 0.20 + operational * 0.15) * 10);
+                let level = 'low';
+                if (weightedScore >= 65) level = 'high';
+                else if (weightedScore >= 35) level = 'medium';
+                riskResult.style.display = 'block';
+                riskResult.innerHTML = `<div class="risk-result risk-${level}"><div class="risk-label">${getLevelLabel(level)} المخاطر</div><div class="risk-score">${weightedScore}%</div><p style="margin-top:8px;">تقييم ${type} لـ: ${caseName}</p>${notes ? `<p style="font-size:13px; margin-top:4px;">📝 ${notes}</p>` : ''}</div>`;
+                assessments.unshift({ id: Date.now(), case: caseName, type: type, score: weightedScore, level: level, date: new Date().toISOString().split('T')[0], notes: notes || 'تقييم جديد' });
+                renderAssessments();
+                form.reset();
+                document.getElementById('legalRisk').value = 5;
+                document.getElementById('financialRisk').value = 5;
+                document.getElementById('marketRisk').value = 5;
+                document.getElementById('operationalRisk').value = 5;
+            });
+            renderAssessments();
+        
+
+            // Re-render dynamic content on language change
+            window.addEventListener('languageChanged', function(e) {
+            renderAssessments();
+            });
+        })();
+    </script>
+        </body>
+</html>

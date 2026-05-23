@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سوق Properati العقاري | ورثك فاليد - الحل السريع</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green-dark: #006633;
+            --green-light: #00A859;
+            --green-bg: #e6f5ee;
+            --red: #D21034;
+            --red-light: #fde8ec;
+            --white: #FFFFFF;
+            --off-white: #F8F9FA;
+            --gray-50: #F7F8FA;
+            --gray-100: #F0F2F5;
+            --gray-200: #E4E7EB;
+            --gray-300: #CBD2D9;
+            --gray-400: #9BA5B2;
+            --gray-500: #7B8794;
+            --gray-700: #3E4C59;
+            --gray-900: #1F2933;
+            --properati-accent: #e65c00;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.05);
+            --radius: 12px;
+            --radius-lg: 16px;
+            --transition: 0.2s ease;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: #f4f6f9;
+            min-height: 100vh;
+            color: var(--gray-900);
+            line-height: 1.6;
+        }
+
+        .top-nav {
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+            padding: 0 24px;
+            height: 64px;
+            display: flex; align-items: center; justify-content: space-between;
+            box-shadow: var(--shadow-sm); position: sticky; top: 0; z-index: 100;
+        }
+        .logo-area { display: flex; align-items: center; gap: 10px; }
+        .logo-icon {
+            width: 36px; height: 36px; background: var(--green-dark); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 18px;
+        }
+        .logo-text-nav { font-weight: 800; font-size: 18px; color: var(--green-dark); }
+        .wilaya-tag {
+            background: #ffe6d5; color: var(--properati-accent); padding: 4px 12px; border-radius: 20px;
+            font-size: 13px; font-weight: 600; margin-right: 10px;
+        }
+        .user-area { display: flex; align-items: center; gap: 16px; }
+        .back-link { color: var(--green-dark); text-decoration: none; font-weight: 600; font-size: 14px; cursor: pointer; }
+        .back-link:hover { text-decoration: underline; }
+
+        .main-container { max-width: 1300px; margin: 0 auto; padding: 24px; }
+        .page-header { margin-bottom: 20px; }
+        .greeting { font-size: 26px; font-weight: 800; color: var(--gray-900); }
+        .text-muted { color: var(--gray-500); font-size: 13px; }
+
+        /* Filters */
+        .filter-bar {
+            background: var(--white); border-radius: var(--radius-lg); padding: 16px 20px;
+            box-shadow: var(--shadow-sm); margin-bottom: 24px;
+            display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
+        }
+        .filter-group { display: flex; align-items: center; gap: 8px; flex: 1 1 180px; }
+        .filter-group label { font-weight: 600; font-size: 13px; white-space: nowrap; }
+        select, input {
+            padding: 10px 12px; border: 1.5px solid var(--gray-200); border-radius: var(--radius);
+            font-family: 'Cairo', sans-serif; font-size: 14px; background: var(--off-white);
+            width: 100%;
+        }
+        select:focus, input:focus { border-color: var(--properati-accent); outline: none; box-shadow: 0 0 0 3px rgba(230,92,0,0.1); }
+        .btn-filter {
+            background: var(--properati-accent); color: white; border: none; padding: 10px 18px; border-radius: var(--radius);
+            font-weight: 700; cursor: pointer; white-space: nowrap;
+        }
+        .btn-filter:hover { background: #cc4d00; }
+
+        /* Heatmap & Grid Layout */
+        .properati-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+        @media (max-width: 900px) {
+            .properati-grid { grid-template-columns: 1fr; }
+        }
+
+        .card {
+            background: var(--white); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);
+            overflow: hidden;
+        }
+        .card-header {
+            padding: 16px 20px; border-bottom: 1px solid var(--gray-100);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .card-title { font-weight: 700; font-size: 18px; color: var(--gray-900); }
+        .card-body { padding: 20px; }
+
+        /* Heatmap */
+        .heatmap-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+        .heatmap-cell {
+            background: #f0f0f0;
+            border-radius: var(--radius);
+            padding: 12px;
+            text-align: center;
+            transition: transform var(--transition);
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        .heatmap-cell:hover { transform: scale(1.02); border-color: var(--properati-accent); }
+        .heatmap-cell.high { background: #ffcccc; }
+        .heatmap-cell.medium { background: #ffe0b2; }
+        .heatmap-cell.low { background: #e6f5ee; }
+        .wilaya-name { font-weight: 700; font-size: 14px; }
+        .avg-price { font-size: 14px; font-weight: 800; color: var(--properati-accent); margin-top: 4px; }
+
+        /* Properties list */
+        .property-row {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 12px 0; border-bottom: 1px solid var(--gray-100);
+            flex-wrap: wrap; gap: 8px;
+        }
+        .property-row:last-child { border-bottom: none; }
+        .property-title { font-weight: 600; color: var(--gray-900); }
+        .property-location { font-size: 12px; color: var(--gray-500); }
+        .property-price { font-weight: 800; color: var(--green-dark); }
+
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 8px 16px; border-radius: var(--radius); font-weight: 700;
+            font-family: 'Cairo', sans-serif; font-size: 14px; cursor: pointer; border: none;
+            transition: all var(--transition); text-decoration: none; color: white;
+            background: var(--green-dark); gap: 6px;
+        }
+        .btn:hover { background: #005a2b; }
+        .btn-outline {
+            background: transparent; border: 1.5px solid var(--green-dark); color: var(--green-dark);
+        }
+        .btn-outline:hover { background: rgba(0,102,51,0.05); }
+
+        .analytics-row {
+            display: flex; gap: 16px; flex-wrap: wrap; margin-top: 16px;
+        }
+        .analytics-card {
+            flex: 1; min-width: 150px; background: var(--gray-50); border-radius: var(--radius);
+            padding: 16px; text-align: center;
+        }
+        .analytics-value { font-size: 22px; font-weight: 800; color: var(--properati-accent); }
+        .analytics-label { font-size: 13px; color: var(--gray-500); }
+
+        .footer { text-align: center; padding: 16px; font-size: 12px; color: var(--gray-400); border-top: 1px solid var(--gray-200); margin-top: 24px; }
+    
+        /* Language Switcher */
+        .lang-switch {
+            display: flex;
+            gap: 6px;
+            margin-left: 16px;
+        }
+        .lang-btn {
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: none;
+            background: transparent;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            color: var(--gray-700);
+            transition: 0.2s;
+            font-family: 'Cairo', sans-serif;
+        }
+        .lang-btn.active {
+            background: var(--green-dark);
+            color: white;
+            box-shadow: 0 2px 6px rgba(0,102,51,0.2);
+        }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="logo-area">
+            <div class="logo-icon">و</div>
+            <span class="logo-text-nav" data-translate="brand">ورثك فاليد</span>
+            <span class="wilaya-tag" data-translate="nav_properati">🗺️ Properati</span>
+        </div>
+        <div class="user-area">
+            <div class="lang-switch">
+                <button class="lang-btn active" data-lang="ar" data-lang-switch onclick="changeLanguage('ar')">🇩🇿 العربية</button>
+                <button class="lang-btn" data-lang="fr" data-lang-switch onclick="changeLanguage('fr')">🇫🇷 Français</button>
+                <button class="lang-btn" data-lang="en" data-lang-switch onclick="changeLanguage('en')">🇬🇧 English</button>
+            </div>
+            <a href="marketplace.html" class="back-link" data-translate="back_to_dashboard">↩ سوق العقارات</a>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="page-header">
+            <h1 class="greeting" data-translate="properati_title">سوق Properati العقاري</h1>
+            <p class="text-muted" data-translate="properati_subtitle">تحليلات الأسعار حسب الولايات، خريطة حرارية، وتصفح العقارات المتاحة.</p>
+        </div>
+
+        <!-- Filters -->
+        <div class="filter-bar">
+            <div class="filter-group">
+                <label data-translate="filter_wilaya">الولاية</label>
+                <select id="filterWilaya">
+                    <option value="">الكل</option>
+                    <option>الجزائر العاصمة</option>
+                    <option>وهران</option>
+                    <option>قسنطينة</option>
+                    <option>سطيف</option>
+                    <option>البليدة</option>
+                    <option>تلمسان</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label data-translate="filter_property_type">نوع العقار</label>
+                <select id="filterType">
+                    <option value="">الكل</option>
+                    <option>فيلا</option>
+                    <option>شقة</option>
+                    <option>أرض</option>
+                    <option>محل تجاري</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label data-translate="filter_price_min">السعر الأدنى</label>
+                <input type="number" id="priceMin" data-translate-placeholder="ph_price_min" placeholder="0 دج">
+            </div>
+            <div class="filter-group">
+                <label data-translate="filter_price_max">السعر الأقصى</label>
+                <input type="number" id="priceMax" data-translate-placeholder="ph_price_max" placeholder="50,000,000 دج">
+            </div>
+            <button class="btn-filter" id="applyFiltersBtn" data-translate="filter_search">🔍 بحث</button>
+        </div>
+
+        <!-- Main Grid: Heatmap + Listings -->
+        <div class="properati-grid">
+            <!-- Heatmap & Analytics Column -->
+            <div>
+                <div class="card" style="margin-bottom:24px;">
+                    <div class="card-header"><span class="card-title" data-translate="properati_heatmap">📍 الخريطة الحرارية لمتوسط الأسعار</span></div>
+                    <div class="card-body">
+                        <div class="heatmap-container" id="heatmapContainer"></div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header"><span class="card-title" data-translate="properati_analytics">📊 تحليلات السوق</span></div>
+                    <div class="card-body">
+                        <div class="analytics-row">
+                            <div class="analytics-card">
+                                <div class="analytics-value" id="avgPriceOverall">12.4M</div>
+                                <div class="analytics-label" data-translate="properati_avg_price">متوسط السعر (دج)</div>
+                            </div>
+                            <div class="analytics-card">
+                                <div class="analytics-value" id="totalListings">153</div>
+                                <div class="analytics-label" data-translate="properati_total_properties">إجمالي العقارات</div>
+                            </div>
+                            <div class="analytics-card">
+                                <div class="analytics-value" id="avgPricePerSqm">68k</div>
+                                <div class="analytics-label" data-translate="properati_avg_price_sqm">متوسط سعر المتر (دج)</div>
+                            </div>
+                        </div>
+                        <div style="margin-top:16px;">
+                            <strong data-translate="properati_trend">اتجاه السوق (آخر 6 أشهر):</strong>
+                            <div style="display:flex; gap:4px; align-items:end; height:60px; margin-top:8px;" id="trendChart"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Property Listings Column -->
+            <div>
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title" data-translate="properati_featured">🏘️ عقارات مميزة</span>
+                        <span id="resultsCount">9 عقارات</span>
+                    </div>
+                    <div class="card-body" id="propertyList"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer" data-translate="footer">
+        © 2026 ورثك فاليد - الحل السريع. جميع الحقوق محفوظة. الجزائر.
+    </div>
+
+    <script src="js/translations.js"></script>
+<script src="js/i18n.js"></script>
+<script>
+        (function() {
+            const properties = [
+                { title:'فيلا F4 - الأبيار', location:'الجزائر العاصمة', type:'فيلا', price:15500000, area:280, priceSqm:55357 },
+                { title:'أرض 500م² - بئر توتة', location:'الجزائر العاصمة', type:'أرض', price:8200000, area:500, priceSqm:16400 },
+                { title:'شقة F3 - حي الموز', location:'قسنطينة', type:'شقة', price:6900000, area:110, priceSqm:62727 },
+                { title:'فيلا F5 - حي النخيل', location:'قسنطينة', type:'فيلا', price:14800000, area:320, priceSqm:46250 },
+                { title:'محل 120م² - وسط وهران', location:'وهران', type:'محل تجاري', price:11200000, area:120, priceSqm:93333 },
+                { title:'أرض 1 هكتار - البليدة', location:'البليدة', type:'أرض', price:9500000, area:10000, priceSqm:950 },
+                { title:'شقة F2 - سيدي مبروك', location:'قسنطينة', type:'شقة', price:4200000, area:75, priceSqm:56000 },
+                { title:'فيلا F3 - حي السلام', location:'سطيف', type:'فيلا', price:8700000, area:200, priceSqm:43500 },
+                { title:'أرض 300م² - تلمسان', location:'تلمسان', type:'أرض', price:6100000, area:300, priceSqm:20333 }
+            ];
+
+            const wilayas = [
+                { name:'الجزائر', avgPrice:11500000, count:45, colorClass:'high' },
+                { name:'وهران', avgPrice:9800000, count:30, colorClass:'high' },
+                { name:'قسنطينة', avgPrice:8200000, count:22, colorClass:'medium' },
+                { name:'سطيف', avgPrice:7100000, count:18, colorClass:'medium' },
+                { name:'البليدة', avgPrice:6500000, count:15, colorClass:'low' },
+                { name:'تلمسان', avgPrice:5800000, count:12, colorClass:'low' }
+            ];
+
+            function renderHeatmap() {
+                const container = document.getElementById('heatmapContainer');
+                container.innerHTML = wilayas.map(w => `
+                    <div class="heatmap-cell ${w.colorClass}" onclick="alert(tv('msg_wilaya_avg_price', {name: '${w.name}', price: ${w.avgPrice}.toLocaleString()}))">
+                        <div class="wilaya-name">${w.name}</div>
+                        <div class="avg-price">${(w.avgPrice/1e6).toFixed(1)}M دج</div>
+                        <div style="font-size:11px;">${w.count} عقار</div>
+                    </div>
+                `).join('');
+            }
+
+            function renderPropertyList(props) {
+                const container = document.getElementById('propertyList');
+                if (props.length === 0) {
+                    container.innerHTML = '<p style="text-align:center; color:var(--gray-400);">لا توجد عقارات مطابقة.</p>';
+                    document.getElementById('resultsCount').textContent = '0 عقارات';
+                    return;
+                }
+                container.innerHTML = props.map(p => `
+                    <div class="property-row">
+                        <div>
+                            <div class="property-title">${p.title}</div>
+                            <div class="property-location">📍 ${p.location} | ${p.type} | ${p.area} م²</div>
+                        </div>
+                        <div style="display:flex; align-items:center; gap:10px;">
+                            <span class="property-price">${p.price.toLocaleString()} دج</span>
+                            <a href="property-detail.html" class="btn btn-sm">عرض</a>
+                        </div>
+                    </div>
+                `).join('');
+                document.getElementById('resultsCount').textContent = `${props.length} عقارات`;
+                updateAnalytics(props);
+            }
+
+            function updateAnalytics(props) {
+                if (props.length === 0) return;
+                const total = props.reduce((s, p) => s + p.price, 0);
+                const avgPrice = total / props.length;
+                const avgSqm = props.reduce((s, p) => s + p.priceSqm, 0) / props.length;
+                document.getElementById('avgPriceOverall').textContent = (avgPrice/1e6).toFixed(1) + 'M';
+                document.getElementById('totalListings').textContent = props.length;
+                document.getElementById('avgPricePerSqm').textContent = Math.round(avgSqm/1000) + 'k';
+                const trendMonths = ['جانفي','فيفري','مارس','أفريل','ماي'];
+                const trendValues = [10.2, 11.0, 11.8, 12.1, 12.4];
+                const maxVal = Math.max(...trendValues);
+                document.getElementById('trendChart').innerHTML = trendValues.map((v, i) => {
+                    const h = (v / maxVal) * 50;
+                    return `<div style="flex:1; display:flex; flex-direction:column; align-items:center;">
+                        <div style="height:${h}px; width:20px; background:var(--properati-accent); border-radius:4px 4px 0 0;"></div>
+                        <span style="font-size:10px;">${trendMonths[i]}</span>
+                    </div>`;
+                }).join('');
+            }
+
+            function applyFilters() {
+                const wilaya = document.getElementById('filterWilaya').value;
+                const type = document.getElementById('filterType').value;
+                const min = parseFloat(document.getElementById('priceMin').value) || 0;
+                const max = parseFloat(document.getElementById('priceMax').value) || Infinity;
+                const filtered = properties.filter(p => 
+                    (!wilaya || p.location.includes(wilaya)) &&
+                    (!type || p.type === type) &&
+                    (p.price >= min && p.price <= max)
+                );
+                renderPropertyList(filtered);
+            }
+
+            document.getElementById('applyFiltersBtn').addEventListener('click', applyFilters);
+            renderHeatmap();
+            renderPropertyList(properties);
+        
+
+            // Re-render dynamic content on language change
+            window.addEventListener('languageChanged', function(e) {
+            renderHeatmap();
+            applyFilters();
+            });
+        })();
+    </script>
+        </body>
+</html>

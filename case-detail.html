@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تفاصيل القضية - وريث | ورثك فاليد - الحل السريع</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green-dark: #006633;
+            --green-light: #00A859;
+            --green-bg: #e6f5ee;
+            --red: #D21034;
+            --red-light: #fde8ec;
+            --white: #FFFFFF;
+            --off-white: #F8F9FA;
+            --gray-50: #F7F8FA;
+            --gray-100: #F0F2F5;
+            --gray-200: #E4E7EB;
+            --gray-300: #CBD2D9;
+            --gray-400: #9BA5B2;
+            --gray-500: #7B8794;
+            --gray-700: #3E4C59;
+            --gray-900: #1F2933;
+            --heir-accent: #006633;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.05);
+            --radius: 12px;
+            --radius-lg: 16px;
+            --transition: 0.2s ease;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: #f4f6f9;
+            min-height: 100vh;
+            color: var(--gray-900);
+            line-height: 1.6;
+        }
+
+        .top-nav {
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+            padding: 0 24px;
+            height: 64px;
+            display: flex; align-items: center; justify-content: space-between;
+            box-shadow: var(--shadow-sm); position: sticky; top: 0; z-index: 100;
+        }
+        .logo-area { display: flex; align-items: center; gap: 10px; }
+        .logo-icon {
+            width: 36px; height: 36px; background: var(--green-dark); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 18px;
+        }
+        .logo-text-nav { font-weight: 800; font-size: 18px; color: var(--green-dark); }
+        .wilaya-tag {
+            background: var(--green-bg); color: var(--green-dark); padding: 4px 12px; border-radius: 20px;
+            font-size: 13px; font-weight: 600; margin-right: 10px;
+        }
+        .user-area { display: flex; align-items: center; gap: 16px; }
+        .back-link { color: var(--green-dark); text-decoration: none; font-weight: 600; font-size: 14px; cursor: pointer; }
+        .back-link:hover { text-decoration: underline; }
+
+        .main-container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+        .page-header { margin-bottom: 24px; }
+        .greeting { font-size: 26px; font-weight: 800; color: var(--gray-900); }
+        .text-muted { color: var(--gray-500); font-size: 13px; }
+
+        .case-summary {
+            background: var(--white); border-radius: var(--radius-lg); padding: 24px;
+            box-shadow: var(--shadow-sm); margin-bottom: 24px;
+            display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start;
+        }
+        .case-info { flex: 2; }
+        .case-title { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
+        .case-meta { display: flex; flex-wrap: wrap; gap: 16px; font-size: 14px; color: var(--gray-500); margin-bottom: 12px; }
+        .case-status-badge {
+            display: inline-block; padding: 6px 14px; border-radius: 20px; font-weight: 700; font-size: 14px;
+        }
+        .status-active { background: var(--green-bg); color: var(--green-dark); }
+
+        .dashboard-grid {
+            display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-bottom: 24px;
+        }
+        @media (max-width: 800px) { .dashboard-grid { grid-template-columns: 1fr; } }
+
+        .card {
+            background: var(--white); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);
+            overflow: hidden; margin-bottom: 24px;
+        }
+        .card-header {
+            padding: 16px 20px; border-bottom: 1px solid var(--gray-100);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .card-title { font-weight: 700; font-size: 18px; color: var(--gray-900); }
+        .card-body { padding: 20px; }
+
+        .doc-item, .session-item, .lawyer-item {
+            padding: 14px 0; border-bottom: 1px solid var(--gray-100);
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+        }
+        .doc-item:last-child, .session-item:last-child, .lawyer-item:last-child { border-bottom: none; }
+        .item-title { font-weight: 600; color: var(--gray-900); margin-bottom: 4px; }
+        .item-meta { font-size: 12px; color: var(--gray-500); }
+
+        .badge-status {
+            display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600;
+        }
+        .status-active { background: var(--green-bg); color: var(--green-dark); }
+        .status-pending { background: #fff8e1; color: #f57f17; }
+        .status-done { background: #e0f0ff; color: #0077b6; }
+
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 10px 18px; border-radius: var(--radius); font-weight: 700;
+            font-family: 'Cairo', sans-serif; font-size: 14px; cursor: pointer; border: none;
+            transition: all var(--transition); text-decoration: none; color: white;
+            box-shadow: var(--shadow-sm); gap: 6px; background: var(--green-dark);
+        }
+        .btn:hover { background: #005a2b; }
+        .btn-outline {
+            background: transparent; border: 1.5px solid var(--green-dark); color: var(--green-dark); box-shadow: none;
+        }
+        .btn-outline:hover { background: rgba(0,102,51,0.05); }
+        .btn-sm { padding: 6px 14px; font-size: 13px; }
+
+        .link { color: var(--green-dark); text-decoration: none; font-weight: 600; cursor: pointer; }
+        .link:hover { text-decoration: underline; }
+
+        .footer { text-align: center; padding: 16px; font-size: 12px; color: var(--gray-400); border-top: 1px solid var(--gray-200); margin-top: 24px; }
+    
+        /* Language Switcher */
+        .lang-switch {
+            display: flex;
+            gap: 6px;
+            margin-left: 16px;
+        }
+        .lang-btn {
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: none;
+            background: transparent;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            color: var(--gray-700);
+            transition: 0.2s;
+            font-family: 'Cairo', sans-serif;
+        }
+        .lang-btn.active {
+            background: var(--green-dark);
+            color: white;
+            box-shadow: 0 2px 6px rgba(0,102,51,0.2);
+        }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="logo-area">
+            <div class="logo-icon">و</div>
+            <span class="logo-text-nav" data-translate="brand">ورثك فاليد</span>
+            <span class="wilaya-tag" data-translate="nav_case_detail">📋 تفاصيل القضية</span>
+        </div>
+        <div class="user-area">
+            <div class="lang-switch">
+                <button class="lang-btn active" data-lang="ar" data-lang-switch onclick="changeLanguage('ar')">🇩🇿 العربية</button>
+                <button class="lang-btn" data-lang="fr" data-lang-switch onclick="changeLanguage('fr')">🇫🇷 Français</button>
+                <button class="lang-btn" data-lang="en" data-lang-switch onclick="changeLanguage('en')">🇬🇧 English</button>
+            </div>
+            <a href="case-detail.html" class="back-link" data-translate="back_to_dashboard">↩ لوحة التحكم</a>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="page-header">
+            <h1 class="greeting" data-translate="case_title">تفاصيل القضية</h1>
+            <p class="text-muted" data-translate="case_desc_detail">قضية تركة عقار الحسينية - وهران. يمكنك متابعة المستجدات والمستندات والجلسات.</p>
+        </div>
+
+        <!-- Case Summary -->
+        <div class="case-summary">
+            <div class="case-info">
+                <h2 class="case-title" data-translate="case_name_houss">تركة عقار الحسينية - وهران</h2>
+                <div class="case-meta">
+                    <span><span data-translate="case_number">رقم القضية</span>: C-2026-042</span>
+                    <span><span data-translate="case_main_heir">الوارث الرئيسي</span>: محمد بن صالح</span>
+                    <span><span data-translate="case_open_date">تاريخ الفتح</span>: 10 أفريل 2026</span>
+                </div>
+                <div class="case-meta">
+                    <span><span data-translate="case_lawyer">المحامي</span>: الأستاذ كمال بومدين</span>
+                    <span><span data-translate="case_estimated_value">القيمة التقديرية للتركة</span>: 12.000.000 دج</span>
+                </div>
+                <span class="case-status-badge status-active" data-translate="case_status_litigation">● جاري المرافعة</span>
+            </div>
+            <div style="flex:1; text-align:center;">
+                <div style="background:var(--gray-100); border-radius:var(--radius); padding:20px;">
+                    <div style="font-size:32px; font-weight:800; color:var(--green-dark);">12M</div>
+                    <div style="color:var(--gray-500);" data-translate="case_value_label">دج قيمة التركة</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Left: Documents & Sessions -->
+            <div>
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title" data-translate="case_documents">📄 مستندات القضية</span>
+                        <button class="btn btn-sm btn-outline" data-translate="upload_document">+ رفع مستند</button>
+                    </div>
+                    <div class="card-body" id="documentsList"></div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title" data-translate="case_sessions">📅 الجلسات والمواعيد</span>
+                    </div>
+                    <div class="card-body" id="sessionsList"></div>
+                </div>
+            </div>
+
+            <!-- Right: Lawyer & Quick Info -->
+            <div>
+                <div class="card">
+                    <div class="card-header"><span class="card-title" data-translate="case_lawyer_info">⚖️ المحامي المرتبط</span></div>
+                    <div class="card-body" id="lawyerInfo"></div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header"><span class="card-title" data-translate="case_additional_info">ℹ️ معلومات إضافية</span></div>
+                    <div class="card-body">
+                        <p><span data-translate="case_prop_address">📍 العقار: 15 شارع العقيد عميروش، الحسينية، وهران</span></p>
+                        <p><span data-translate="case_prop_area">📐 المساحة: 280 م²</span></p>
+                        <p><span data-translate="case_prop_type">🏠 النوع: فيلا F4</span></p>
+                        <p><span data-translate="case_court">⚖️ المحكمة المختصة: محكمة وهران الابتدائية</span></p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header"><span class="card-title" data-translate="case_privacy">🛡️ الخصوصية</span></div>
+                    <div class="card-body">
+                        <p style="color:var(--gray-500); font-size:13px;" data-translate="case_privacy_note">🔒 الملاحظات النفسية مشفرة ولا يمكن للوريث الاطلاع عليها.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer" data-translate="footer">
+        © 2025 ورثك فاليد - الحل السريع. جميع الحقوق محفوظة. الجزائر.
+    </div>
+
+    <script src="js/translations.js?v=3"></script>
+<script src="js/i18n.js"></script>
+<script>
+        (function() {
+            const documents = [
+                { nameKey:'doc_ownership', name:'عقد الملكية', type:'pdf', date:'2026-04-12', size:'1.2 MB' },
+                { nameKey:'doc_death_cert', name:'شهادة الوفاة', type:'pdf', date:'2026-04-10', size:'0.8 MB' },
+                { nameKey:'doc_expert_report', name:'تقرير الخبير العقاري', type:'pdf', date:'2026-05-01', size:'3.4 MB' },
+                { nameKey:'doc_lawsuit', name:'لائحة الدعوى', type:'docx', date:'2026-04-15', size:'0.5 MB' }
+            ];
+
+            const sessions = [
+                { titleKey:'session_court', title:'جلسة محكمة', date:'2026-05-25', time:'09:00', locKey:'loc_court_oran', location:'محكمة وهران', status:'قادمة' },
+                { titleKey:'session_lawyer_meet', title:'اجتماع مع المحامي', date:'2026-05-10', time:'14:00', locKey:'loc_lawyer_office', location:'مكتب الأستاذ كمال', status:'مكتملة' },
+                { titleKey:'session_prop_inspect', title:'معاينة العقار', date:'2026-04-20', time:'10:30', locKey:'loc_houss_oran', location:'الحسينية، وهران', status:'مكتملة' }
+            ];
+
+            const lawyer = {
+                nameKey:'lawyer_kamel', name:'الأستاذ كمال بومدين',
+                wilayaKey:'wilaya_oran', wilaya:'وهران',
+                phone:'05 50 11 22 33',
+                email:'kamel@law.dz'
+            };
+
+            document.getElementById('documentsList').innerHTML = documents.map(d => `
+                <div class="doc-item">
+                    <div>
+                        <div class="item-title">📄 <span data-translate="${d.nameKey}">${d.name}</span></div>
+                        <div class="item-meta">${d.type.toUpperCase()} · ${d.size} · ${d.date}</div>
+                    </div>
+                    <a href="#" class="btn btn-sm btn-outline" data-translate="download">تحميل</a>
+                </div>
+            `).join('');
+
+            document.getElementById('sessionsList').innerHTML = sessions.map(s => `
+                <div class="session-item">
+                    <div>
+                        <div class="item-title"><span data-translate="${s.titleKey}">${s.title}</span></div>
+                        <div class="item-meta">${s.date} · ${s.time} · <span data-translate="${s.locKey}">${s.location}</span></div>
+                    </div>
+                    <span class="badge-status ${s.status === 'قادمة' ? 'status-pending' : 'status-done'}" data-translate="${s.status === 'قادمة' ? 'case_upcoming' : 'completed_f'}">${s.status}</span>
+                </div>
+            `).join('');
+
+            document.getElementById('lawyerInfo').innerHTML = `
+                <div style="text-align:center; margin-bottom:12px;">
+                    <div style="width:60px; height:60px; border-radius:50%; background:#1e5f74; color:white; display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:800; margin:0 auto;">ك</div>
+                    <div style="font-weight:800; font-size:18px; margin-top:8px;"><span data-translate="${lawyer.nameKey}">${lawyer.name}</span></div>
+                </div>
+                <p>📍 <span data-translate="${lawyer.wilayaKey}">${lawyer.wilaya}</span></p>
+                <p>📞 ${lawyer.phone}</p>
+                <p>📧 ${lawyer.email}</p>
+                <a href="chat.html" class="btn btn-outline" style="width:100%; margin-top:8px;" data-translate="case_message_lawyer">💬 مراسلة المحامي</a>
+            `;
+
+            console.log('صفحة تفاصيل القضية للوريث جاهزة.');
+
+            window.addEventListener('languageChanged', function(e) {
+                // Re-render documents list
+                document.getElementById('documentsList').innerHTML = documents.map(d => `
+                    <div class="doc-item">
+                        <div>
+                            <div class="item-title">📄 ${t(d.nameKey, d.name)}</div>
+                            <div class="item-meta">${d.type.toUpperCase()} · ${d.size} · ${d.date}</div>
+                        </div>
+                        <a href="#" class="btn btn-sm btn-outline">${t('download', 'تحميل')}</a>
+                    </div>
+                `).join('');
+                // Re-render sessions list
+                document.getElementById('sessionsList').innerHTML = sessions.map(s => `
+                    <div class="session-item">
+                        <div>
+                            <div class="item-title">${t(s.titleKey, s.title)}</div>
+                            <div class="item-meta">${s.date} · ${s.time} · ${t(s.locKey, s.location)}</div>
+                        </div>
+                        <span class="badge-status ${s.status === 'قادمة' ? 'status-pending' : 'status-done'}" data-translate="${s.status === 'قادمة' ? 'case_upcoming' : 'completed_f'}">${s.status === 'قادمة' ? t('case_upcoming', 'قادمة') : t('completed_f', 'مكتملة')}</span>
+                    </div>
+                `).join('');
+                // Re-render lawyer info
+                document.getElementById('lawyerInfo').innerHTML = `
+                    <div style="text-align:center; margin-bottom:12px;">
+                        <div style="width:60px; height:60px; border-radius:50%; background:#1e5f74; color:white; display:flex; align-items:center; justify-content:center; font-size:24px; font-weight:800; margin:0 auto;">ك</div>
+                        <div style="font-weight:800; font-size:18px; margin-top:8px;">${t(lawyer.nameKey, lawyer.name)}</div>
+                    </div>
+                    <p>📍 ${t(lawyer.wilayaKey, lawyer.wilaya)}</p>
+                    <p>📞 ${lawyer.phone}</p>
+                    <p>📧 ${lawyer.email}</p>
+                    <a href="chat.html" class="btn btn-outline" style="width:100%; margin-top:8px;" data-translate="case_message_lawyer">💬 ${t('case_message_lawyer', 'مراسلة المحامي')}</a>
+                `;
+            });
+        })();
+    </script>
+</body>
+</html>

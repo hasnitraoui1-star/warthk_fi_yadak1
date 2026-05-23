@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تفاصيل العقار - فيلا الأبيار | ورثك فاليد - الحل السريع</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green-dark: #006633;
+            --green-light: #00A859;
+            --green-bg: #e6f5ee;
+            --red: #D21034;
+            --red-light: #fde8ec;
+            --white: #FFFFFF;
+            --off-white: #F8F9FA;
+            --gray-50: #F7F8FA;
+            --gray-100: #F0F2F5;
+            --gray-200: #E4E7EB;
+            --gray-300: #CBD2D9;
+            --gray-400: #9BA5B2;
+            --gray-500: #7B8794;
+            --gray-700: #3E4C59;
+            --gray-900: #1F2933;
+            --investor-accent: #1e5f74;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.05);
+            --radius: 12px;
+            --radius-lg: 16px;
+            --transition: 0.2s ease;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: #f4f6f9;
+            min-height: 100vh;
+            color: var(--gray-900);
+            line-height: 1.6;
+        }
+
+        .top-nav {
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+            padding: 0 24px;
+            height: 64px;
+            display: flex; align-items: center; justify-content: space-between;
+            box-shadow: var(--shadow-sm); position: sticky; top: 0; z-index: 100;
+        }
+        .logo-area { display: flex; align-items: center; gap: 10px; }
+        .logo-icon {
+            width: 36px; height: 36px; background: var(--green-dark); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 18px;
+        }
+        .logo-text-nav { font-weight: 800; font-size: 18px; color: var(--green-dark); }
+        .wilaya-tag {
+            background: #e0f0f7; color: var(--investor-accent); padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; margin-right: 10px;
+        }
+        .user-area { display: flex; align-items: center; gap: 16px; }
+        .back-link { color: var(--green-dark); text-decoration: none; font-weight: 600; font-size: 14px; cursor: pointer; }
+        .back-link:hover { text-decoration: underline; }
+
+        .main-container { max-width: 1100px; margin: 0 auto; padding: 24px; }
+
+        .property-header {
+            background: var(--white); border-radius: var(--radius-lg); padding: 24px;
+            box-shadow: var(--shadow-sm); margin-bottom: 24px;
+            display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start;
+        }
+        .image-gallery {
+            flex: 1 1 400px; display: flex; gap: 12px;
+        }
+        .main-image {
+            flex: 3; background: linear-gradient(135deg, #cbd5e1, #94a3b8);
+            border-radius: var(--radius); min-height: 280px;
+            display: flex; align-items: center; justify-content: center; color: white; font-size: 48px;
+        }
+        .thumb-list { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+        .thumb {
+            flex: 1; background: #e2e8f0; border-radius: 8px; min-height: 60px;
+            display: flex; align-items: center; justify-content: center; color: #64748b; font-size: 14px;
+        }
+        .property-info { flex: 1 1 300px; }
+        .property-title { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
+        .property-address { color: var(--gray-500); margin-bottom: 16px; display: flex; align-items: center; gap: 6px; }
+        .price-tag { font-size: 32px; font-weight: 800; color: var(--green-dark); margin-bottom: 12px; }
+        .features { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 20px; }
+        .feature { background: var(--gray-100); padding: 8px 14px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+        .badge-nda {
+            background: var(--green-bg); color: var(--green-dark); padding: 6px 14px; border-radius: 20px;
+            font-weight: 700; font-size: 13px; display: inline-flex; align-items: center; gap: 4px;
+        }
+
+        .card {
+            background: var(--white); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);
+            overflow: hidden; margin-bottom: 24px;
+        }
+        .card-header {
+            padding: 16px 20px; border-bottom: 1px solid var(--gray-100);
+            font-weight: 700; font-size: 18px;
+        }
+        .card-body { padding: 20px; }
+
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 12px 20px; border-radius: var(--radius); font-weight: 700;
+            font-family: 'Cairo', sans-serif; font-size: 15px; cursor: pointer; border: none;
+            transition: all var(--transition); text-decoration: none; color: white;
+            box-shadow: var(--shadow-sm); gap: 8px;
+        }
+        .btn-primary { background: var(--green-dark); }
+        .btn-primary:hover { background: #005a2b; box-shadow: var(--shadow-md); transform: translateY(-1px); }
+        .btn-outline {
+            background: transparent; border: 1.5px solid var(--green-dark); color: var(--green-dark); box-shadow: none;
+        }
+        .btn-outline:hover { background: rgba(0,102,51,0.05); }
+        .btn-investor { background: var(--investor-accent); }
+        .btn-investor:hover { background: #134b5e; }
+        .btn-block { width: 100%; }
+
+        .input-group { margin-bottom: 16px; }
+        label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 14px; }
+        input, textarea {
+            width: 100%; padding: 12px; border: 1.5px solid var(--gray-200); border-radius: var(--radius);
+            font-family: 'Cairo', sans-serif; font-size: 14px; background: var(--off-white);
+        }
+        input:focus, textarea:focus { border-color: var(--green-light); outline: none; box-shadow: 0 0 0 3px rgba(0,168,89,0.15); }
+
+        .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @media (max-width: 700px) { .grid-2col { grid-template-columns: 1fr; } }
+
+        .footer { text-align: center; padding: 16px; font-size: 12px; color: var(--gray-400); border-top: 1px solid var(--gray-200); margin-top: 24px; }
+    
+        /* Language Switcher */
+        .lang-switch {
+            display: flex;
+            gap: 6px;
+            margin-left: 16px;
+        }
+        .lang-btn {
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: none;
+            background: transparent;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            color: var(--gray-700);
+            transition: 0.2s;
+            font-family: 'Cairo', sans-serif;
+        }
+        .lang-btn.active {
+            background: var(--green-dark);
+            color: white;
+            box-shadow: 0 2px 6px rgba(0,102,51,0.2);
+        }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="logo-area">
+            <div class="logo-icon">و</div>
+            <span class="logo-text-nav" data-translate="brand">ورثك فاليد</span>
+            <span class="wilaya-tag" data-translate="wilaya_alger">📍 الجزائر العاصمة</span>
+        </div>
+        <div class="user-area">
+            <div class="lang-switch">
+                <button class="lang-btn active" data-lang="ar" data-lang-switch onclick="changeLanguage('ar')">🇩🇿 العربية</button>
+                <button class="lang-btn" data-lang="fr" data-lang-switch onclick="changeLanguage('fr')">🇫🇷 Français</button>
+                <button class="lang-btn" data-lang="en" data-lang-switch onclick="changeLanguage('en')">🇬🇧 English</button>
+            </div>
+            <a href="investor-dashboard.html" class="back-link" data-translate="back_to_control">↩ الرجوع للوحة التحكم</a>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <!-- Property Header -->
+        <div class="property-header">
+            <div class="image-gallery">
+                <div class="main-image">🏡</div>
+                <div class="thumb-list">
+                    <div class="thumb" data-translate="prop_thumb_front">📷 واجهة</div>
+                    <div class="thumb" data-translate="prop_thumb_salon">📷 صالون</div>
+                    <div class="thumb" data-translate="prop_thumb_garden">📷 حديقة</div>
+                </div>
+            </div>
+            <div class="property-info">
+                <h1 class="property-title" data-translate="prop_detail_title">فيلا F4 - الأبيار</h1>
+                <div class="property-address"><span data-translate="prop_detail_addr">📍 12 شارع محمد خميستي، الأبيار، الجزائر العاصمة</span></div>
+                <div class="price-tag">15.500.000 <span data-translate="currency">دج</span></div>
+                <div class="features">
+                    <span class="feature" data-translate="marketplace_rooms">4 غرف</span>
+                    <span class="feature" data-translate="prop_feat_salon">صالون</span>
+                    <span class="feature" data-translate="prop_feat_kitchen">مطبخ</span>
+                    <span class="feature" data-translate="prop_feat_bath">2 حمام</span>
+                    <span class="feature" data-translate="prop_feat_garden">حديقة 200م²</span>
+                    <span class="feature" data-translate="prop_feat_garage">مرآب</span>
+                </div>
+                <div class="badge-nda" data-translate="property_nda_required">🔒 NDA مطلوب للوصول للمستندات</div>
+            </div>
+        </div>
+
+        <div class="grid-2col">
+            <!-- Left: Details & Documents -->
+            <div>
+                <div class="card">
+                    <div class="card-header" data-translate="property_description">📋 وصف العقار</div>
+                    <div class="card-body">
+                        <p data-translate="prop_desc_text">فيلا عائلية راقية بحي الأبيار الهادئ، قريبة من جميع المرافق. بناء حديث (2018)، واجهة رخامية، تدفئة مركزية، ومكيفة. مناسبة للسكن أو الاستثمار الإيجاري.</p>
+                        <p style="margin-top:12px;"><strong data-translate="prop_agency_label">الوكالة:</strong> <span data-translate="prop_agency_name">دار العقار</span> | <strong data-translate="prop_agent_label">وكيل:</strong> <span data-translate="prop_agent_name">نور الدين سليماني</span></p>
+                        <p><strong data-translate="prop_date_label">تاريخ الإدراج:</strong> <span data-translate="prop_date_val">1 ماي 2026</span> | <strong data-translate="prop_ref_label">رقم العقار:</strong> PROP-2026-042</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" data-translate="property_documents">📄 مستندات العقار</div>
+                    <div class="card-body">
+                        <p data-translate="property_nda_message">الاطلاع على المستندات يتطلب توقيع اتفاقية سرية (NDA).</p>
+                        <button class="btn btn-primary" id="signNdaBtn" style="margin-top:12px;" data-translate="property_sign_nda">✍️ طلب توقيع NDA</button>
+                        <div id="vdrAccessMessage" style="margin-top:12px;"></div>
+                        <button class="btn btn-outline" id="enterVdrBtn" style="margin-top:8px; display:none;" data-translate="property_enter_vdr">🔓 دخول غرفة البيانات (VDR)</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Offers & Actions -->
+            <div>
+                <div class="card">
+                    <div class="card-header" data-translate="property_make_offer">💰 تقديم عرض</div>
+                    <div class="card-body">
+                        <form id="offerForm">
+                            <div class="input-group">
+                                <label data-translate="property_offer_amount">المبلغ المقترح (دج)</label>
+                                <input type="number" id="offerAmount" data-translate-placeholder="ph_example_15m" placeholder="مثال: 15000000" required min="1">
+                            </div>
+                            <div class="input-group">
+                                <label data-translate="property_offer_duration">مدة سريان العرض (أيام)</label>
+                                <input type="number" id="offerValidity" data-translate-placeholder="ph_example_15" placeholder="مثال: 15" value="15" min="1" max="60">
+                            </div>
+                            <div class="input-group">
+                                <label data-translate="notes">ملاحظات</label>
+                                <textarea id="offerNotes" rows="2" data-translate-placeholder="ph_additional_notes" placeholder="أي ملاحظات إضافية..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-investor btn-block" data-translate="property_submit_offer">📨 تقديم عرض</button>
+                        </form>
+                        <div id="offerConfirmation" style="margin-top:12px;"></div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header" data-translate="property_quick_sim">🧮 محاكاة سريعة</div>
+                    <div class="card-body">
+                        <p><strong data-translate="property_rental_yield">العائد الإيجاري المتوقع:</strong> <span data-translate="prop_yield_val">8% سنوياً (~1.240.000 دج/سنة)</span></p>
+                        <p><strong data-translate="property_value_growth">تقدير ارتفاع القيمة:</strong> <span data-translate="prop_growth_val">5-7% سنوياً حسب مؤشر حي الأبيار</span></p>
+                        <a href="investment-simulator.html" class="btn btn-outline btn-block" style="margin-top:8px;" data-translate="property_open_simulator">📊 فتح المحاكي الكامل</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer" data-translate="footer">
+        © 2026 ورثك فاليد - الحل السريع. جميع الحقوق محفوظة. الجزائر.
+    </div>
+
+    <script src="js/translations.js"></script>
+<script src="js/i18n.js"></script>
+<script>
+        (function() {
+            const signNdaBtn = document.getElementById('signNdaBtn');
+            const vdrAccessMessage = document.getElementById('vdrAccessMessage');
+            const enterVdrBtn = document.getElementById('enterVdrBtn');
+            const offerForm = document.getElementById('offerForm');
+            const offerConfirmation = document.getElementById('offerConfirmation');
+
+            // Simulate NDA signing
+            let ndaSigned = false;
+            let lastOfferAmount = null;
+            signNdaBtn.addEventListener('click', function() {
+                if (ndaSigned) {
+                    vdrAccessMessage.innerHTML = '<span style="color:green;">✅ ' + t('nda_already_signed', 'NDA موقع مسبقاً.') + '</span>';
+                    enterVdrBtn.style.display = 'block';
+                    return;
+                }
+                if (confirm(t('confirm_sign_nda_property'))) {
+                    ndaSigned = true;
+                    vdrAccessMessage.innerHTML = '<span style="color:green;">✅ ' + t('nda_signed_success', 'تم توقيع NDA بنجاح. يمكنك دخول غرفة البيانات الآن.') + '</span>';
+                    signNdaBtn.textContent = '✅ ' + t('nda_signed', 'تم التوقيع');
+                    signNdaBtn.disabled = true;
+                    signNdaBtn.style.background = 'var(--gray-400)';
+                    enterVdrBtn.style.display = 'block';
+                }
+            });
+
+            enterVdrBtn.addEventListener('click', function() {
+                window.location.href = 'vdr-viewer.html';
+            });
+
+            // Offer submission
+            offerForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const amount = document.getElementById('offerAmount').value;
+                const validity = document.getElementById('offerValidity').value;
+                if (!amount || amount <= 0) {
+                    offerConfirmation.innerHTML = '<span style="color:red;">' + t('msg_valid_amount', 'الرجاء إدخال مبلغ صحيح.') + '</span>';
+                    return;
+                }
+                lastOfferAmount = Number(amount);
+                offerConfirmation.innerHTML = '<span style="color:green;">✅ ' + tv('offer_submitted', { amount: lastOfferAmount.toLocaleString() }, 'تم تقديم عرضك بقيمة {amount} دج. سنعلمك بأي رد.') + '</span>';
+                offerForm.reset();
+                document.getElementById('offerValidity').value = '15';
+            });
+
+            console.log('صفحة تفاصيل العقار جاهزة.');
+
+            window.addEventListener('languageChanged', function(e) {
+                // Re-render NDA status message
+                if (ndaSigned) {
+                    vdrAccessMessage.innerHTML = '<span style="color:green;">✅ ' + t('nda_signed_success', 'تم توقيع NDA بنجاح. يمكنك دخول غرفة البيانات الآن.') + '</span>';
+                    signNdaBtn.textContent = '✅ ' + t('nda_signed', 'تم التوقيع');
+                }
+                // Re-render offer confirmation if an offer was submitted
+                if (lastOfferAmount !== null) {
+                    offerConfirmation.innerHTML = '<span style="color:green;">✅ ' + tv('offer_submitted', { amount: lastOfferAmount.toLocaleString() }, 'تم تقديم عرضك بقيمة {amount} دج. سنعلمك بأي رد.') + '</span>';
+                }
+                applyLanguage(getCurrentLanguage());
+            });
+        })();
+    </script>
+        </body>
+</html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محفظتي الاستثمارية | ورثك فاليد - الحل السريع</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green-dark: #006633;
+            --green-light: #00A859;
+            --green-bg: #e6f5ee;
+            --red: #D21034;
+            --red-light: #fde8ec;
+            --white: #FFFFFF;
+            --off-white: #F8F9FA;
+            --gray-50: #F7F8FA;
+            --gray-100: #F0F2F5;
+            --gray-200: #E4E7EB;
+            --gray-300: #CBD2D9;
+            --gray-400: #9BA5B2;
+            --gray-500: #7B8794;
+            --gray-700: #3E4C59;
+            --gray-900: #1F2933;
+            --portfolio-accent: #1e5f74;
+            --portfolio-light: #e0f0f7;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.05);
+            --radius: 12px;
+            --radius-lg: 16px;
+            --transition: 0.2s ease;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: #f4f6f9;
+            min-height: 100vh;
+            color: var(--gray-900);
+            line-height: 1.6;
+        }
+
+        .top-nav {
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+            padding: 0 24px;
+            height: 64px;
+            display: flex; align-items: center; justify-content: space-between;
+            box-shadow: var(--shadow-sm); position: sticky; top: 0; z-index: 100;
+        }
+        .logo-area { display: flex; align-items: center; gap: 10px; }
+        .logo-icon {
+            width: 36px; height: 36px; background: var(--green-dark); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 18px;
+        }
+        .logo-text-nav { font-weight: 800; font-size: 18px; color: var(--green-dark); }
+        .wilaya-tag {
+            background: var(--portfolio-light); color: var(--portfolio-accent); padding: 4px 12px; border-radius: 20px;
+            font-size: 13px; font-weight: 600; margin-right: 10px;
+        }
+        .user-area { display: flex; align-items: center; gap: 16px; }
+        .back-link { color: var(--green-dark); text-decoration: none; font-weight: 600; font-size: 14px; cursor: pointer; }
+        .back-link:hover { text-decoration: underline; }
+
+        .main-container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+        .page-header { margin-bottom: 24px; }
+        .greeting { font-size: 26px; font-weight: 800; color: var(--gray-900); }
+        .text-muted { color: var(--gray-500); font-size: 13px; }
+
+        .stats-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px; margin-bottom: 28px;
+        }
+        .stat-card {
+            background: var(--white); border-radius: var(--radius-lg); padding: 20px;
+            box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 16px;
+            transition: transform var(--transition), box-shadow var(--transition);
+        }
+        .stat-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .stat-icon {
+            width: 48px; height: 48px; border-radius: var(--radius);
+            display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0;
+        }
+        .icon-blue { background: #e0f0ff; color: #007bff; }
+        .icon-green { background: var(--green-bg); color: var(--green-dark); }
+        .icon-orange { background: #fff3e0; color: #f57c00; }
+        .icon-purple { background: #f3e5f5; color: #7b1fa2; }
+
+        .stat-info h3 { font-size: 14px; color: var(--gray-500); font-weight: 500; margin-bottom: 4px; }
+        .stat-number { font-size: 24px; font-weight: 800; color: var(--gray-900); }
+        .dinar { font-family: 'Cairo', sans-serif; font-weight: 700; }
+
+        .card {
+            background: var(--white); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);
+            overflow: hidden; margin-bottom: 24px;
+        }
+        .card-header {
+            padding: 16px 20px; border-bottom: 1px solid var(--gray-100);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .card-title { font-weight: 700; font-size: 18px; color: var(--gray-900); }
+        .card-body { padding: 20px; }
+
+        .investment-item {
+            padding: 16px 0; border-bottom: 1px solid var(--gray-100);
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+        }
+        .investment-item:last-child { border-bottom: none; }
+
+        .investment-info { flex: 1; }
+        .investment-title { font-weight: 700; font-size: 16px; color: var(--gray-900); margin-bottom: 4px; }
+        .investment-meta { font-size: 13px; color: var(--gray-500); display: flex; flex-wrap: wrap; gap: 12px; }
+        .investment-value { text-align: left; }
+        .investment-amount { font-size: 20px; font-weight: 800; color: var(--green-dark); }
+        .investment-roi { font-size: 13px; font-weight: 600; }
+        .roi-positive { color: var(--green-dark); }
+        .roi-neutral { color: var(--gray-500); }
+
+        .badge-status {
+            display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600;
+        }
+        .status-active { background: var(--green-bg); color: var(--green-dark); }
+        .status-pending { background: #fff8e1; color: #f57f17; }
+
+        .progress-bar {
+            height: 8px; background: var(--gray-200); border-radius: 4px; margin-top: 6px; overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%; border-radius: 4px; transition: width 0.3s;
+        }
+        .fill-green { background: var(--green-light); }
+        .fill-blue { background: var(--portfolio-accent); }
+
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 8px 16px; border-radius: var(--radius); font-weight: 700;
+            font-family: 'Cairo', sans-serif; font-size: 14px; cursor: pointer; border: none;
+            transition: all var(--transition); text-decoration: none; color: white;
+            box-shadow: var(--shadow-sm); gap: 6px; background: var(--green-dark);
+        }
+        .btn:hover { background: #005a2b; }
+        .btn-outline {
+            background: transparent; border: 1.5px solid var(--green-dark); color: var(--green-dark); box-shadow: none;
+        }
+        .btn-outline:hover { background: rgba(0,102,51,0.05); }
+
+        .distribution-item {
+            display: flex; justify-content: space-between; align-items: center; padding: 10px 0;
+            border-bottom: 1px solid var(--gray-100);
+        }
+        .distribution-item:last-child { border-bottom: none; }
+
+        .footer { text-align: center; padding: 16px; font-size: 12px; color: var(--gray-400); border-top: 1px solid var(--gray-200); margin-top: 24px; }
+    
+        /* Language Switcher */
+        .lang-switch {
+            display: flex;
+            gap: 6px;
+            margin-left: 16px;
+        }
+        .lang-btn {
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: none;
+            background: transparent;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            color: var(--gray-700);
+            transition: 0.2s;
+            font-family: 'Cairo', sans-serif;
+        }
+        .lang-btn.active {
+            background: var(--green-dark);
+            color: white;
+            box-shadow: 0 2px 6px rgba(0,102,51,0.2);
+        }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="logo-area">
+            <div class="logo-icon">و</div>
+            <span class="logo-text-nav" data-translate="brand">ورثك فاليد</span>
+            <span class="wilaya-tag" data-translate="nav_portfolio">📊 محفظتي</span>
+        </div>
+        <div class="user-area">
+            <div class="lang-switch">
+                <button class="lang-btn active" data-lang="ar" data-lang-switch onclick="changeLanguage('ar')">🇩🇿 العربية</button>
+                <button class="lang-btn" data-lang="fr" data-lang-switch onclick="changeLanguage('fr')">🇫🇷 Français</button>
+                <button class="lang-btn" data-lang="en" data-lang-switch onclick="changeLanguage('en')">🇬🇧 English</button>
+            </div>
+            <a href="investor-dashboard.html" class="back-link" data-translate="back_to_dashboard">↩ لوحة التحكم</a>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="page-header">
+            <h1 class="greeting" data-translate="portfolio_title">محفظتي الاستثمارية</h1>
+            <p class="text-muted" data-translate="portfolio_subtitle">نظرة تفصيلية على جميع استثماراتك العقارية والعوائد المحققة.</p>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon icon-blue">🏠</div>
+                <div class="stat-info"><h3 data-translate="portfolio_stat_count">عدد العقارات</h3><div class="stat-number">3</div></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon icon-green">💰</div>
+                <div class="stat-info"><h3 data-translate="portfolio_stat_total">إجمالي الاستثمار</h3><div class="stat-number dinar">18.500.000 دج</div></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon icon-orange">📈</div>
+                <div class="stat-info"><h3 data-translate="portfolio_stat_avg_return">متوسط العائد</h3><div class="stat-number">12.4%</div></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon icon-purple">💸</div>
+                <div class="stat-info"><h3 data-translate="portfolio_stat_received">عوائد مستلمة</h3><div class="stat-number dinar">780.000 دج</div></div>
+            </div>
+        </div>
+
+        <!-- Investments List -->
+        <div class="card">
+            <div class="card-header">
+                <span class="card-title" data-translate="portfolio_investments">🏢 استثماراتي العقارية</span>
+                <a href="marketplace.html" class="btn btn-sm btn-outline">+ استثمار جديد</a>
+            </div>
+            <div class="card-body" id="investmentsList"></div>
+        </div>
+
+        <!-- Distributions & Updates -->
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:24px;">
+            <div class="card">
+                <div class="card-header"><span class="card-title" data-translate="portfolio_dividends">💸 توزيعات الأرباح</span></div>
+                <div class="card-body" id="distributionsList"></div>
+            </div>
+            <div class="card">
+                <div class="card-header"><span class="card-title" data-translate="portfolio_updates">📋 آخر التحديثات</span></div>
+                <div class="card-body" id="updatesList"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer" data-translate="footer">
+        © 2026 ورثك فاليد - الحل السريع. جميع الحقوق محفوظة. الجزائر.
+    </div>
+
+    <script src="js/translations.js"></script>
+<script src="js/i18n.js"></script>
+<script>
+        (function() {
+            const investments = [
+                { id:1, title:'فيلا F4 - حي النخيل، قسنطينة', type:'تملك كامل', purchasePrice:9200000, currentValue:9800000, annualRent:736000, roi:8.0, status:'active' },
+                { id:2, title:'أرض بناء 800م² - الخروب، قسنطينة', type:'شراكة تطوير (40%)', purchasePrice:5600000, currentValue:6200000, annualRent:0, roi:10.7, status:'development' },
+                { id:3, title:'شقة F3 - سيدي مبروك، قسنطينة', type:'تمويل جماعي (50 سهم)', purchasePrice:3700000, currentValue:3900000, annualRent:407000, roi:11.0, status:'active' }
+            ];
+
+            const distributions = [
+                { date:'2026-05-14', project:'تمويل جماعي الخروب', amount:120000, type:'ربح' },
+                { date:'2026-04-01', project:'فيلا حي النخيل - إيجار', amount:184000, type:'إيجار' },
+                { date:'2026-01-15', project:'شقة سيدي مبروك - إيجار', amount:101750, type:'إيجار' }
+            ];
+
+            const updates = [
+                { date:'2026-05-16', text:'تقييم فيلا حي النخيل ارتفع 2% هذا الربع.' },
+                { date:'2026-05-10', text:'بدء أشغال تطوير أرض الخروب.' },
+                { date:'2026-04-20', text:'مشروع التمويل الجماعي وصل 80% من هدفه.' }
+            ];
+
+            function renderInvestments() {
+                const container = document.getElementById('investmentsList');
+                container.innerHTML = investments.map(inv => `
+                    <div class="investment-item">
+                        <div class="investment-info">
+                            <div class="investment-title">🏠 ${inv.title}</div>
+                            <div class="investment-meta">
+                                <span>${inv.type}</span>
+                                <span><span data-translate="portfolio_purchase_price">سعر الشراء</span>: ${inv.purchasePrice.toLocaleString()} دج</span>
+                                <span><span data-translate="portfolio_current_value">القيمة الحالية</span>: ${inv.currentValue.toLocaleString()} دج</span>
+                                ${inv.annualRent > 0 ? `<span><span data-translate="portfolio_annual_income">دخل سنوي</span>: ${inv.annualRent.toLocaleString()} دج</span>` : ''}
+                            </div>
+                            <div class="progress-bar" style="margin-top:8px;">
+                                <div class="progress-fill ${inv.status === 'active' ? 'fill-green' : 'fill-blue'}" style="width:${inv.status === 'active' ? '100' : '65'}%;"></div>
+                            </div>
+                        </div>
+                        <div class="investment-value">
+                            <div class="investment-amount">${inv.currentValue.toLocaleString()} دج</div>
+                            <div class="investment-roi roi-positive">📈 ${inv.roi}% سنوياً</div>
+                            <span class="badge-status ${inv.status === 'active' ? 'status-active' : 'status-pending'}">${inv.status === 'active' ? '<span data-translate="active">نشط</span>' : '<span data-translate="invest_under_development">قيد التطوير</span>'}</span>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            function renderDistributions() {
+                const container = document.getElementById('distributionsList');
+                container.innerHTML = distributions.map(d => `
+                    <div class="distribution-item">
+                        <div>
+                            <div style="font-weight:600;">${d.project}</div>
+                            <div style="font-size:12px; color:var(--gray-500);">${d.date} · ${d.type}</div>
+                        </div>
+                        <span style="font-weight:800; color:var(--green-dark);">+ ${d.amount.toLocaleString()} دج</span>
+                    </div>
+                `).join('');
+            }
+
+            function renderUpdates() {
+                const container = document.getElementById('updatesList');
+                container.innerHTML = updates.map(u => `
+                    <div class="distribution-item">
+                        <div>
+                            <div style="font-weight:600;">${u.text}</div>
+                            <div style="font-size:12px; color:var(--gray-500);">${u.date}</div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            renderInvestments();
+            renderDistributions();
+            renderUpdates();
+        
+
+            // Re-render dynamic content on language change
+            window.addEventListener('languageChanged', function(e) {
+            renderInvestments();
+            renderDistributions();
+            renderUpdates();
+            });
+        })();
+    </script>
+        </body>
+</html>

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محاكي الاستثمار العقاري | ورثك فاليد - الحل السريع</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green-dark: #006633;
+            --green-light: #00A859;
+            --green-bg: #e6f5ee;
+            --red: #D21034;
+            --red-light: #fde8ec;
+            --white: #FFFFFF;
+            --off-white: #F8F9FA;
+            --gray-50: #F7F8FA;
+            --gray-100: #F0F2F5;
+            --gray-200: #E4E7EB;
+            --gray-300: #CBD2D9;
+            --gray-400: #9BA5B2;
+            --gray-500: #7B8794;
+            --gray-700: #3E4C59;
+            --gray-900: #1F2933;
+            --sim-accent: #0077b6;
+            --sim-light: #e0f0ff;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.05);
+            --radius: 12px;
+            --radius-lg: 16px;
+            --transition: 0.2s ease;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: #f4f6f9;
+            min-height: 100vh;
+            color: var(--gray-900);
+            line-height: 1.6;
+        }
+
+        .top-nav {
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+            padding: 0 24px;
+            height: 64px;
+            display: flex; align-items: center; justify-content: space-between;
+            box-shadow: var(--shadow-sm); position: sticky; top: 0; z-index: 100;
+        }
+        .logo-area { display: flex; align-items: center; gap: 10px; }
+        .logo-icon {
+            width: 36px; height: 36px; background: var(--green-dark); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 18px;
+        }
+        .logo-text-nav { font-weight: 800; font-size: 18px; color: var(--green-dark); }
+        .wilaya-tag {
+            background: var(--sim-light); color: var(--sim-accent); padding: 4px 12px; border-radius: 20px;
+            font-size: 13px; font-weight: 600; margin-right: 10px;
+        }
+        .user-area { display: flex; align-items: center; gap: 16px; }
+        .back-link { color: var(--green-dark); text-decoration: none; font-weight: 600; font-size: 14px; cursor: pointer; }
+        .back-link:hover { text-decoration: underline; }
+
+        .main-container { max-width: 1100px; margin: 0 auto; padding: 24px; }
+        .page-header { margin-bottom: 24px; }
+        .greeting { font-size: 26px; font-weight: 800; color: var(--gray-900); }
+        .text-muted { color: var(--gray-500); font-size: 13px; }
+
+        .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        @media (max-width: 800px) { .grid-2col { grid-template-columns: 1fr; } }
+
+        .card {
+            background: var(--white); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);
+            overflow: hidden; margin-bottom: 24px;
+        }
+        .card-header {
+            padding: 16px 20px; border-bottom: 1px solid var(--gray-100);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .card-title { font-weight: 700; font-size: 18px; color: var(--gray-900); }
+        .card-body { padding: 20px; }
+
+        .input-group { margin-bottom: 16px; }
+        label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 14px; color: var(--gray-700); }
+        input, select {
+            width: 100%; padding: 12px 14px; border: 1.5px solid var(--gray-200); border-radius: var(--radius);
+            font-family: 'Cairo', sans-serif; font-size: 14px; background: var(--off-white);
+        }
+        input:focus, select:focus { border-color: var(--sim-accent); outline: none; box-shadow: 0 0 0 3px rgba(0,119,182,0.1); }
+        .input-row { display: flex; gap: 12px; }
+        .input-row .input-group { flex: 1; }
+
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 12px 20px; border-radius: var(--radius); font-weight: 700;
+            font-family: 'Cairo', sans-serif; font-size: 15px; cursor: pointer; border: none;
+            transition: all var(--transition); text-decoration: none; color: white;
+            box-shadow: var(--shadow-sm); gap: 8px;
+        }
+        .btn-primary { background: var(--sim-accent); }
+        .btn-primary:hover { background: #005b8a; box-shadow: var(--shadow-md); transform: translateY(-1px); }
+
+        .result-item {
+            display: flex; justify-content: space-between; align-items: center; padding: 12px 0;
+            border-bottom: 1px solid var(--gray-100);
+        }
+        .result-item:last-child { border-bottom: none; }
+        .result-label { font-weight: 600; color: var(--gray-700); }
+        .result-value { font-weight: 800; font-size: 18px; color: var(--gray-900); }
+        .positive { color: var(--green-dark); }
+        .negative { color: var(--red); }
+
+        .chart-bar {
+            display: flex; align-items: end; gap: 8px; height: 120px; margin-top: 16px;
+        }
+        .bar {
+            flex: 1; background: linear-gradient(to top, var(--sim-accent), #48cae4);
+            border-radius: 8px 8px 0 0; display: flex; align-items: flex-end; justify-content: center;
+            color: white; font-size: 11px; font-weight: 600; padding-bottom: 4px; min-height: 20px;
+            transition: height 0.5s ease;
+        }
+        .bar-label { text-align: center; font-size: 11px; color: var(--gray-500); margin-top: 4px; }
+
+        .footer { text-align: center; padding: 16px; font-size: 12px; color: var(--gray-400); border-top: 1px solid var(--gray-200); margin-top: 24px; }
+    
+        /* Language Switcher */
+        .lang-switch {
+            display: flex;
+            gap: 6px;
+            margin-left: 16px;
+        }
+        .lang-btn {
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: none;
+            background: transparent;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            color: var(--gray-700);
+            transition: 0.2s;
+            font-family: 'Cairo', sans-serif;
+        }
+        .lang-btn.active {
+            background: var(--green-dark);
+            color: white;
+            box-shadow: 0 2px 6px rgba(0,102,51,0.2);
+        }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="logo-area">
+            <div class="logo-icon">و</div>
+            <span class="logo-text-nav" data-translate="brand">ورثك فاليد</span>
+            <span class="wilaya-tag" data-translate="nav_simulator">📊 محاكي الاستثمار</span>
+        </div>
+        <div class="user-area">
+            <div class="lang-switch">
+                <button class="lang-btn active" data-lang="ar" data-lang-switch onclick="changeLanguage('ar')">🇩🇿 العربية</button>
+                <button class="lang-btn" data-lang="fr" data-lang-switch onclick="changeLanguage('fr')">🇫🇷 Français</button>
+                <button class="lang-btn" data-lang="en" data-lang-switch onclick="changeLanguage('en')">🇬🇧 English</button>
+            </div>
+            <a href="investor-dashboard.html" class="back-link" data-translate="back_to_dashboard">↩ لوحة التحكم</a>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="page-header">
+            <h1 class="greeting" data-translate="simulator_title">محاكي الاستثمار العقاري</h1>
+            <p class="text-muted" data-translate="simulator_subtitle">أدخل تفاصيل العقار واحصل على توقعات العوائد وصافي الأرباح.</p>
+        </div>
+
+        <div class="grid-2col">
+            <!-- Input Form -->
+            <div>
+                <div class="card">
+                    <div class="card-header"><span class="card-title" data-translate="simulator_property_details">📋 تفاصيل العقار والتمويل</span></div>
+                    <div class="card-body">
+                        <form id="simulatorForm">
+                            <div class="input-group">
+                                <label data-translate="simulator_purchase_price">سعر شراء العقار (دج)</label>
+                                <input type="number" id="purchasePrice" data-translate-placeholder="ph_example_15m" placeholder="مثال: 15000000" required min="1">
+                            </div>
+                            <div class="input-row">
+                                <div class="input-group">
+                                    <label data-translate="simulator_down_payment">الدفعة الأولى (%)</label>
+                                    <input type="number" id="downPaymentPercent" value="20" min="0" max="100">
+                                </div>
+                                <div class="input-group">
+                                    <label data-translate="simulator_interest_rate">نسبة الفائدة السنوية (%)</label>
+                                    <input type="number" id="interestRate" value="5.5" step="0.1" min="0">
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label data-translate="simulator_loan_term">مدة القرض (سنوات)</label>
+                                <input type="number" id="loanYears" value="15" min="1" max="30">
+                            </div>
+                            <div class="input-row">
+                                <div class="input-group">
+                                    <label data-translate="simulator_monthly_rent">الإيجار الشهري المتوقع (دج)</label>
+                                    <input type="number" id="monthlyRent" data-translate-placeholder="ph_example_80k" placeholder="مثال: 80000">
+                                </div>
+                                <div class="input-group">
+                                    <label data-translate="simulator_value_growth">ارتفاع القيمة السنوي (%)</label>
+                                    <input type="number" id="appreciationRate" value="4" step="0.1">
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <label data-translate="simulator_annual_expenses">مصاريف سنوية (صيانة، ضرائب) (دج)</label>
+                                <input type="number" id="annualExpenses" value="30000">
+                            </div>
+                            <button type="submit" class="btn btn-primary" style="width:100%;" data-translate="simulator_calculate">📊 حساب المحاكاة</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results -->
+            <div>
+                <div class="card" id="resultsCard" style="display:none;">
+                    <div class="card-header"><span class="card-title" data-translate="simulator_results">📈 نتائج المحاكاة</span></div>
+                    <div class="card-body" id="resultsBody"></div>
+                </div>
+
+                <div class="card" id="chartCard" style="display:none;">
+                    <div class="card-header"><span class="card-title">📊 توزيع التكاليف والعوائد (سنوية)</span></div>
+                    <div class="card-body">
+                        <div class="chart-bar" id="chartBars"></div>
+                        <div style="display:flex; justify-content:space-around; margin-top:8px;">
+                            <span class="bar-label">إيجار</span>
+                            <span class="bar-label">قرض</span>
+                            <span class="bar-label">مصاريف</span>
+                            <span class="bar-label">صافي</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="noResults" class="card">
+                    <div class="card-body" style="text-align:center; color:var(--gray-400); padding:40px;">
+                        <div style="font-size:48px;">📊</div>
+                        <p>أدخل البيانات واضغط "حساب" لعرض النتائج</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer" data-translate="footer">
+        © 2026 ورثك فاليد - الحل السريع. جميع الحقوق محفوظة. الجزائر.
+    </div>
+
+    <script src="js/translations.js"></script>
+<script src="js/i18n.js"></script>
+<script>
+        (function() {
+            const form = document.getElementById('simulatorForm');
+            const resultsCard = document.getElementById('resultsCard');
+            const chartCard = document.getElementById('chartCard');
+            const noResults = document.getElementById('noResults');
+            const resultsBody = document.getElementById('resultsBody');
+            const chartBars = document.getElementById('chartBars');
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const purchasePrice = parseFloat(document.getElementById('purchasePrice').value) || 0;
+                const downPercent = parseFloat(document.getElementById('downPaymentPercent').value) || 0;
+                const interestRate = parseFloat(document.getElementById('interestRate').value) || 0;
+                const loanYears = parseInt(document.getElementById('loanYears').value) || 15;
+                const monthlyRent = parseFloat(document.getElementById('monthlyRent').value) || 0;
+                const appreciationRate = parseFloat(document.getElementById('appreciationRate').value) || 0;
+                const annualExpenses = parseFloat(document.getElementById('annualExpenses').value) || 0;
+
+                if (purchasePrice <= 0) { alert(t('msg_valid_purchase_price')); return; }
+
+                const downPayment = purchasePrice * (downPercent / 100);
+                const loanAmount = purchasePrice - downPayment;
+                const monthlyInterestRate = interestRate / 100 / 12;
+                const totalPayments = loanYears * 12;
+                let monthlyLoanPayment = 0;
+                if (loanAmount > 0 && monthlyInterestRate > 0 && totalPayments > 0) {
+                    monthlyLoanPayment = loanAmount * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, totalPayments) /
+                                         (Math.pow(1 + monthlyInterestRate, totalPayments) - 1);
+                } else if (loanAmount > 0 && totalPayments > 0) {
+                    monthlyLoanPayment = loanAmount / totalPayments;
+                }
+
+                const annualLoanPayment = monthlyLoanPayment * 12;
+                const annualRentalIncome = monthlyRent * 12;
+                const netAnnualCashflow = annualRentalIncome - annualLoanPayment - annualExpenses;
+                const totalInvestment = downPayment + annualExpenses * loanYears;
+                const annualROI = totalInvestment > 0 ? (netAnnualCashflow / totalInvestment) * 100 : 0;
+                const futureValue = purchasePrice * Math.pow(1 + appreciationRate / 100, loanYears);
+
+                resultsBody.innerHTML = `
+                    <div class="result-item"><span class="result-label" data-translate="simulator_down_payment_amount">الدفعة الأولى</span><span class="result-value">${downPayment.toLocaleString()} دج</span></div>
+                    <div class="result-item"><span class="result-label" data-translate="simulator_loan_amount">مبلغ القرض</span><span class="result-value">${loanAmount.toLocaleString()} دج</span></div>
+                    <div class="result-item"><span class="result-label" data-translate="simulator_monthly_payment">القسط الشهري للقرض</span><span class="result-value">${Math.round(monthlyLoanPayment).toLocaleString()} دج</span></div>
+                    <div class="result-item"><span class="result-label" data-translate="simulator_annual_rental">الدخل الإيجاري السنوي</span><span class="result-value">${annualRentalIncome.toLocaleString()} دج</span></div>
+                    <div class="result-item"><span class="result-label" data-translate="simulator_net_cashflow">صافي التدفق النقدي السنوي</span><span class="result-value ${netAnnualCashflow >= 0 ? 'positive' : 'negative'}">${Math.round(netAnnualCashflow).toLocaleString()} دج</span></div>
+                    <div class="result-item"><span class="result-label" data-translate="simulator_roi">العائد على الاستثمار (ROI)</span><span class="result-value ${annualROI >= 0 ? 'positive' : 'negative'}">${annualROI.toFixed(2)}%</span></div>
+                    <div class="result-item"><span class="result-label">القيمة المستقبلية للعقار (بعد ${loanYears} سنة)</span><span class="result-value">${Math.round(futureValue).toLocaleString()} دج</span></div>
+                `;
+
+                const maxVal = Math.max(annualRentalIncome, annualLoanPayment, annualExpenses, Math.abs(netAnnualCashflow), 1);
+                const scaleFactor = 100 / maxVal;
+                chartBars.innerHTML = `
+                    <div style="display:flex; flex-direction:column; align-items:center; flex:1;">
+                        <div class="bar" style="height:${annualRentalIncome * scaleFactor}px;">${Math.round(annualRentalIncome/1000)}k</div>
+                    </div>
+                    <div style="display:flex; flex-direction:column; align-items:center; flex:1;">
+                        <div class="bar" style="height:${annualLoanPayment * scaleFactor}px; background:linear-gradient(to top, #e63946, #f4a261);">${Math.round(annualLoanPayment/1000)}k</div>
+                    </div>
+                    <div style="display:flex; flex-direction:column; align-items:center; flex:1;">
+                        <div class="bar" style="height:${annualExpenses * scaleFactor}px; background:linear-gradient(to top, #6c757d, #adb5bd);">${Math.round(annualExpenses/1000)}k</div>
+                    </div>
+                    <div style="display:flex; flex-direction:column; align-items:center; flex:1;">
+                        <div class="bar" style="height:${Math.abs(netAnnualCashflow) * scaleFactor}px; background:${netAnnualCashflow >= 0 ? 'linear-gradient(to top, #006633, #00A859)' : 'linear-gradient(to top, #D21034, #f77f00)'};">${Math.round(netAnnualCashflow/1000)}k</div>
+                    </div>
+                `;
+
+                resultsCard.style.display = 'block';
+                chartCard.style.display = 'block';
+                noResults.style.display = 'none';
+            });
+
+            window.addEventListener('languageChanged', function(e) {
+                // Re-render results if they are currently visible
+                if (resultsCard.style.display !== 'none') {
+                    // Re-trigger calculation and rendering
+                    form.dispatchEvent(new Event('submit', { cancelable: true }));
+                }
+            });
+        })();
+    </script>
+</body>
+</html>

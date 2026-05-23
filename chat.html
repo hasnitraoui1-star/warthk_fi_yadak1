@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المحادثات | ورثك فاليد - الحل السريع</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green-dark: #006633;
+            --green-light: #00A859;
+            --green-bg: #e6f5ee;
+            --red: #D21034;
+            --red-light: #fde8ec;
+            --white: #FFFFFF;
+            --off-white: #F8F9FA;
+            --gray-50: #F7F8FA;
+            --gray-100: #F0F2F5;
+            --gray-200: #E4E7EB;
+            --gray-300: #CBD2D9;
+            --gray-400: #9BA5B2;
+            --gray-500: #7B8794;
+            --gray-700: #3E4C59;
+            --gray-900: #1F2933;
+            --chat-accent: #1e5f74;
+            --chat-light: #e0f0f7;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.05);
+            --radius: 12px;
+            --radius-lg: 16px;
+            --transition: 0.2s ease;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Cairo', sans-serif; background: #f0f2f5; min-height: 100vh; color: var(--gray-900); line-height: 1.6; display: flex; flex-direction: column; }
+        .top-nav { background: var(--white); border-bottom: 1px solid var(--gray-200); padding: 0 24px; height: 64px; display: flex; align-items: center; justify-content: space-between; box-shadow: var(--shadow-sm); position: sticky; top: 0; z-index: 100; }
+        .logo-area { display: flex; align-items: center; gap: 10px; }
+        .logo-icon { width: 36px; height: 36px; background: var(--green-dark); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 18px; }
+        .logo-text-nav { font-weight: 800; font-size: 18px; color: var(--green-dark); }
+        .wilaya-tag { background: var(--chat-light); color: var(--chat-accent); padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; margin-right: 10px; }
+        .user-area { display: flex; align-items: center; gap: 16px; }
+        .back-link { color: var(--green-dark); text-decoration: none; font-weight: 600; font-size: 14px; cursor: pointer; }
+        .back-link:hover { text-decoration: underline; }
+        .chat-container { display: flex; flex: 1; overflow: hidden; max-width: 1300px; width: 100%; margin: 24px auto; background: var(--white); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); }
+        .conversations-sidebar { width: 320px; min-width: 280px; border-left: 1px solid var(--gray-200); display: flex; flex-direction: column; }
+        .sidebar-header { padding: 16px 20px; font-weight: 800; font-size: 18px; border-bottom: 1px solid var(--gray-200); background: var(--gray-50); }
+        .conversation-list { flex: 1; overflow-y: auto; }
+        .conversation-item { padding: 14px 16px; border-bottom: 1px solid var(--gray-100); cursor: pointer; transition: background var(--transition); display: flex; gap: 12px; align-items: center; }
+        .conversation-item:hover { background: var(--gray-50); }
+        .conversation-item.active { background: var(--green-bg); border-right: 4px solid var(--green-dark); }
+        .conv-avatar { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px; color: white; flex-shrink: 0; }
+        .conv-info { flex: 1; overflow: hidden; }
+        .conv-name { font-weight: 700; font-size: 15px; }
+        .conv-last-msg { font-size: 12px; color: var(--gray-500); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .conv-badge { background: var(--red); color: white; border-radius: 50%; min-width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; }
+        .chat-main { flex: 1; display: flex; flex-direction: column; }
+        .chat-header { padding: 16px 20px; border-bottom: 1px solid var(--gray-200); display: flex; align-items: center; gap: 12px; background: var(--gray-50); }
+        .chat-header .conv-name { font-size: 18px; }
+        .chat-messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; background: #fafbfc; }
+        .message { display: flex; gap: 10px; max-width: 70%; animation: fadeIn 0.2s; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .message.sent { align-self: flex-end; flex-direction: row-reverse; }
+        .message.received { align-self: flex-start; }
+        .msg-bubble { padding: 10px 16px; border-radius: 18px; font-size: 14px; line-height: 1.5; }
+        .msg-sent { background: var(--green-dark); color: white; border-bottom-left-radius: 4px; }
+        .msg-received { background: var(--gray-200); color: var(--gray-900); border-bottom-right-radius: 4px; }
+        .msg-time { font-size: 10px; color: var(--gray-400); margin-top: 2px; display: block; }
+        .sent .msg-time { text-align: left; color: rgba(255,255,255,0.8); }
+        .received .msg-time { text-align: right; }
+        .chat-input-area { padding: 14px 20px; border-top: 1px solid var(--gray-200); display: flex; gap: 12px; align-items: center; background: white; }
+        .chat-input { flex: 1; padding: 12px 16px; border: 1.5px solid var(--gray-200); border-radius: 24px; font-family: 'Cairo', sans-serif; font-size: 14px; outline: none; resize: none; }
+        .chat-input:focus { border-color: var(--green-light); }
+        .send-btn { width: 44px; height: 44px; border-radius: 50%; background: var(--green-dark); color: white; border: none; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background var(--transition); }
+        .send-btn:hover { background: #005a2b; }
+        .empty-chat { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--gray-400); gap: 12px; }
+        @media (max-width: 700px) {
+            .chat-container { flex-direction: column; margin: 0; border-radius: 0; }
+            .conversations-sidebar { width: 100%; max-height: 200px; border-left: none; border-bottom: 1px solid var(--gray-200); }
+            .chat-main { min-height: 50vh; }
+            .message { max-width: 90%; }
+        }
+    
+        /* Language Switcher */
+        .lang-switch {
+            display: flex;
+            gap: 6px;
+            margin-left: 16px;
+        }
+        .lang-btn {
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: none;
+            background: transparent;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            color: var(--gray-700);
+            transition: 0.2s;
+            font-family: 'Cairo', sans-serif;
+        }
+        .lang-btn.active {
+            background: var(--green-dark);
+            color: white;
+            box-shadow: 0 2px 6px rgba(0,102,51,0.2);
+        }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="logo-area">
+            <div class="logo-icon">و</div>
+            <span class="logo-text-nav" data-translate="brand">ورثك فاليد</span>
+            <span class="wilaya-tag" data-translate="nav_chat">💬 المحادثات</span>
+        </div>
+        <div class="user-area">
+            <div class="lang-switch">
+                <button class="lang-btn active" data-lang="ar" data-lang-switch onclick="changeLanguage('ar')">🇩🇿 العربية</button>
+                <button class="lang-btn" data-lang="fr" data-lang-switch onclick="changeLanguage('fr')">🇫🇷 Français</button>
+                <button class="lang-btn" data-lang="en" data-lang-switch onclick="changeLanguage('en')">🇬🇧 English</button>
+            </div>
+            <a href="case-detail.html" class="back-link" data-translate="back_to_dashboard">↩ لوحة التحكم</a>
+        </div>
+    </nav>
+    <div class="chat-container">
+        <div class="conversations-sidebar">
+            <div class="sidebar-header" data-translate="chat_title">💬 المحادثات</div>
+            <div class="conversation-list" id="conversationList"></div>
+        </div>
+        <div class="chat-main" id="chatMain">
+            <div id="chatHeader" class="chat-header" style="display:none;"></div>
+            <div id="chatMessages" class="chat-messages">
+                <div class="empty-chat" id="emptyChat">
+                    <span style="font-size:48px;">💬</span>
+                    <p data-translate="chat_empty">اختر محادثة من القائمة للبدء</p>
+                </div>
+            </div>
+            <div class="chat-input-area" id="chatInputArea" style="display:none;">
+                <input type="text" class="chat-input" id="messageInput" placeholder="اكتب رسالتك هنا..." data-translate-placeholder="chat_placeholder">
+                <button class="send-btn" id="sendBtn">➤</button>
+            </div>
+        </div>
+    </div>
+    <script src="js/translations.js"></script>
+<script src="js/i18n.js"></script>
+<script>
+        (function() {
+            const conversations = [
+                { id:1, name:'الأستاذ كمال بومدين', role:'محامي', lastMsg:'سأرسل لك المستندات غداً.', unread:2, avatarBg:'#1e5f74', avatarText:'ك' },
+                { id:2, name:'سامية بوجملين', role:'أخصائية نفسية', lastMsg:'موعد الجلسة القادمة الأربعاء.', unread:0, avatarBg:'#5b2c6f', avatarText:'س' },
+                { id:3, name:'نور الدين سليماني', role:'وكيل عقاري', lastMsg:'هل أنت مهتم بمعاينة العقار؟', unread:1, avatarBg:'#c3540a', avatarText:'ن' }
+            ];
+            const messagesData = {
+                1: [
+                    { id:1, sender:'received', text:'السلام عليكم، أستاذ محمد. كيف حالك؟', time:'09:30' },
+                    { id:2, sender:'sent', text:'وعليكم السلام، بخير الحمد لله. هل هناك جديد في القضية؟', time:'09:32' },
+                    { id:3, sender:'received', text:'نعم، تم تحديد جلسة المحكمة يوم 25 ماي.', time:'09:35' },
+                    { id:4, sender:'sent', text:'ممتاز، سأكون حاضراً. شكراً لك.', time:'09:36' },
+                    { id:5, sender:'received', text:'سأرسل لك المستندات غداً.', time:'09:40' }
+                ],
+                2: [
+                    { id:1, sender:'received', text:'مرحباً محمد، أود تأكيد موعد الجلسة.', time:'14:00' },
+                    { id:2, sender:'sent', text:'نعم، الأربعاء على 10:00 مناسب.', time:'14:05' },
+                    { id:3, sender:'received', text:'تم التأكيد. لا تتردد في الاتصال إذا احتجت شيئاً.', time:'14:10' }
+                ],
+                3: [
+                    { id:1, sender:'received', text:'صباح الخير، لدينا عقار جديد في الأبيار قد يهمك.', time:'10:15' },
+                    { id:2, sender:'sent', text:'صباح النور، كم السعر؟', time:'10:20' },
+                    { id:3, sender:'received', text:'15.5 مليون دج. فيلا F4 مع حديقة.', time:'10:22' },
+                    { id:4, sender:'sent', text:'يبدو جيداً. هل يمكنني المعاينة هذا الأسبوع؟', time:'10:25' }
+                ]
+            };
+            let activeConversation = null;
+            const convListEl = document.getElementById('conversationList');
+            const chatHeader = document.getElementById('chatHeader');
+            const chatMessages = document.getElementById('chatMessages');
+            const emptyChat = document.getElementById('emptyChat');
+            const chatInputArea = document.getElementById('chatInputArea');
+            const messageInput = document.getElementById('messageInput');
+            const sendBtn = document.getElementById('sendBtn');
+
+            function renderConversations() {
+                convListEl.innerHTML = conversations.map(c => `
+                    <div class="conversation-item ${activeConversation && activeConversation.id === c.id ? 'active' : ''}" data-id="${c.id}">
+                        <div class="conv-avatar" style="background:${c.avatarBg};">${c.avatarText}</div>
+                        <div class="conv-info">
+                            <div class="conv-name">${c.name}</div>
+                            <div class="conv-last-msg">${c.lastMsg}</div>
+                        </div>
+                        ${c.unread > 0 ? `<span class="conv-badge">${c.unread}</span>` : ''}
+                    </div>
+                `).join('');
+                document.querySelectorAll('.conversation-item').forEach(item => {
+                    item.addEventListener('click', function() { openConversation(parseInt(this.dataset.id)); });
+                });
+            }
+
+            function openConversation(convId) {
+                const conv = conversations.find(c => c.id === convId);
+                if (!conv) return;
+                activeConversation = conv;
+                conv.unread = 0;
+                renderConversations();
+                chatHeader.style.display = 'flex';
+                chatHeader.innerHTML = `<div class="conv-avatar" style="background:${conv.avatarBg}; width:40px; height:40px; font-size:16px;">${conv.avatarText}</div><span class="conv-name">${conv.name} · ${conv.role}</span>`;
+                emptyChat.style.display = 'none';
+                chatInputArea.style.display = 'flex';
+                renderMessages(convId);
+            }
+
+            function renderMessages(convId) {
+                const msgs = messagesData[convId] || [];
+                chatMessages.innerHTML = msgs.map(m => `
+                    <div class="message ${m.sender === 'sent' ? 'sent' : 'received'}">
+                        <div class="msg-bubble ${m.sender === 'sent' ? 'msg-sent' : 'msg-received'}">
+                            ${m.text}
+                            <span class="msg-time">${m.time}</span>
+                        </div>
+                    </div>
+                `).join('');
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            function sendMessage() {
+                if (!activeConversation) return;
+                const text = messageInput.value.trim();
+                if (!text) return;
+                const now = new Date();
+                const time = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0');
+                messagesData[activeConversation.id].push({ id: Date.now(), sender: 'sent', text, time });
+                activeConversation.lastMsg = text;
+                messageInput.value = '';
+                renderMessages(activeConversation.id);
+                renderConversations();
+            }
+
+            sendBtn.addEventListener('click', sendMessage);
+            messageInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+            });
+            renderConversations();
+        
+
+            // Re-render dynamic content on language change
+            window.addEventListener('languageChanged', function(e) {
+            renderConversations();
+            renderMessages();
+            });
+        })();
+    </script>
+        </body>
+</html>

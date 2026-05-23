@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - خبير عقاري | ورثك فاليد - الحل السريع</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green-dark: #006633;
+            --green-light: #00A859;
+            --green-bg: #e6f5ee;
+            --red: #D21034;
+            --red-light: #fde8ec;
+            --white: #FFFFFF;
+            --off-white: #F8F9FA;
+            --gray-50: #F7F8FA;
+            --gray-100: #F0F2F5;
+            --gray-200: #E4E7EB;
+            --gray-300: #CBD2D9;
+            --gray-400: #9BA5B2;
+            --gray-500: #7B8794;
+            --gray-700: #3E4C59;
+            --gray-900: #1F2933;
+            --expert-accent: #8B4513;
+            --expert-light: #fdf2e9;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.05);
+            --radius: 12px;
+            --radius-lg: 16px;
+            --transition: 0.2s ease;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #f9f5f0 0%, #f0f5f2 100%);
+            min-height: 100vh;
+            color: var(--gray-900);
+            line-height: 1.6;
+        }
+
+        .top-nav {
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+            padding: 0 24px;
+            height: 64px;
+            display: flex; align-items: center; justify-content: space-between;
+            box-shadow: var(--shadow-sm); position: sticky; top: 0; z-index: 100;
+        }
+        .logo-area { display: flex; align-items: center; gap: 10px; }
+        .logo-icon {
+            width: 36px; height: 36px; background: var(--green-dark); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 18px;
+        }
+        .logo-text-nav { font-weight: 800; font-size: 18px; color: var(--green-dark); }
+        .wilaya-tag {
+            background: var(--expert-light); color: var(--expert-accent); padding: 4px 12px; border-radius: 20px;
+            font-size: 13px; font-weight: 600; margin-right: 10px;
+        }
+        .user-area { display: flex; align-items: center; gap: 16px; }
+        .notification-bell { position: relative; cursor: pointer; font-size: 22px; color: var(--gray-700); }
+        .notification-bell:hover { color: var(--green-dark); }
+        .badge {
+            position: absolute; top: -6px; right: -8px; background: var(--red); color: white;
+            border-radius: 50%; width: 18px; height: 18px; font-size: 10px; font-weight: 700;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .user-dropdown {
+            display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 6px 10px;
+            border-radius: var(--radius); background: var(--gray-50); transition: background var(--transition);
+        }
+        .user-dropdown:hover { background: var(--gray-100); }
+        .user-avatar {
+            width: 34px; height: 34px; background: var(--expert-accent); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 16px;
+        }
+        .user-info { display: flex; flex-direction: column; }
+        .user-name { font-weight: 700; font-size: 14px; color: var(--gray-900); line-height: 1.2; }
+        .user-role {
+            font-size: 11px; color: #fff; background: var(--expert-accent); padding: 1px 8px; border-radius: 20px;
+            display: inline-block; width: fit-content;
+        }
+        .dropdown-menu {
+            display: none; position: absolute; top: 60px; left: 24px; background: white;
+            border-radius: var(--radius); box-shadow: var(--shadow-lg); width: 200px; z-index: 200; overflow: hidden;
+        }
+        .dropdown-menu a {
+            display: block; padding: 10px 16px; color: var(--gray-700); text-decoration: none;
+            font-weight: 500; font-size: 14px;
+        }
+        .dropdown-menu a:hover { background: var(--gray-100); color: var(--green-dark); }
+        .dropdown-menu a.logout { color: var(--red); border-top: 1px solid var(--gray-200); }
+
+        .main-container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+        .page-header { margin-bottom: 24px; }
+        .greeting { font-size: 26px; font-weight: 800; color: var(--gray-900); }
+        .text-muted { color: var(--gray-500); font-size: 13px; }
+
+        .stats-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px; margin-bottom: 28px;
+        }
+        .stat-card {
+            background: var(--white); border-radius: var(--radius-lg); padding: 20px;
+            box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 16px;
+            transition: transform var(--transition), box-shadow var(--transition);
+        }
+        .stat-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        .stat-icon {
+            width: 48px; height: 48px; border-radius: var(--radius);
+            display: flex; align-items: center; justify-content: center; font-size: 24px; flex-shrink: 0;
+        }
+        .icon-blue { background: #e0f0ff; color: #007bff; }
+        .icon-green { background: var(--green-bg); color: var(--green-dark); }
+        .icon-orange { background: var(--expert-light); color: var(--expert-accent); }
+        .icon-red { background: var(--red-light); color: var(--red); }
+
+        .stat-info h3 { font-size: 14px; color: var(--gray-500); font-weight: 500; margin-bottom: 4px; }
+        .stat-number { font-size: 24px; font-weight: 800; color: var(--gray-900); }
+
+        .dashboard-grid {
+            display: grid; grid-template-columns: 2fr 1fr; gap: 24px; margin-bottom: 24px;
+        }
+        @media (max-width: 900px) {
+            .dashboard-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+        }
+
+        .card {
+            background: var(--white); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);
+            overflow: hidden; margin-bottom: 24px;
+        }
+        .card-header {
+            padding: 16px 20px; border-bottom: 1px solid var(--gray-100);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .card-title { font-weight: 700; font-size: 18px; color: var(--gray-900); }
+        .card-body { padding: 20px; }
+
+        .case-item, .report-item, .notification-item {
+            padding: 14px 0; border-bottom: 1px solid var(--gray-100);
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+        }
+        .case-item:last-child, .report-item:last-child, .notification-item:last-child { border-bottom: none; }
+
+        .item-title { font-weight: 600; color: var(--gray-900); margin-bottom: 4px; }
+        .item-meta { font-size: 12px; color: var(--gray-500); }
+
+        .badge-status {
+            display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600;
+        }
+        .status-active { background: var(--green-bg); color: var(--green-dark); }
+        .status-pending { background: #fff8e1; color: #f57f17; }
+        .status-completed { background: #e0f0ff; color: #0077b6; }
+
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 10px 18px; border-radius: var(--radius); font-weight: 700;
+            font-family: 'Cairo', sans-serif; font-size: 14px; cursor: pointer; border: none;
+            transition: all var(--transition); text-decoration: none; color: white;
+            box-shadow: var(--shadow-sm); gap: 6px;
+        }
+        .btn-primary { background: var(--green-dark); }
+        .btn-primary:hover { background: #005a2b; box-shadow: var(--shadow-md); transform: translateY(-1px); }
+        .btn-outline {
+            background: transparent; border: 1.5px solid var(--green-dark); color: var(--green-dark); box-shadow: none;
+        }
+        .btn-outline:hover { background: rgba(0,102,51,0.05); }
+        .btn-sm { padding: 6px 14px; font-size: 13px; }
+        .btn-expert { background: var(--expert-accent); }
+        .btn-expert:hover { background: #6b3410; }
+
+        .link { color: var(--green-dark); text-decoration: none; font-weight: 600; cursor: pointer; }
+        .link:hover { text-decoration: underline; }
+
+        .quick-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 16px; }
+
+        .footer { text-align: center; padding: 16px; font-size: 12px; color: var(--gray-400); border-top: 1px solid var(--gray-200); margin-top: 24px; }
+    
+        /* Language Switcher */
+        .lang-switch {
+            display: flex;
+            gap: 6px;
+            margin-left: 16px;
+        }
+        .lang-btn {
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: none;
+            background: transparent;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            color: var(--gray-700);
+            transition: 0.2s;
+            font-family: 'Cairo', sans-serif;
+        }
+        .lang-btn.active {
+            background: var(--green-dark);
+            color: white;
+            box-shadow: 0 2px 6px rgba(0,102,51,0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <div class="logo-area">
+            <div class="logo-icon">و</div>
+            <span class="logo-text-nav" data-translate="brand">ورثك فاليد</span>
+            <span class="wilaya-tag" data-translate="nav_expert">🏢 خبير عقاري</span>
+        </div>
+        <div class="user-area">
+            <div class="lang-switch">
+                <button class="lang-btn active" data-lang="ar" data-lang-switch onclick="changeLanguage('ar')">🇩🇿 العربية</button>
+                <button class="lang-btn" data-lang="fr" data-lang-switch onclick="changeLanguage('fr')">🇫🇷 Français</button>
+                <button class="lang-btn" data-lang="en" data-lang-switch onclick="changeLanguage('en')">🇬🇧 English</button>
+            </div>
+            <div class="notification-bell" id="notificationBell">
+                🔔
+                <span class="badge">4</span>
+            </div>
+            <div class="user-dropdown" id="userDropdown">
+                <div class="user-avatar">م</div>
+                <div class="user-info">
+                    <span class="user-name">مصطفى بوكرومي</span>
+                    <span class="user-role" data-translate="role_expert">خبير عقاري</span>
+                </div>
+                <span style="font-size:12px;">▼</span>
+            </div>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="#" data-translate="profile">الملف الشخصي</a>
+                <a href="#" data-translate="settings">الإعدادات</a>
+                <a href="notifications.html">الإشعارات</a>
+                <a href="#" class="logout" id="logoutBtn" data-translate="logout">تسجيل الخروج</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="page-header">
+            <h1 class="greeting" data-translate="expert_greeting">السلام عليكم، مصطفى</h1>
+            <p class="text-muted" data-translate="expert_subtitle">نظرة عامة على القضايا والعقارات المحالة إليك للتقييم. اليوم 17 ماي 2026.</p>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon icon-blue">📋</div>
+                <div class="stat-info"><h3 data-translate="expert_stat_cases">قضايا مكلف بها</h3><div class="stat-number">5</div></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon icon-orange">🏠</div>
+                <div class="stat-info"><h3 data-translate="expert_stat_evaluations">عقارات للتقييم</h3><div class="stat-number">3</div></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon icon-green">📄</div>
+                <div class="stat-info"><h3 data-translate="expert_stat_reports">تقارير مرفوعة</h3><div class="stat-number">7</div></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon icon-red">⏳</div>
+                <div class="stat-info"><h3 data-translate="expert_stat_pending">تقارير معلقة</h3><div class="stat-number">2</div></div>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Left Column: Cases & Properties -->
+            <div>
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title" data-translate="expert_my_cases">📁 قضاياي للتقييم العقاري</span>
+                        <a href="#" class="link">عرض الكل</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="case-item">
+                            <div>
+                                <div class="item-title">قضية تركة عقار الحسينية - وهران</div>
+                                <div class="item-meta">المحامي: الأستاذ كمال بومدين • آخر معاينة: 10 ماي</div>
+                            </div>
+                            <span class="badge-status status-active" data-translate="case_status_under_evaluation">قيد التقييم</span>
+                        </div>
+                        <div class="case-item">
+                            <div>
+                                <div class="item-title">قضية تركة أرض فلاحية - البليدة</div>
+                                <div class="item-meta">المحامية: فتيحة لعموري • تاريخ الإحالة: 5 ماي</div>
+                            </div>
+                            <span class="badge-status status-pending" data-translate="case_status_awaiting_inspection">في انتظار المعاينة</span>
+                        </div>
+                        <div class="case-item">
+                            <div>
+                                <div class="item-title">نزاع عقار تجاري - تلمسان</div>
+                                <div class="item-meta">المحامي: عبد الحق زرقين • مطلوب تقرير عاجل</div>
+                            </div>
+                            <span class="badge-status status-active" data-translate="case_status_under_evaluation">قيد التقييم</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title" data-translate="expert_my_properties">🏘️ عقارات محالة للتقييم</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="case-item">
+                            <div>
+                                <div class="item-title">فيلا F4 - الأبيار، الجزائر العاصمة</div>
+                                <div class="item-meta">الوكالة: دار العقار • القيمة التقديرية الأولية: 15.5M دج</div>
+                            </div>
+                            <button class="btn btn-sm btn-expert" data-translate="submit_report">رفع تقرير</button>
+                        </div>
+                        <div class="case-item">
+                            <div>
+                                <div class="item-title">أرض بناء 500م² - بئر توتة</div>
+                                <div class="item-meta">الوكالة: دار العقار • القيمة التقديرية: 8.2M دج</div>
+                            </div>
+                            <button class="btn btn-sm btn-expert" data-translate="submit_report">رفع تقرير</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Reports & Quick Actions -->
+            <div>
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title" data-translate="expert_my_reports">📄 آخر التقارير المرفوعة</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="report-item">
+                            <div>
+                                <div class="item-title">تقرير تقييم فيلا الأبيار</div>
+                                <div class="item-meta">12 ماي 2026 • للوكالة العقارية</div>
+                            </div>
+                            <span class="badge-status status-completed" data-translate="completed">مكتمل</span>
+                        </div>
+                        <div class="report-item">
+                            <div>
+                                <div class="item-title">تقرير خبرة أرض البليدة</div>
+                                <div class="item-meta">8 ماي 2026 • للمحكمة</div>
+                            </div>
+                            <span class="badge-status status-completed" data-translate="completed">مكتمل</span>
+                        </div>
+                        <div class="report-item">
+                            <div>
+                                <div class="item-title">تقرير معاينة شقة سطيف</div>
+                                <div class="item-meta">1 ماي 2026 • للوارث أحمد بوسعادة</div>
+                            </div>
+                            <span class="badge-status status-completed" data-translate="completed">مكتمل</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header"><span class="card-title" data-translate="quick_actions">⚡ إجراءات سريعة</span></div>
+                    <div class="card-body">
+                        <div class="quick-actions">
+                            <button class="btn btn-expert" style="width:100%;" data-translate="expert_new_report">📄 إعداد تقرير جديد</button>
+                            <a href="chat.html" class="btn btn-outline" style="text-align:center;" data-translate="expert_chat_lawyer">💬 محادثة مع محام</a>
+                            <a href="risk-assessment.html" class="btn btn-outline" style="text-align:center;" data-translate="expert_risk_assess">⚠️ تقييم مخاطر عقار</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header"><span class="card-title">🔔 إشعارات</span></div>
+                    <div class="card-body">
+                        <div class="notification-item">
+                            <div>
+                                <div class="item-title">طلب تقرير عاجل</div>
+                                <div class="item-meta">محكمة تلمسان تطلب تقريراً خلال 48 ساعة</div>
+                            </div>
+                        </div>
+                        <div class="notification-item">
+                            <div>
+                                <div class="item-title">موعد معاينة غداً</div>
+                                <div class="item-meta">عقار الحسينية بوهران الساعة 10:00</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer" data-translate="footer">
+        © 2026 ورثك فاليد - الحل السريع. جميع الحقوق محفوظة. الجزائر.
+    </div>
+
+    <script src="js/translations.js"></script>
+<script src="js/i18n.js"></script>
+<script>
+        (function() {
+            // Dropdown
+            const userDropdown = document.getElementById('userDropdown');
+            const dropdownMenu = document.getElementById('dropdownMenu');
+            let dropdownOpen = false;
+            userDropdown.addEventListener('click', function(e) {
+                e.stopPropagation();
+                dropdownOpen = !dropdownOpen;
+                dropdownMenu.style.display = dropdownOpen ? 'block' : 'none';
+            });
+            document.addEventListener('click', () => {
+                dropdownOpen = false;
+                dropdownMenu.style.display = 'none';
+            });
+
+            document.getElementById('notificationBell').addEventListener('click', () => {
+                window.location.href = 'notifications.html';
+            });
+
+            document.getElementById('logoutBtn').addEventListener('click', function(e) {
+                e.preventDefault();
+                if (confirm(t('confirm_logout'))) {
+                    alert(t('msg_logout_success'));
+                    localStorage.clear();
+                    sessionStorage.clear();
+                    window.location.href = 'index.html';
+                }
+            });
+
+            // Simulate "رفع تقرير" buttons
+            document.querySelectorAll('.btn-expert').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    alert(t('msg_redirect_expert_report'));
+                });
+            });
+
+            console.log('لوحة تحكم الخبير العقاري - مصطفى بوكرومي جاهزة.');
+        })();
+    </script>
+        </body>
+</html>

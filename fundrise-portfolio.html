@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>محفظة التمويل الجماعي | ورثك فاليد - الحل السريع</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green-dark: #006633;
+            --green-light: #00A859;
+            --green-bg: #e6f5ee;
+            --red: #D21034;
+            --red-light: #fde8ec;
+            --white: #FFFFFF;
+            --off-white: #F8F9FA;
+            --gray-50: #F7F8FA;
+            --gray-100: #F0F2F5;
+            --gray-200: #E4E7EB;
+            --gray-300: #CBD2D9;
+            --gray-400: #9BA5B2;
+            --gray-500: #7B8794;
+            --gray-700: #3E4C59;
+            --gray-900: #1F2933;
+            --fundrise-accent: #2d6a4f;
+            --fundrise-light: #d4edda;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.05);
+            --radius: 12px;
+            --radius-lg: 16px;
+            --transition: 0.2s ease;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: #f4f6f9;
+            min-height: 100vh;
+            color: var(--gray-900);
+            line-height: 1.6;
+        }
+
+        .top-nav {
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+            padding: 0 24px;
+            height: 64px;
+            display: flex; align-items: center; justify-content: space-between;
+            box-shadow: var(--shadow-sm); position: sticky; top: 0; z-index: 100;
+        }
+        .logo-area { display: flex; align-items: center; gap: 10px; }
+        .logo-icon {
+            width: 36px; height: 36px; background: var(--green-dark); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 18px;
+        }
+        .logo-text-nav { font-weight: 800; font-size: 18px; color: var(--green-dark); }
+        .wilaya-tag {
+            background: var(--fundrise-light); color: var(--fundrise-accent); padding: 4px 12px; border-radius: 20px;
+            font-size: 13px; font-weight: 600; margin-right: 10px;
+        }
+        .user-area { display: flex; align-items: center; gap: 16px; }
+        .back-link { color: var(--green-dark); text-decoration: none; font-weight: 600; font-size: 14px; cursor: pointer; }
+        .back-link:hover { text-decoration: underline; }
+
+        .main-container { max-width: 1100px; margin: 0 auto; padding: 24px; }
+        .page-header { margin-bottom: 24px; }
+        .greeting { font-size: 26px; font-weight: 800; color: var(--gray-900); }
+        .text-muted { color: var(--gray-500); font-size: 13px; }
+
+        .stats-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px; margin-bottom: 28px;
+        }
+        .stat-card {
+            background: var(--white); border-radius: var(--radius-lg); padding: 20px;
+            box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 16px;
+        }
+        .stat-icon {
+            width: 48px; height: 48px; border-radius: var(--radius);
+            display: flex; align-items: center; justify-content: center; font-size: 24px;
+        }
+        .stat-info h3 { font-size: 14px; color: var(--gray-500); font-weight: 500; margin-bottom: 4px; }
+        .stat-number { font-size: 24px; font-weight: 800; color: var(--gray-900); }
+        .dinar { font-family: 'Cairo', sans-serif; font-weight: 700; }
+
+        .card {
+            background: var(--white); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);
+            overflow: hidden; margin-bottom: 24px;
+        }
+        .card-header {
+            padding: 16px 20px; border-bottom: 1px solid var(--gray-100);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .card-title { font-weight: 700; font-size: 18px; color: var(--gray-900); }
+        .card-body { padding: 20px; }
+
+        .investment-item {
+            padding: 16px 0; border-bottom: 1px solid var(--gray-100);
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+        }
+        .investment-item:last-child { border-bottom: none; }
+        .investment-info { flex: 1; }
+        .investment-title { font-weight: 700; font-size: 16px; color: var(--gray-900); margin-bottom: 4px; }
+        .investment-meta { font-size: 13px; color: var(--gray-500); display: flex; flex-wrap: wrap; gap: 12px; }
+        .investment-stats { text-align: left; }
+        .investment-amount { font-size: 20px; font-weight: 800; color: var(--green-dark); }
+        .roi-positive { color: var(--green-dark); font-weight: 600; font-size: 13px; }
+
+        .progress-bar {
+            height: 8px; background: var(--gray-200); border-radius: 4px; margin-top: 6px; overflow: hidden;
+        }
+        .progress-fill { height: 100%; border-radius: 4px; background: var(--fundrise-accent); }
+
+        .distribution-item {
+            display: flex; justify-content: space-between; align-items: center; padding: 10px 0;
+            border-bottom: 1px solid var(--gray-100);
+        }
+        .distribution-item:last-child { border-bottom: none; }
+
+        .badge-status {
+            display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600;
+        }
+        .status-active { background: var(--green-bg); color: var(--green-dark); }
+        .status-completed { background: #e0f0ff; color: #0077b6; }
+
+        .footer { text-align: center; padding: 16px; font-size: 12px; color: var(--gray-400); border-top: 1px solid var(--gray-200); margin-top: 24px; }
+    
+        /* Language Switcher */
+        .lang-switch {
+            display: flex;
+            gap: 6px;
+            margin-left: 16px;
+        }
+        .lang-btn {
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: none;
+            background: transparent;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            color: var(--gray-700);
+            transition: 0.2s;
+            font-family: 'Cairo', sans-serif;
+        }
+        .lang-btn.active {
+            background: var(--green-dark);
+            color: white;
+            box-shadow: 0 2px 6px rgba(0,102,51,0.2);
+        }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="logo-area">
+            <div class="logo-icon">و</div>
+            <span class="logo-text-nav" data-translate="brand">ورثك فاليد</span>
+            <span class="wilaya-tag" data-translate="nav_fundrise_portfolio">🏘️ محفظة التمويل الجماعي</span>
+        </div>
+        <div class="user-area">
+            <div class="lang-switch">
+                <button class="lang-btn active" data-lang="ar" data-lang-switch onclick="changeLanguage('ar')">🇩🇿 العربية</button>
+                <button class="lang-btn" data-lang="fr" data-lang-switch onclick="changeLanguage('fr')">🇫🇷 Français</button>
+                <button class="lang-btn" data-lang="en" data-lang-switch onclick="changeLanguage('en')">🇬🇧 English</button>
+            </div>
+            <a href="fundrise-crowdfunding.html" class="back-link" data-translate="nav_fundrise_market">↩ سوق التمويل الجماعي</a>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="page-header">
+            <h1 class="greeting" data-translate="fundrise_portfolio_title">محفظة التمويل الجماعي</h1>
+            <p class="text-muted" data-translate="fundrise_portfolio_subtitle">استثماراتك في مشاريع Fundrise، الأسهم المملوكة، والعوائد المستلمة.</p>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon" style="background:var(--fundrise-light); color:var(--fundrise-accent);">🏗️</div>
+                <div class="stat-info"><h3 data-translate="fundrise_portfolio_stat_projects">مشاريع مستثمر فيها</h3><div class="stat-number">2</div></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background:#e0f0ff; color:#007bff;">📊</div>
+                <div class="stat-info"><h3 data-translate="fundrise_portfolio_stat_shares">إجمالي الأسهم</h3><div class="stat-number">90</div></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background:#fff3e0; color:#f57c00;">💰</div>
+                <div class="stat-info"><h3 data-translate="fundrise_portfolio_stat_investment">إجمالي الاستثمار</h3><div class="stat-number dinar">4.200.000 دج</div></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background:#f3e5f5; color:#7b1fa2;">💸</div>
+                <div class="stat-info"><h3 data-translate="fundrise_portfolio_stat_returns">عوائد مستلمة</h3><div class="stat-number dinar">340.000 دج</div></div>
+            </div>
+        </div>
+
+        <!-- Investments -->
+        <div class="card">
+            <div class="card-header"><span class="card-title" data-translate="fundrise_portfolio_active">📋 استثماراتي النشطة</span></div>
+            <div class="card-body" id="investmentsList">
+                <!-- Dynamically filled -->
+            </div>
+        </div>
+
+        <!-- Distributions -->
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:24px;">
+            <div class="card">
+                <div class="card-header"><span class="card-title" data-translate="fundrise_portfolio_dividends">💸 توزيعات الأرباح</span></div>
+                <div class="card-body" id="distributionsList"></div>
+            </div>
+            <div class="card">
+                <div class="card-header"><span class="card-title" data-translate="fundrise_portfolio_performance">📊 أداء المشاريع</span></div>
+                <div class="card-body" id="performanceSummary"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer" data-translate="footer">
+        © 2026 ورثك فاليد - الحل السريع. جميع الحقوق محفوظة. الجزائر.
+    </div>
+
+    <script src="js/translations.js"></script>
+<script src="js/i18n.js"></script>
+<script>
+        (function() {
+            // Simulated portfolio data
+            const myInvestments = [
+                {
+                    id: 1,
+                    project: 'مشروع الخروب السكني - قسنطينة',
+                    shares: 50,
+                    sharePrice: 50000,
+                    invested: 2500000,
+                    currentValue: 2800000,
+                    roi: 12.0,
+                    status: 'active',
+                    progress: 80
+                },
+                {
+                    id: 2,
+                    project: 'إقامة سكنية - البليدة',
+                    shares: 40,
+                    sharePrice: 30000,
+                    invested: 1200000,
+                    currentValue: 1320000,
+                    roi: 10.0,
+                    status: 'active',
+                    progress: 70
+                }
+            ];
+
+            const distributions = [
+                { date: '2026-05-14', project: 'الخروب السكني', amount: 200000, type: 'ربح' },
+                { date: '2026-04-01', project: 'إقامة البليدة', amount: 90000, type: 'ربح' },
+                { date: '2026-01-15', project: 'الخروب السكني', amount: 50000, type: 'عائد إضافي' }
+            ];
+
+            const performanceData = [
+                { month: 'جانفي', value: 3.1 },
+                { month: 'فيفري', value: 3.3 },
+                { month: 'مارس', value: 3.6 },
+                { month: 'أفريل', value: 3.9 },
+                { month: 'ماي', value: 4.2 }
+            ];
+
+            function renderInvestments() {
+                const container = document.getElementById('investmentsList');
+                container.innerHTML = myInvestments.map(inv => `
+                    <div class="investment-item">
+                        <div class="investment-info">
+                            <div class="investment-title">🏗️ ${inv.project}</div>
+                            <div class="investment-meta">
+                                <span>📊 ${inv.shares} <span data-translate="fundrise_portfolio_share">سهم</span></span>
+                                <span><span data-translate="fundrise_share_price">سعر السهم</span>: ${inv.sharePrice.toLocaleString()} دج</span>
+                                <span><span data-translate="fundrise_portfolio_investor">مستثمر</span>: ${inv.invested.toLocaleString()} دج</span>
+                            </div>
+                            <div class="progress-bar" style="margin-top:8px;">
+                                <div class="progress-fill" style="width:${inv.progress}%;"></div>
+                            </div>
+                        </div>
+                        <div class="investment-stats">
+                            <div class="investment-amount">${inv.currentValue.toLocaleString()} دج</div>
+                            <div class="roi-positive">📈 ${inv.roi}% <span data-translate="fundrise_return">عائد</span></div>
+                            <span class="badge-status status-active" data-translate="active">نشط</span>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            function renderDistributions() {
+                const container = document.getElementById('distributionsList');
+                container.innerHTML = distributions.map(d => `
+                    <div class="distribution-item">
+                        <div>
+                            <div style="font-weight:600;">${d.project}</div>
+                            <div style="font-size:12px; color:var(--gray-500);">${d.date} · ${d.type}</div>
+                        </div>
+                        <span style="font-weight:800; color:var(--green-dark);">+ ${d.amount.toLocaleString()} دج</span>
+                    </div>
+                `).join('');
+            }
+
+            function renderPerformance() {
+                const container = document.getElementById('performanceSummary');
+                const maxVal = Math.max(...performanceData.map(d => d.value));
+                const barsHTML = performanceData.map(d => {
+                    const h = (d.value / maxVal) * 100;
+                    return `<div style="flex:1; display:flex; flex-direction:column; align-items:center;">
+                        <div style="height:${h}px; width:24px; background:var(--fundrise-accent); border-radius:4px 4px 0 0; display:flex; align-items:flex-end; justify-content:center; color:white; font-size:10px;">${d.value}M</div>
+                        <span style="font-size:10px; margin-top:4px;">${d.month}</span>
+                    </div>`;
+                }).join('');
+                container.innerHTML = `
+                    <p style="font-weight:600; margin-bottom:12px;">تطور قيمة المحفظة (مليون دج)</p>
+                    <div style="display:flex; gap:8px; align-items:end; height:120px;">${barsHTML}</div>
+                    <p style="margin-top:12px; font-size:13px; color:var(--gray-500);">إجمالي العائد منذ بداية السنة: <strong style="color:var(--green-dark);">+35.5%</strong></p>
+                `;
+            }
+
+            renderInvestments();
+            renderDistributions();
+            renderPerformance();
+            console.log('صفحة محفظة التمويل الجماعي جاهزة.');
+        
+
+            // Re-render dynamic content on language change
+            window.addEventListener('languageChanged', function(e) {
+            renderInvestments();
+            renderDistributions();
+            renderPerformance();
+            });
+        })();
+    </script>
+</body>
+</html>

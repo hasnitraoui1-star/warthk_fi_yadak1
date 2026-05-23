@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مركز التفاوض والعروض | ورثك فاليد - الحل السريع</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green-dark: #006633;
+            --green-light: #00A859;
+            --green-bg: #e6f5ee;
+            --red: #D21034;
+            --red-light: #fde8ec;
+            --white: #FFFFFF;
+            --off-white: #F8F9FA;
+            --gray-50: #F7F8FA;
+            --gray-100: #F0F2F5;
+            --gray-200: #E4E7EB;
+            --gray-300: #CBD2D9;
+            --gray-400: #9BA5B2;
+            --gray-500: #7B8794;
+            --gray-700: #3E4C59;
+            --gray-900: #1F2933;
+            --orange-accent: #c3540a;
+            --orange-light: #fff3e8;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.05);
+            --radius: 12px;
+            --radius-lg: 16px;
+            --transition: 0.2s ease;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Cairo', sans-serif; background: #f4f6f9; min-height: 100vh; color: var(--gray-900); line-height: 1.6; }
+        .top-nav { background: var(--white); border-bottom: 1px solid var(--gray-200); padding: 0 24px; height: 64px; display: flex; align-items: center; justify-content: space-between; box-shadow: var(--shadow-sm); position: sticky; top: 0; z-index: 100; }
+        .logo-area { display: flex; align-items: center; gap: 10px; }
+        .logo-icon { width: 36px; height: 36px; background: var(--green-dark); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 18px; }
+        .logo-text-nav { font-weight: 800; font-size: 18px; color: var(--green-dark); }
+        .wilaya-tag { background: var(--orange-light); color: var(--orange-accent); padding: 4px 12px; border-radius: 20px; font-size: 13px; font-weight: 600; margin-right: 10px; }
+        .user-area { display: flex; align-items: center; gap: 16px; }
+        .back-link { color: var(--green-dark); text-decoration: none; font-weight: 600; font-size: 14px; cursor: pointer; }
+        .back-link:hover { text-decoration: underline; }
+        .main-container { max-width: 1100px; margin: 0 auto; padding: 24px; }
+        .page-header { margin-bottom: 24px; }
+        .greeting { font-size: 26px; font-weight: 800; color: var(--gray-900); }
+        .text-muted { color: var(--gray-500); font-size: 13px; }
+        .tabs { display: flex; gap: 0; background: var(--white); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); overflow: hidden; margin-bottom: 24px; }
+        .tab { flex: 1; padding: 14px 20px; text-align: center; font-weight: 700; font-size: 15px; cursor: pointer; transition: all var(--transition); background: var(--gray-50); border-bottom: 3px solid transparent; color: var(--gray-700); }
+        .tab.active { background: white; color: var(--green-dark); border-bottom-color: var(--green-dark); }
+        .tab:hover:not(.active) { background: var(--gray-100); }
+        .offers-panel { display: none; }
+        .offers-panel.active { display: block; }
+        .card { background: var(--white); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); overflow: hidden; margin-bottom: 20px; }
+        .card-header { padding: 16px 20px; border-bottom: 1px solid var(--gray-100); display: flex; justify-content: space-between; align-items: center; }
+        .card-title { font-weight: 700; font-size: 17px; color: var(--gray-900); }
+        .card-body { padding: 20px; }
+        .offer-card { padding: 16px; border: 1px solid var(--gray-200); border-radius: var(--radius); margin-bottom: 12px; transition: box-shadow var(--transition); }
+        .offer-card:hover { box-shadow: var(--shadow-sm); }
+        .offer-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px; margin-bottom: 12px; }
+        .offer-property { font-weight: 700; font-size: 16px; color: var(--gray-900); }
+        .offer-meta { display: flex; flex-wrap: wrap; gap: 16px; font-size: 13px; color: var(--gray-500); margin-bottom: 8px; }
+        .offer-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+        .badge-status { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+        .status-pending { background: #fff8e1; color: #f57f17; }
+        .status-accepted { background: var(--green-bg); color: var(--green-dark); }
+        .status-rejected { background: var(--red-light); color: var(--red); }
+        .status-counter { background: #e0f0ff; color: #0077b6; }
+        .btn { display: inline-flex; align-items: center; justify-content: center; padding: 10px 18px; border-radius: var(--radius); font-weight: 700; font-family: 'Cairo', sans-serif; font-size: 14px; cursor: pointer; border: none; transition: all var(--transition); text-decoration: none; color: white; box-shadow: var(--shadow-sm); gap: 6px; }
+        .btn-sm { padding: 6px 14px; font-size: 13px; }
+        .btn-accept { background: var(--green-dark); }
+        .btn-accept:hover { background: #005a2b; }
+        .btn-reject { background: var(--red); }
+        .btn-reject:hover { background: #b00e2b; }
+        .btn-counter { background: var(--orange-accent); }
+        .btn-counter:hover { background: #a04000; }
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 300; align-items: center; justify-content: center; }
+        .modal-overlay.active { display: flex; }
+        .modal { background: white; border-radius: var(--radius-lg); width: 90%; max-width: 500px; box-shadow: var(--shadow-lg); padding: 24px; }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .modal-title { font-weight: 800; font-size: 20px; }
+        .close-btn { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--gray-500); }
+        .input-group { margin-bottom: 16px; }
+        label { display: block; font-weight: 600; margin-bottom: 6px; font-size: 14px; }
+        input { width: 100%; padding: 12px; border: 1.5px solid var(--gray-200); border-radius: var(--radius); font-family: 'Cairo', sans-serif; font-size: 14px; background: var(--off-white); }
+        input:focus { border-color: var(--green-light); outline: none; box-shadow: 0 0 0 3px rgba(0,168,89,0.1); }
+        .footer { text-align: center; padding: 16px; font-size: 12px; color: var(--gray-400); border-top: 1px solid var(--gray-200); margin-top: 24px; }
+        .empty-state { text-align: center; padding: 40px; color: var(--gray-400); }
+        .empty-state .icon { font-size: 48px; margin-bottom: 16px; }
+    
+        /* Language Switcher */
+        .lang-switch {
+            display: flex;
+            gap: 6px;
+            margin-left: 16px;
+        }
+        .lang-btn {
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: none;
+            background: transparent;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            color: var(--gray-700);
+            transition: 0.2s;
+            font-family: 'Cairo', sans-serif;
+        }
+        .lang-btn.active {
+            background: var(--green-dark);
+            color: white;
+            box-shadow: 0 2px 6px rgba(0,102,51,0.2);
+        }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="logo-area">
+            <div class="logo-icon">و</div>
+            <span class="logo-text-nav" data-translate="brand">ورثك فاليد</span>
+            <span class="wilaya-tag" data-translate="nav_negotiation">🤝 مركز التفاوض</span>
+        </div>
+        <div class="user-area">
+            <div class="lang-switch">
+                <button class="lang-btn active" data-lang="ar" data-lang-switch onclick="changeLanguage('ar')">🇩🇿 العربية</button>
+                <button class="lang-btn" data-lang="fr" data-lang-switch onclick="changeLanguage('fr')">🇫🇷 Français</button>
+                <button class="lang-btn" data-lang="en" data-lang-switch onclick="changeLanguage('en')">🇬🇧 English</button>
+            </div>
+            <a href="investor-dashboard.html" class="back-link" data-translate="back_to_dashboard">↩ لوحة التحكم</a>
+        </div>
+    </nav>
+    <div class="main-container">
+        <div class="page-header">
+            <h1 class="greeting" data-translate="negotiation_title">مركز التفاوض والعروض</h1>
+            <p class="text-muted" data-translate="negotiation_subtitle">إدارة العروض المقدمة والمستلمة على العقارات. يمكنك قبول، رفض، أو تقديم عرض مضاد.</p>
+        </div>
+        <div class="tabs">
+            <div class="tab active" data-tab="received" data-translate="negotiation_received">📥 العروض المستلمة (2)</div>
+            <div class="tab" data-tab="sent" data-translate="negotiation_sent">📤 العروض المرسلة (2)</div>
+        </div>
+        <div id="received-panel" class="offers-panel active">
+            <div class="card">
+                <div class="card-header"><span class="card-title" data-translate="negotiation_received">📥 العروض المستلمة على عقاراتي</span></div>
+                <div class="card-body" id="receivedOffersList"></div>
+            </div>
+        </div>
+        <div id="sent-panel" class="offers-panel">
+            <div class="card">
+                <div class="card-header"><span class="card-title" data-translate="negotiation_sent">📤 العروض التي قدمتها</span></div>
+                <div class="card-body" id="sentOffersList"></div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-overlay" id="counterModal">
+        <div class="modal">
+            <div class="modal-header">
+                <span class="modal-title" data-translate="negotiation_counter_offer">تقديم عرض مضاد</span>
+                <button class="close-btn" id="closeCounterModal">&times;</button>
+            </div>
+            <form id="counterForm">
+                <div class="input-group">
+                    <label data-translate="negotiation_new_amount">المبلغ الجديد (دج)</label>
+                    <input type="number" id="counterAmount" required min="1" data-translate-placeholder="ph_proposed_amount" placeholder="أدخل المبلغ المقترح">
+                </div>
+                <div class="input-group">
+                    <label data-translate="notes">ملاحظات</label>
+                    <input type="text" id="counterNotes" data-translate-placeholder="ph_additional_notes" placeholder="أي ملاحظات إضافية...">
+                </div>
+                <input type="hidden" id="counterOfferId">
+                <button type="submit" class="btn btn-counter" style="width:100%;" data-translate="negotiation_submit_counter">📨 إرسال العرض المضاد</button>
+            </form>
+        </div>
+    </div>
+    <div class="footer" data-translate="footer">© 2026 ورثك فاليد - الحل السريع. جميع الحقوق محفوظة. الجزائر.</div>
+    <script src="js/translations.js"></script>
+<script src="js/i18n.js"></script>
+<script>
+        (function() {
+            const receivedOffers = [
+                { id: 101, property: 'فيلا F4 - الأبيار', from: 'ليلى بن عمار', amount: 15200000, date: '2026-05-16', status: 'pending', notes: '' },
+                { id: 102, property: 'أرض بناء 500م² - بئر توتة', from: 'سفيان بلقاسم', amount: 8000000, date: '2026-05-14', status: 'counter', counterAmount: 8100000, notes: 'أقترح زيادة طفيفة' }
+            ];
+            const sentOffers = [
+                { id: 201, property: 'فيلا F5 - حي النخيل', to: 'وكالة النخبة', amount: 14000000, date: '2026-05-15', status: 'pending' },
+                { id: 202, property: 'شقة F3 - سيدي مبروك', to: 'دار المستقبل', amount: 6500000, date: '2026-05-12', status: 'counter', counterAmount: 6800000 }
+            ];
+            function getStatusClass(s) { return s==='accepted'?'status-accepted':s==='rejected'?'status-rejected':s==='counter'?'status-counter':'status-pending'; }
+            function getStatusI18n(s) { return s==='accepted'?'accept':s==='rejected'?'reject':s==='counter'?'negotiation_counter_offer':'pending'; }
+            function getStatusLabel(s) { return s==='accepted'?'مقبول':s==='rejected'?'مرفوض':s==='counter'?'عرض مضاد':'قيد الانتظار'; }
+            function renderReceived() {
+                const c = document.getElementById('receivedOffersList');
+                c.innerHTML = receivedOffers.map(o => `<div class="offer-card"><div class="offer-header"><span class="offer-property">🏠 ${o.property}</span><span class="badge-status ${getStatusClass(o.status)}" data-translate="${getStatusI18n(o.status)}">${getStatusLabel(o.status)}</span></div><div class="offer-meta"><span>👤 من: ${o.from}</span><span>📅 ${o.date}</span><span>💰 العرض: ${o.amount.toLocaleString()} دج</span>${o.counterAmount?`<span>🔄 عرض مضاد: ${o.counterAmount.toLocaleString()} دج</span>`:''}</div>${o.notes?`<p style="font-size:13px;color:var(--gray-700);">📝 ${o.notes}</p>`:''}<div class="offer-actions">${o.status==='pending'?`<button class="btn btn-sm btn-accept" onclick="acceptReceived(${o.id})" data-translate="accept">✅ قبول</button><button class="btn btn-sm btn-reject" onclick="rejectReceived(${o.id})" data-translate="reject">❌ رفض</button><button class="btn btn-sm btn-counter" onclick="openCounter(${o.id})" data-translate="negotiation_counter_offer">🔄 عرض مضاد</button>`:''}${o.status==='counter'?`<button class="btn btn-sm btn-accept" onclick="acceptReceived(${o.id})" data-translate="accept">✅ قبول المضاد</button><button class="btn btn-sm btn-reject" onclick="rejectReceived(${o.id})" data-translate="reject">❌ رفض</button>`:''}</div></div>`).join('');
+            }
+            function renderSent() {
+                const c = document.getElementById('sentOffersList');
+                c.innerHTML = sentOffers.map(o => `<div class="offer-card"><div class="offer-header"><span class="offer-property">🏠 ${o.property}</span><span class="badge-status ${getStatusClass(o.status)}" data-translate="${getStatusI18n(o.status)}">${getStatusLabel(o.status)}</span></div><div class="offer-meta"><span>👤 إلى: ${o.to}</span><span>📅 ${o.date}</span><span>💰 عرضي: ${o.amount.toLocaleString()} دج</span>${o.counterAmount?`<span>🔄 عرضهم المضاد: ${o.counterAmount.toLocaleString()} دج</span>`:''}</div>${o.status==='counter'?`<div class="offer-actions"><button class="btn btn-sm btn-accept" onclick="acceptSent(${o.id})" data-translate="accept">✅ قبول المضاد</button><button class="btn btn-sm btn-reject" onclick="rejectSent(${o.id})" data-translate="reject">❌ رفض</button></div>`:''}</div>`).join('');
+            }
+            window.acceptReceived = function(id) { const o=receivedOffers.find(x=>x.id===id); if(o&&confirm(t('confirm_accept_offer'))){o.status='accepted';renderReceived();} };
+            window.rejectReceived = function(id) { const o=receivedOffers.find(x=>x.id===id); if(o&&confirm(t('confirm_reject_offer'))){o.status='rejected';renderReceived();} };
+            window.acceptSent = function(id) { const o=sentOffers.find(x=>x.id===id); if(o&&confirm(t('confirm_accept_counter'))){o.status='accepted';renderSent();} };
+            window.rejectSent = function(id) { if(confirm(t('confirm_reject_counter'))){sentOffers.find(x=>x.id===id).status='rejected';renderSent();} };
+            window.openCounter = function(id) { document.getElementById('counterOfferId').value=id; document.getElementById('counterModal').classList.add('active'); };
+            document.getElementById('counterForm').addEventListener('submit', function(e) { e.preventDefault(); const id=parseInt(document.getElementById('counterOfferId').value); const amt=parseFloat(document.getElementById('counterAmount').value); const o=receivedOffers.find(x=>x.id===id); if(o&&amt>0){o.status='counter';o.counterAmount=amt;o.notes=document.getElementById('counterNotes').value||'عرض مضاد';document.getElementById('counterModal').classList.remove('active');renderReceived();alert(tv('msg_counter_offer_sent', {amount: amt.toLocaleString()}));} });
+            document.getElementById('closeCounterModal').addEventListener('click', ()=>document.getElementById('counterModal').classList.remove('active'));
+            window.addEventListener('click', e=>{if(e.target===document.getElementById('counterModal'))document.getElementById('counterModal').classList.remove('active');});
+            document.querySelectorAll('.tab').forEach(tab=>{tab.addEventListener('click',function(){document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));this.classList.add('active');const n=this.dataset.tab;document.getElementById('received-panel').classList.toggle('active',n==='received');document.getElementById('sent-panel').classList.toggle('active',n==='sent');});});
+            renderReceived(); renderSent();
+        
+
+            // Re-render dynamic content on language change
+            window.addEventListener('languageChanged', function(e) {
+            renderReceived();
+            renderSent();
+            });
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>غرفة البيانات الافتراضية VDR | ورثك فاليد - الحل السريع</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green-dark: #006633;
+            --green-light: #00A859;
+            --green-bg: #e6f5ee;
+            --red: #D21034;
+            --red-light: #fde8ec;
+            --white: #FFFFFF;
+            --off-white: #F8F9FA;
+            --gray-50: #F7F8FA;
+            --gray-100: #F0F2F5;
+            --gray-200: #E4E7EB;
+            --gray-300: #CBD2D9;
+            --gray-400: #9BA5B2;
+            --gray-500: #7B8794;
+            --gray-700: #3E4C59;
+            --gray-900: #1F2933;
+            --vdr-accent: #1e3a5f;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.05);
+            --radius: 12px;
+            --radius-lg: 16px;
+            --transition: 0.2s ease;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: #1a1f2b;
+            min-height: 100vh;
+            color: var(--gray-900);
+            line-height: 1.6;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        .vdr-topbar {
+            background: var(--vdr-accent);
+            color: white;
+            padding: 10px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            box-shadow: var(--shadow-md);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .vdr-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 16px;
+        }
+        .vdr-lock-icon { font-size: 20px; }
+        .session-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 13px;
+            flex-wrap: wrap;
+        }
+        .session-timer {
+            background: rgba(255,255,255,0.15);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+        .watermark-badge {
+            background: rgba(255,255,255,0.1);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+        .btn-exit {
+            background: var(--red);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: var(--radius);
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            font-size: 13px;
+            text-decoration: none;
+        }
+        .btn-exit:hover { background: #b00e2b; }
+
+        .vdr-container {
+            display: flex;
+            height: calc(100vh - 56px);
+        }
+        @media (max-width: 800px) {
+            .vdr-container { flex-direction: column; }
+            .document-viewer { min-height: 50vh; }
+        }
+
+        .document-sidebar {
+            width: 300px;
+            min-width: 280px;
+            background: var(--white);
+            border-left: 1px solid var(--gray-200);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+        .sidebar-header {
+            padding: 16px;
+            font-weight: 700;
+            font-size: 16px;
+            border-bottom: 1px solid var(--gray-200);
+            background: var(--gray-50);
+            color: var(--vdr-accent);
+        }
+        .doc-list { flex: 1; overflow-y: auto; }
+        .doc-item {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--gray-100);
+            cursor: pointer;
+            transition: background var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .doc-item:hover { background: var(--gray-50); }
+        .doc-item.active { background: var(--green-bg); border-right: 4px solid var(--green-dark); }
+        .doc-icon { font-size: 24px; flex-shrink: 0; }
+        .doc-info { flex: 1; }
+        .doc-name { font-weight: 600; font-size: 14px; }
+        .doc-meta { font-size: 11px; color: var(--gray-500); }
+        .doc-status { font-size: 10px; padding: 2px 8px; border-radius: 10px; }
+        .doc-viewed { background: var(--green-bg); color: var(--green-dark); }
+        .doc-new { background: #e0f0ff; color: #007bff; }
+
+        .document-viewer {
+            flex: 1;
+            background: #2d333f;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .viewer-area {
+            width: 100%;
+            max-width: 800px;
+            background: white;
+            border-radius: 4px;
+            box-shadow: var(--shadow-lg);
+            min-height: 500px;
+            padding: 40px;
+            position: relative;
+            margin: 20px;
+            overflow: auto;
+            max-height: 80vh;
+        }
+        .watermark-overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 10;
+            opacity: 0.08;
+            font-size: 48px;
+            font-weight: 800;
+            color: #000;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            line-height: 1.2;
+            letter-spacing: 4px;
+            transform: rotate(-20deg);
+        }
+        .document-content {
+            position: relative;
+            z-index: 5;
+            color: #333;
+        }
+        .document-content h2 { margin-bottom: 16px; color: var(--vdr-accent); }
+        .document-content p { margin-bottom: 10px; line-height: 1.8; }
+        .viewer-placeholder {
+            text-align: center;
+            color: #a0aec0;
+        }
+        .viewer-placeholder .icon { font-size: 64px; margin-bottom: 16px; }
+
+        .audit-indicator {
+            position: fixed;
+            bottom: 16px; left: 16px;
+            background: rgba(0,0,0,0.7);
+            color: #4ade80;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .blink-dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: #4ade80;
+            animation: blink 1.5s infinite;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+        .footer-note {
+            text-align: center;
+            padding: 6px;
+            font-size: 10px;
+            color: #64748b;
+            background: var(--gray-50);
+        }
+        /* Language Switcher on VDR */
+        .vdr-lang-switch {
+            display: inline-flex;
+            gap: 6px;
+            margin-left: 16px; margin-right: 12px;
+        }
+        .vdr-lang-btn {
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: none;
+            background: transparent;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            color: rgba(255,255,255,0.6);
+            transition: 0.2s;
+            font-family: 'Cairo', sans-serif;
+        }
+        .vdr-lang-btn.active {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+        .vdr-lang-btn:hover:not(.active) {
+            background: rgba(255,255,255,0.1);
+        }
+    </style>
+</head>
+<body oncontextmenu="return false;" onkeydown="return disableKeys(event);" ondragstart="return false;" oncopy="return false;" oncut="return false;">
+
+    <div class="vdr-topbar">
+        <div class="vdr-logo">
+            <span class="vdr-lock-icon">🔒</span>
+            <span data-translate="vdr_title">غرفة البيانات الافتراضية | ورثك فاليد</span>
+        </div>
+        <div class="session-info">
+            <div class="vdr-lang-switch">
+                <button class="vdr-lang-btn active" data-lang="ar" data-lang-switch onclick="changeLanguage('ar')">🇩🇿 عربي</button>
+                <button class="vdr-lang-btn" data-lang="fr" data-lang-switch onclick="changeLanguage('fr')">🇫🇷 FR</button>
+                <button class="vdr-lang-btn" data-lang="en" data-lang-switch onclick="changeLanguage('en')">🇬🇧 EN</button>
+            </div>
+            <span class="watermark-badge">👤 ليلى بن عمار · مستثمرة</span>
+            <span class="watermark-badge">📄 فيلا الأبيار - PROP-042</span>
+            <span class="session-timer" id="sessionTimer">⏱️ 00:00</span>
+            <a href="property-detail.html" class="btn-exit" data-translate="vdr_exit">🚪 خروج</a>
+        </div>
+    </div>
+
+    <div class="vdr-container">
+        <div class="document-sidebar">
+            <div class="sidebar-header" data-translate="vdr_sidebar_title">📁 مستندات العقار</div>
+            <div class="doc-list" id="docList"></div>
+            <div class="footer-note" data-translate="vdr_audit_warning">⚠️ كل مشاهدة مسجلة في سجل التدقيق</div>
+        </div>
+
+        <div class="document-viewer" id="documentViewer">
+            <div class="viewer-area" id="viewerArea">
+                <div class="watermark-overlay" id="watermarkOverlay">
+                    ليلى بن عمار · 17-05-2026 · VDR-042<br>
+                    <span data-translate="vdr_confidential">سري - Confidential</span>
+                </div>
+                <div class="document-content" id="documentContent">
+                    <div class="viewer-placeholder">
+                        <div class="icon">📂</div>
+                        <p style="color:#a0aec0;" data-translate="vdr_select_doc">اختر مستنداً من القائمة للبدء</p>
+                        <p style="font-size:12px; color:#64748b;" data-translate="vdr_watermark">جميع المستندات محمية بتقنية العلامة المائية</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="audit-indicator" id="auditIndicator">
+        <span class="blink-dot"></span>
+        <span data-translate="vdr_auto_log">جاري تسجيل المشاهدة تلقائياً كل 30 ثانية</span>
+    </div>
+
+    <script src="js/translations.js"></script>
+<script src="js/i18n.js"></script>
+<script>
+        (function() {
+            window.disableKeys = function(e) {
+                if (e.ctrlKey && (e.key === 's' || e.key === 'S' || e.key === 'p' || e.key === 'P' ||
+                    e.key === 'u' || e.key === 'U' || e.key === 'c' || e.key === 'C')) {
+                    e.preventDefault(); return false;
+                }
+                if (e.key === 'F12') { e.preventDefault(); return false; }
+                if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j')) {
+                    e.preventDefault(); return false;
+                }
+                return true;
+            };
+
+            const documents = [
+                { id: 1, name: 'عقد الملكية', i18nKey: 'doc_ownership', type: 'pdf', size: '2.4 MB', pages: 12, viewed: true, icon: '📜' },
+                { id: 2, name: 'رخصة البناء', i18nKey: 'doc_building_permit', type: 'pdf', size: '1.1 MB', pages: 3, viewed: false, icon: '📋' },
+                { id: 3, name: 'تقرير الخبير العقاري', i18nKey: 'doc_expert_report', type: 'pdf', size: '4.8 MB', pages: 28, viewed: false, icon: '📊' },
+                { id: 4, name: 'شهادة الحيازة', i18nKey: 'doc_possession_cert', type: 'pdf', size: '0.9 MB', pages: 2, viewed: true, icon: '✅' },
+                { id: 5, name: 'مخططات هندسية', i18nKey: 'doc_floor_plans', type: 'dwg', size: '8.2 MB', pages: 5, viewed: false, icon: '📐' },
+                { id: 6, name: 'تقرير المساحة', i18nKey: 'doc_survey_report', type: 'pdf', size: '3.1 MB', pages: 8, viewed: false, icon: '📏' }
+            ];
+
+            const docListEl = document.getElementById('docList');
+            documents.forEach(doc => {
+                const div = document.createElement('div');
+                div.className = 'doc-item' + (doc.id === 1 ? ' active' : '');
+                div.dataset.docId = doc.id;
+                div.innerHTML = `
+                    <span class="doc-icon">${doc.icon}</span>
+                    <div class="doc-info">
+                        <div class="doc-name" data-translate="${doc.i18nKey}">${doc.name}</div>
+                        <div class="doc-meta">${doc.type.toUpperCase()} · ${doc.size} · ${doc.pages} صفحات</div>
+                    </div>
+                    <span class="doc-status ${doc.viewed ? 'doc-viewed' : 'doc-new'}" data-translate="${doc.viewed ? 'completed' : 'active'}">${doc.viewed ? 'تمت مشاهدته' : 'جديد'}</span>
+                `;
+                div.addEventListener('click', () => openDocument(doc, div));
+                docListEl.appendChild(div);
+            });
+
+            const documentContent = document.getElementById('documentContent');
+            const watermarkOverlay = document.getElementById('watermarkOverlay');
+            let currentDoc = null;
+            let viewLogInterval = null;
+            let sessionSeconds = 0;
+            let auditLogsSent = 0;
+
+            const sessionTimer = document.getElementById('sessionTimer');
+            setInterval(() => {
+                sessionSeconds++;
+                const mins = Math.floor(sessionSeconds / 60);
+                const secs = sessionSeconds % 60;
+                sessionTimer.textContent = `⏱️ ${String(mins).padStart(2,'0')}:${String(secs).padStart(2,'0')}`;
+            }, 1000);
+
+            function openDocument(doc, element) {
+                document.querySelectorAll('.doc-item').forEach(el => el.classList.remove('active'));
+                element.classList.add('active');
+                currentDoc = doc;
+                doc.viewed = true;
+                const statusEl = element.querySelector('.doc-status');
+                statusEl.textContent = 'تمت مشاهدته';
+                statusEl.setAttribute('data-translate', 'completed');
+                statusEl.className = 'doc-status doc-viewed';
+
+                documentContent.innerHTML = `
+                    <h2>📄 ${doc.name}</h2>
+                    <p><strong>نوع الملف:</strong> ${doc.type.toUpperCase()}</p>
+                    <p><strong>الحجم:</strong> ${doc.size}</p>
+                    <p><strong>عدد الصفحات:</strong> ${doc.pages}</p>
+                    <hr style="margin:16px 0; border-color:#e2e8f0;">
+                    <p>هذا المحتوى محمي بموجب اتفاقية السرية (NDA) الموقعة بين المستثمرة ليلى بن عمار ووكالة "دار العقار".</p>
+                    <p>يمنع نسخ أو توزيع أو إعادة إنتاج أي جزء من هذا المستند دون إذن كتابي مسبق.</p>
+                    <p style="margin-top:16px;"><em>— محتوى المستند معروض بشكل آمن داخل غرفة البيانات الافتراضية —</em></p>
+                    <p style="margin-top:12px; font-size:13px; color:#64748b;">رقم الجلسة: VDR-SESS-${Date.now().toString(36).toUpperCase()}</p>
+                `;
+
+                watermarkOverlay.innerHTML = `
+                    ليلى بن عممار · ${new Date().toLocaleDateString('ar-DZ')} · VDR-042<br>
+                    ${doc.name} · <span data-translate="vdr_confidential">سري - Confidential</span>
+                `;
+
+                logView(doc);
+                if (viewLogInterval) clearInterval(viewLogInterval);
+                viewLogInterval = setInterval(() => {
+                    if (currentDoc) logView(currentDoc);
+                }, 30000);
+            }
+
+            function logView(doc) {
+                auditLogsSent++;
+                console.log('📝 سجل تدقيق:', {
+                    user: 'ليلى بن عمار', user_id: 'investor-003', action: 'vdr_view',
+                    entity_type: 'property_document', entity_id: `PROP-042-DOC-${doc.id}`,
+                    document_name: doc.name, property_id: 'PROP-042',
+                    timestamp: new Date().toISOString()
+                });
+                document.getElementById('auditIndicator').innerHTML =
+                    `<span class="blink-dot"></span> آخر تسجيل: ${new Date().toLocaleTimeString('ar-DZ')} (${auditLogsSent})`;
+            }
+
+            logView({ id: 0, name: 'دخول الغرفة' });
+
+            window.addEventListener('beforeunload', function(e) {
+                if (currentDoc) { e.preventDefault(); e.returnValue = ''; }
+            });
+
+            window.addEventListener('languageChanged', function(e) {
+                // Re-render currently open document content
+                if (currentDoc) {
+                    documentContent.innerHTML = `
+                        <h2>📄 ${currentDoc.name}</h2>
+                        <p><strong>${t('doc_file_type', 'نوع الملف')}:</strong> ${currentDoc.type.toUpperCase()}</p>
+                        <p><strong>${t('doc_file_size', 'الحجم')}:</strong> ${currentDoc.size}</p>
+                        <p><strong>${t('doc_page_count', 'عدد الصفحات')}:</strong> ${currentDoc.pages}</p>
+                        <hr style="margin:16px 0; border-color:#e2e8f0;">
+                        <p>${t('vdr_nda_protection_notice', 'هذا المحتوى محمي بموجب اتفاقية السرية (NDA) الموقعة بين المستثمرة ليلى بن عمار ووكالة "دار العقار".')}</p>
+                        <p>${t('vdr_no_copy_notice', 'يمنع نسخ أو توزيع أو إعادة إنتاج أي جزء من هذا المستند دون إذن كتابي مسبق.')}</p>
+                        <p style="margin-top:16px;"><em>— ${t('vdr_secure_display_notice', 'محتوى المستند معروض بشكل آمن داخل غرفة البيانات الافتراضية')} —</em></p>
+                        <p style="margin-top:12px; font-size:13px; color:#64748b;">${t('vdr_session_id', 'رقم الجلسة')}: VDR-SESS-${Date.now().toString(36).toUpperCase()}</p>
+                    `;
+                    watermarkOverlay.innerHTML = `
+                        ليلى بن عممار · ${new Date().toLocaleDateString('ar-DZ')} · VDR-042<br>
+                        ${currentDoc.name} · <span data-translate="vdr_confidential">${t('vdr_confidential', 'سري - Confidential')}</span>
+                    `;
+                }
+                // Re-render audit indicator
+                document.getElementById('auditIndicator').innerHTML =
+                    '<span class="blink-dot"></span> ' + t('vdr_last_log', 'آخر تسجيل') + ': ' + new Date().toLocaleTimeString('ar-DZ') + ' (' + auditLogsSent + ')';
+                applyLanguage(getCurrentLanguage());
+            });
+        })();
+    </script>
+</body>
+</html>

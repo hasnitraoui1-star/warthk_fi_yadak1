@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الموافقة على المحامين | ورثك فاليد - الحل السريع</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green-dark: #006633;
+            --green-light: #00A859;
+            --green-bg: #e6f5ee;
+            --red: #D21034;
+            --red-light: #fde8ec;
+            --white: #FFFFFF;
+            --off-white: #F8F9FA;
+            --gray-50: #F7F8FA;
+            --gray-100: #F0F2F5;
+            --gray-200: #E4E7EB;
+            --gray-300: #CBD2D9;
+            --gray-400: #9BA5B2;
+            --gray-500: #7B8794;
+            --gray-700: #3E4C59;
+            --gray-900: #1F2933;
+            --admin-accent: #2c3e50;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.06);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.1), 0 4px 10px rgba(0,0,0,0.05);
+            --radius: 12px;
+            --radius-lg: 16px;
+            --transition: 0.2s ease;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #f0f5f2 0%, #eaf5ee 100%);
+            min-height: 100vh;
+            color: var(--gray-900);
+            line-height: 1.6;
+        }
+
+        .top-nav {
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+            padding: 0 24px;
+            height: 64px;
+            display: flex; align-items: center; justify-content: space-between;
+            box-shadow: var(--shadow-sm); position: sticky; top: 0; z-index: 100;
+        }
+        .logo-area { display: flex; align-items: center; gap: 10px; }
+        .logo-icon {
+            width: 36px; height: 36px; background: var(--green-dark); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 18px;
+        }
+        .logo-text-nav { font-weight: 800; font-size: 18px; color: var(--green-dark); }
+        .admin-badge {
+            background: var(--admin-accent); color: white; padding: 4px 12px; border-radius: 20px;
+            font-size: 13px; font-weight: 600; margin-right: 10px;
+        }
+        .user-area { display: flex; align-items: center; gap: 16px; }
+        .back-link { color: var(--green-dark); text-decoration: none; font-weight: 600; font-size: 14px; cursor: pointer; }
+        .back-link:hover { text-decoration: underline; }
+
+        .main-container { max-width: 1100px; margin: 0 auto; padding: 24px; }
+        .page-header { margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        .greeting { font-size: 26px; font-weight: 800; color: var(--gray-900); }
+        .text-muted { color: var(--gray-500); font-size: 13px; }
+
+        .tabs {
+            display: flex; gap: 0; background: var(--white); border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm); overflow: hidden; margin-bottom: 24px;
+        }
+        .tab {
+            flex: 1; padding: 14px 20px; text-align: center; font-weight: 700; font-size: 15px;
+            cursor: pointer; transition: all var(--transition); background: var(--gray-50);
+            border-bottom: 3px solid transparent; color: var(--gray-700);
+        }
+        .tab.active { background: white; color: var(--green-dark); border-bottom-color: var(--green-dark); }
+        .tab:hover:not(.active) { background: var(--gray-100); }
+        .panel { display: none; }
+        .panel.active { display: block; }
+
+        .card {
+            background: var(--white); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm);
+            overflow: hidden; margin-bottom: 24px;
+        }
+        .card-header {
+            padding: 16px 20px; border-bottom: 1px solid var(--gray-100);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .card-title { font-weight: 700; font-size: 18px; color: var(--gray-900); }
+        .card-body { padding: 20px; }
+
+        .lawyer-item {
+            padding: 16px 0; border-bottom: 1px solid var(--gray-100);
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 12px;
+        }
+        .lawyer-item:last-child { border-bottom: none; }
+        .lawyer-info { flex: 1; }
+        .lawyer-name { font-weight: 700; font-size: 16px; color: var(--gray-900); margin-bottom: 4px; }
+        .lawyer-meta { font-size: 13px; color: var(--gray-500); display: flex; flex-wrap: wrap; gap: 12px; }
+        .lawyer-actions { display: flex; gap: 8px; }
+
+        .badge-status {
+            display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600;
+        }
+        .status-pending { background: #fff8e1; color: #f57f17; }
+        .status-approved { background: var(--green-bg); color: var(--green-dark); }
+        .status-rejected { background: var(--red-light); color: var(--red); }
+
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 10px 18px; border-radius: var(--radius); font-weight: 700;
+            font-family: 'Cairo', sans-serif; font-size: 14px; cursor: pointer; border: none;
+            transition: all var(--transition); text-decoration: none; color: white;
+            box-shadow: var(--shadow-sm); gap: 6px;
+        }
+        .btn-sm { padding: 6px 14px; font-size: 13px; }
+        .btn-primary { background: var(--green-dark); }
+        .btn-primary:hover { background: #005a2b; }
+        .btn-outline {
+            background: transparent; border: 1.5px solid var(--green-dark); color: var(--green-dark); box-shadow: none;
+        }
+        .btn-outline:hover { background: rgba(0,102,51,0.05); }
+        .btn-danger { background: var(--red); color: white; }
+        .btn-danger:hover { background: #b00e2b; }
+
+        .modal-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); z-index: 300; align-items: center; justify-content: center;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal {
+            background: white; border-radius: var(--radius-lg); width: 90%; max-width: 550px;
+            box-shadow: var(--shadow-lg); padding: 24px; max-height: 80vh; overflow-y: auto;
+        }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+        .modal-title { font-weight: 800; font-size: 20px; }
+        .close-btn { background: none; border: none; font-size: 24px; cursor: pointer; color: var(--gray-500); }
+        .detail-row { margin-bottom: 10px; }
+        .detail-row strong { color: var(--gray-700); margin-left: 8px; }
+
+        .empty-state { text-align: center; padding: 40px; color: var(--gray-400); }
+        .empty-state .icon { font-size: 48px; margin-bottom: 16px; }
+
+        .footer { text-align: center; padding: 16px; font-size: 12px; color: var(--gray-400); border-top: 1px solid var(--gray-200); margin-top: 24px; }
+    
+        /* Language Switcher */
+        .lang-switch {
+            display: flex;
+            gap: 6px;
+            margin-left: 16px;
+        }
+        .lang-btn {
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: none;
+            background: transparent;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            color: var(--gray-700);
+            transition: 0.2s;
+            font-family: 'Cairo', sans-serif;
+        }
+        .lang-btn.active {
+            background: var(--green-dark);
+            color: white;
+            box-shadow: 0 2px 6px rgba(0,102,51,0.2);
+        }
+    </style>
+</head>
+<body>
+    <nav class="top-nav">
+        <div class="logo-area">
+            <div class="logo-icon">و</div>
+            <span class="logo-text-nav" data-translate="brand">ورثك فاليد</span>
+            <span class="admin-badge" data-translate="nav_admin">🛡️ مدير النظام</span>
+        </div>
+        <div class="user-area">
+            <div class="lang-switch">
+                <button class="lang-btn active" data-lang="ar" data-lang-switch onclick="changeLanguage('ar')">🇩🇿 العربية</button>
+                <button class="lang-btn" data-lang="fr" data-lang-switch onclick="changeLanguage('fr')">🇫🇷 Français</button>
+                <button class="lang-btn" data-lang="en" data-lang-switch onclick="changeLanguage('en')">🇬🇧 English</button>
+            </div>
+            <a href="manager-dashboard.html" class="back-link" data-translate="back_to_dashboard">↩ لوحة التحكم</a>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="page-header">
+            <div>
+                <h1 class="greeting" data-translate="lawyer_approval_title">الموافقة على المحامين</h1>
+                <p class="text-muted" data-translate="lawyer_approval_subtitle">مراجعة طلبات تسجيل المحامين الجدد والموافقة عليها أو رفضها.</p>
+            </div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs">
+            <div class="tab active" data-tab="pending" data-translate="lawyer_pending">⏳ طلبات معلقة (3)</div>
+            <div class="tab" data-tab="approved" data-translate="lawyer_approved_tab">✅ محامون معتمدون (2)</div>
+        </div>
+
+        <!-- Pending Panel -->
+        <div id="pending-panel" class="panel active">
+            <div class="card">
+                <div class="card-header"><span class="card-title">📋 طلبات قيد المراجعة</span></div>
+                <div class="card-body" id="pendingList"></div>
+            </div>
+        </div>
+
+        <!-- Approved Panel -->
+        <div id="approved-panel" class="panel">
+            <div class="card">
+                <div class="card-header"><span class="card-title">✅ المحامون المعتمدون</span></div>
+                <div class="card-body" id="approvedList"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Details Modal -->
+    <div class="modal-overlay" id="detailsModal">
+        <div class="modal">
+            <div class="modal-header">
+                <span class="modal-title" data-translate="lawyer_detail">تفاصيل المحامي</span>
+                <button class="close-btn" id="closeDetailsModal">&times;</button>
+            </div>
+            <div id="detailsContent"></div>
+        </div>
+    </div>
+
+    <div class="footer" data-translate="footer">
+        ©2026 ورثك فاليد - الحل السريع. جميع الحقوق محفوظة. الجزائر.
+    </div>
+
+    <script src="js/translations.js"></script>
+<script src="js/i18n.js"></script>
+<script>
+        (function() {
+            const pendingLawyers = [
+                { id:1, name:'الأستاذ عبد الحق زرقين', email:'abdelhak@law.dz', wilaya:'الجزائر العاصمة', registry:'رقم 00123', phone:'05 50 11 22 33', date:'2026-05-10', docs:'شهادة محاماة، بطاقة نقابة' },
+                { id:2, name:'الأستاذة فتيحة لعموري', email:'fatiha@law.dz', wilaya:'البليدة', registry:'رقم 00456', phone:'06 60 44 55 66', date:'2026-05-12', docs:'شهادة محاماة، رقم شهادة المحاماة' },
+                { id:3, name:'الأستاذ محمد أمين بوشامة', email:'amine@law.dz', wilaya:'قسنطينة', registry:'رقم 00789', phone:'07 70 77 88 99', date:'2026-05-15', docs:'شهادة محاماة، بطاقة مهنية' }
+            ];
+
+            const approvedLawyers = [
+                { id:4, name:'الأستاذ كمال بومدين', email:'kamel@law.dz', wilaya:'وهران', registry:'رقم 00001', date:'2026-02-14' },
+                { id:5, name:'الأستاذة نادية شريفي', email:'nadia@law.dz', wilaya:'سطيف', registry:'رقم 00002', date:'2026-03-01' }
+            ];
+
+            function renderPending() {
+                const container = document.getElementById('pendingList');
+                if (pendingLawyers.length === 0) {
+                    container.innerHTML = '<div class="empty-state"><div class="icon">✅</div><p data-translate="lawyer_pending_empty">لا توجد طلبات معلقة حالياً.</p></div>';
+                    return;
+                }
+                container.innerHTML = pendingLawyers.map(l => `
+                    <div class="lawyer-item" data-id="${l.id}">
+                        <div class="lawyer-info">
+                            <div class="lawyer-name">⚖️ ${l.name}</div>
+                            <div class="lawyer-meta">
+                                <span>📍 ${l.wilaya}</span>
+                                <span>📧 ${l.email}</span>
+                                <span>📞 ${l.phone}</span>
+                                <span>📅 ${l.date}</span>
+                                <span>📄 ${l.registry}</span>
+                            </div>
+                        </div>
+                        <div class="lawyer-actions">
+                            <button class="btn btn-sm btn-primary approve-btn" data-id="${l.id}" data-translate="accept">✅ قبول</button>
+                            <button class="btn btn-sm btn-outline details-btn" data-id="${l.id}" data-translate="details">🔍 تفاصيل</button>
+                            <button class="btn btn-sm btn-danger reject-btn" data-id="${l.id}" data-translate="reject">❌ رفض</button>
+                        </div>
+                    </div>
+                `).join('');
+                attachPendingEvents();
+            }
+
+            function renderApproved() {
+                const container = document.getElementById('approvedList');
+                if (approvedLawyers.length === 0) {
+                    container.innerHTML = '<div class="empty-state"><div class="icon">⚖️</div><p data-translate="lawyer_approved_empty">لا يوجد محامون معتمدون بعد.</p></div>';
+                    return;
+                }
+                container.innerHTML = approvedLawyers.map(l => `
+                    <div class="lawyer-item">
+                        <div class="lawyer-info">
+                            <div class="lawyer-name">⚖️ ${l.name}</div>
+                            <div class="lawyer-meta">
+                                <span>📍 ${l.wilaya}</span>
+                                <span>📧 ${l.email}</span>
+                                <span>📅 ${l.date}</span>
+                                <span>📄 ${l.registry}</span>
+                            </div>
+                        </div>
+                        <span class="badge-status status-approved">✅ معتمد</span>
+                    </div>
+                `).join('');
+            }
+
+            function attachPendingEvents() {
+                document.querySelectorAll('.approve-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.id);
+                        const index = pendingLawyers.findIndex(l => l.id === id);
+                        if (index > -1 && confirm(t('confirm_accept_lawyer'))) {
+                            const lawyer = pendingLawyers.splice(index, 1)[0];
+                            approvedLawyers.push(lawyer);
+                            renderPending();
+                            renderApproved();
+                            updateTabCounts();
+                        }
+                    });
+                });
+                document.querySelectorAll('.reject-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.id);
+                        const index = pendingLawyers.findIndex(l => l.id === id);
+                        if (index > -1 && confirm(t('confirm_reject_lawyer'))) {
+                            pendingLawyers.splice(index, 1);
+                            renderPending();
+                            updateTabCounts();
+                        }
+                    });
+                });
+                document.querySelectorAll('.details-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const id = parseInt(this.dataset.id);
+                        const lawyer = pendingLawyers.find(l => l.id === id);
+                        if (lawyer) openDetailsModal(lawyer);
+                    });
+                });
+            }
+
+            function openDetailsModal(lawyer) {
+                document.getElementById('detailsContent').innerHTML = `
+                    <div class="detail-row"><strong>الاسم:</strong> ${lawyer.name}</div>
+                    <div class="detail-row"><strong>البريد الإلكتروني:</strong> ${lawyer.email}</div>
+                    <div class="detail-row"><strong>الهاتف:</strong> ${lawyer.phone}</div>
+                    <div class="detail-row"><strong>الولاية:</strong> ${lawyer.wilaya}</div>
+                    <div class="detail-row"><strong data-translate="lawyer_cert_number">رقم شهادة المحاماة:</strong> ${lawyer.registry}</div>
+                    <div class="detail-row"><strong>تاريخ التسجيل:</strong> ${lawyer.date}</div>
+                    <div class="detail-row"><strong>الوثائق:</strong> ${lawyer.docs}</div>
+                `;
+                document.getElementById('detailsModal').classList.add('active');
+            }
+
+            function updateTabCounts() {
+                document.querySelector('.tab[data-tab="pending"]').textContent = `⏳ ${typeof __t === 'function' ? __t('lawyer_pending').replace(/ \(\d+\)/, '') : 'طلبات معلقة'} (${pendingLawyers.length})`;
+                document.querySelector('.tab[data-tab="approved"]').textContent = `✅ ${typeof __t === 'function' ? __t('lawyer_approved_tab').replace(/ \(\d+\)/, '') : 'محامون معتمدون'} (${approvedLawyers.length})`;
+            }
+
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+                    const target = this.dataset.tab === 'pending' ? 'pending-panel' : 'approved-panel';
+                    document.getElementById(target).classList.add('active');
+                });
+            });
+
+            document.getElementById('closeDetailsModal').addEventListener('click', () => {
+                document.getElementById('detailsModal').classList.remove('active');
+            });
+            window.addEventListener('click', (e) => {
+                if (e.target === document.getElementById('detailsModal')) {
+                    document.getElementById('detailsModal').classList.remove('active');
+                }
+            });
+
+            renderPending();
+            renderApproved();
+            updateTabCounts();
+        
+
+            // Re-render dynamic content on language change
+            window.addEventListener('languageChanged', function(e) {
+            renderPending();
+            renderApproved();
+            updateTabCounts();
+            });
+        })();
+    </script>
+        </body>
+</html>

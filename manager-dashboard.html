@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم - مدير | ورثك فاليد - الحل السريع</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --green-dark: #006633;
+            --green-light: #00A859;
+            --green-bg: #e6f5ee;
+            --red: #D21034;
+            --red-light: #fde8ec;
+            --white: #FFFFFF;
+            --off-white: #F8F9FA;
+            --gray-50: #F7F8FA;
+            --gray-100: #F0F2F5;
+            --gray-200: #E4E7EB;
+            --gray-300: #CBD2D9;
+            --gray-400: #9BA5B2;
+            --gray-500: #7B8794;
+            --gray-700: #3E4C59;
+            --gray-900: #1F2933;
+            --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1), 0 4px 10px rgba(0, 0, 0, 0.05);
+            --radius-sm: 8px;
+            --radius: 12px;
+            --radius-lg: 16px;
+            --transition: 0.2s ease;
+            --admin-accent: #2c3e50;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #f0f5f2 0%, #eaf5ee 100%);
+            min-height: 100vh;
+            color: var(--gray-900);
+            line-height: 1.6;
+        }
+
+        /* Top Navigation */
+        .top-nav {
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+            padding: 0 24px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: var(--shadow-xs);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--green-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 800;
+            font-size: 18px;
+        }
+
+        .logo-text-nav {
+            font-weight: 800;
+            font-size: 18px;
+            color: var(--green-dark);
+            letter-spacing: 0.5px;
+        }
+
+        .admin-badge {
+            display: inline-flex;
+            align-items: center;
+            background: var(--admin-accent);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+
+        .user-area {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .notification-bell {
+            position: relative;
+            cursor: pointer;
+            font-size: 22px;
+            color: var(--gray-700);
+            transition: color var(--transition);
+        }
+
+        .notification-bell:hover {
+            color: var(--green-dark);
+        }
+
+        .badge {
+            position: absolute;
+            top: -6px;
+            right: -8px;
+            background: var(--red);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 10px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .user-dropdown {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 6px 10px;
+            border-radius: var(--radius);
+            transition: background var(--transition);
+            background: var(--gray-50);
+        }
+
+        .user-dropdown:hover {
+            background: var(--gray-100);
+        }
+
+        .user-avatar {
+            width: 34px;
+            height: 34px;
+            background: var(--admin-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .user-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-name {
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--gray-900);
+            line-height: 1.2;
+        }
+
+        .user-role {
+            font-size: 11px;
+            color: #fff;
+            background: var(--admin-accent);
+            padding: 1px 8px;
+            border-radius: 20px;
+            display: inline-block;
+            width: fit-content;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 60px;
+            left: 24px;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-lg);
+            width: 220px;
+            z-index: 200;
+            overflow: hidden;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 16px;
+            color: var(--gray-700);
+            text-decoration: none;
+            font-weight: 500;
+            transition: background var(--transition);
+            font-size: 14px;
+        }
+
+        .dropdown-menu a:hover {
+            background: var(--gray-100);
+            color: var(--green-dark);
+        }
+
+        .dropdown-menu a.logout {
+            color: var(--red);
+            border-top: 1px solid var(--gray-200);
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        .page-header {
+            margin-bottom: 24px;
+        }
+
+        .greeting {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--gray-900);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+            margin-bottom: 28px;
+        }
+
+        .stat-card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: transform var(--transition), box-shadow var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .icon-blue {
+            background: #e0f0ff;
+            color: #007bff;
+        }
+
+        .icon-green {
+            background: var(--green-bg);
+            color: var(--green-dark);
+        }
+
+        .icon-orange {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+
+        .icon-red {
+            background: var(--red-light);
+            color: var(--red);
+        }
+
+        .icon-purple {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+
+        .stat-info h3 {
+            font-size: 14px;
+            color: var(--gray-500);
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--gray-900);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+
+        @media (max-width: 900px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            }
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+
+        .card-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--gray-100);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-title {
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--gray-900);
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .activity-item,
+        .approval-item {
+            padding: 14px 0;
+            border-bottom: 1px solid var(--gray-100);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .activity-item:last-child,
+        .approval-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-title {
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 4px;
+        }
+
+        .item-meta {
+            font-size: 12px;
+            color: var(--gray-500);
+        }
+
+        .badge-status {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-active {
+            background: var(--green-bg);
+            color: var(--green-dark);
+        }
+
+        .status-pending {
+            background: #fff8e1;
+            color: #f57f17];
+        }
+
+        .status-closed {
+            background: var(--gray-100);
+            color: var(--gray-500);
+        }
+
+        .dinar {
+            font-family: 'Cairo', sans-serif;
+            font-weight: 700;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 18px;
+            border-radius: var(--radius);
+            font-weight: 700;
+            font-family: 'Cairo', sans-serif;
+            font-size: 14px;
+            cursor: pointer;
+            border: none;
+            transition: all var(--transition);
+            text-decoration: none;
+            background: var(--green-dark);
+            color: white;
+            box-shadow: var(--shadow-sm);
+            gap: 6px;
+        }
+
+        .btn:hover {
+            background: #005a2b;
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1.5px solid var(--green-dark);
+            color: var(--green-dark);
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background: rgba(0, 102, 51, 0.05);
+        }
+
+        .btn-sm {
+            padding: 6px 14px;
+            font-size: 13px;
+        }
+
+        .btn-danger {
+            background: var(--red);
+        }
+
+        .btn-danger:hover {
+            background: #b00e2b;
+        }
+
+        .text-muted {
+            color: var(--gray-500);
+            font-size: 13px;
+        }
+
+        .link {
+            color: var(--green-dark);
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+        }
+
+        .quick-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 16px;
+            font-size: 12px;
+            color: var(--gray-400);
+            border-top: 1px solid var(--gray-200);
+            margin-top: 24px;
+        }
+
+        .approval-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        /* Language Switcher */
+        .lang-switch {
+            display: flex;
+            gap: 6px;
+            margin-left: 16px;
+        }
+
+        .lang-btn {
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: none;
+            background: transparent;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            color: var(--gray-700);
+            transition: 0.2s;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .lang-btn.active {
+            background: var(--green-dark);
+            color: white;
+            box-shadow: 0 2px 6px rgba(0, 102, 51, 0.2);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <div class="logo-area">
+            <div class="logo-icon">و</div>
+            <span class="logo-text-nav" data-translate="brand">ورثك فاليد</span>
+            <span class="admin-badge" data-translate="nav_admin">🛡️ مدير النظام</span>
+        </div>
+        <div class="user-area">
+            <div class="lang-switch">
+                <button class="lang-btn active" data-lang="ar" data-lang-switch onclick="changeLanguage('ar')">🇩🇿
+                    العربية</button>
+                <button class="lang-btn" data-lang="fr" data-lang-switch onclick="changeLanguage('fr')">🇫🇷
+                    Français</button>
+                <button class="lang-btn" data-lang="en" data-lang-switch onclick="changeLanguage('en')">🇬🇧
+                    English</button>
+            </div>
+            <div class="notification-bell" id="notificationBell">
+                🔔
+                <span class="badge" id="notifBadge">7</span>
+            </div>
+            <div class="user-dropdown" id="userDropdown">
+                <div class="user-avatar">ع</div>
+                <div class="user-info">
+                    <span class="user-name">عادل زعيم</span>
+                    <span class="user-role" data-translate="role_manager">مدير</span>
+                </div>
+                <span style="font-size:12px;">▼</span>
+            </div>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="#" data-translate="profile">الملف الشخصي</a>
+                <a href="user-management.html" data-translate="manager_users">إدارة المستخدمين</a>
+                <a href="audit-log.html" data-translate="manager_audit">سجل التدقيق</a>
+                <a href="#" class="logout" id="logoutBtn" data-translate="logout">تسجيل الخروج</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <div class="page-header">
+            <h1 class="greeting" data-translate="manager_greeting">السلام عليكم، عادل</h1>
+            <p class="text-muted" data-translate="manager_subtitle">نظرة شاملة على المنصة. اليوم 17 ماي 2026. أنت مدير
+                النظام.</p>
+        </div>
+
+        <!-- Stats Overview -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon icon-blue">👥</div>
+                <div class="stat-info">
+                    <h3 data-translate="manager_stat_users">إجمالي المستخدمين</h3>
+                    <div class="stat-number">1,284</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon icon-green">📋</div>
+                <div class="stat-info">
+                    <h3 data-translate="manager_stat_cases">قضايا مفتوحة</h3>
+                    <div class="stat-number">87</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon icon-orange">🏠</div>
+                <div class="stat-info">
+                    <h3 data-translate="manager_stat_properties">عقارات معروضة</h3>
+                    <div class="stat-number">153</div>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon icon-red">💰</div>
+                <div class="stat-info">
+                    <h3 data-translate="manager_stat_volume">حجم التداول</h3>
+                    <div class="stat-number dinar">98.5 مليون دج</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Left Column: Recent Activity & System Health -->
+            <div>
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title" data-translate="manager_recent_activity">📋 آخر النشاطات في المنصة</span>
+                        <a href="audit-log.html" class="link" data-translate="manager_audit_full">سجل التدقيق الكامل</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="activity-item">
+                            <div>
+                                <div class="item-title" data-translate="activity_new_lawyer">محامي جديد مسجل: الأستاذة فتيحة لعموري</div>
+                                <div class="item-meta" data-translate="activity_lawyer_meta">الجزائر العاصمة • بانتظار الموافقة</div>
+                            </div>
+                            <span class="badge-status status-pending" data-translate="status_new">جديد</span>
+                        </div>
+                        <div class="activity-item">
+                            <div>
+                                <div class="item-title" data-translate="activity_sale_villa">صفقة بيع فيلا الأبيار مكتملة</div>
+                                <div class="item-meta" data-translate="activity_sale_meta">المشتري: ليلى بن عمار • 15.5 مليون دج</div>
+                            </div>
+                            <span class="badge-status status-active" data-translate="status_completed">مكتملة</span>
+                        </div>
+                        <div class="activity-item">
+                            <div>
+                                <div class="item-title" data-translate="activity_new_heir">تسجيل وريث جديد: كريم مرزوق</div>
+                                <div class="item-meta" data-translate="activity_heir_meta">قسنطينة • فتح قضية جديدة</div>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div>
+                                <div class="item-title" data-translate="activity_crowdfund">مشروع تمويل جماعي "الخروب" وصل 80%</div>
+                                <div class="item-meta" data-translate="activity_crowdfund_meta">42 مستثمر • 6.4 مليون دج من 8 مليون</div>
+                            </div>
+                            <span class="badge-status status-active" data-translate="invest_active">نشط</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title" data-translate="manager_pending_approvals">⚠️ طلبات موافقة معلقة</span>
+                        <span class="badge-status status-pending" data-translate="pending_count">5 طلبات</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="approval-item">
+                            <div>
+                                <div class="item-title" data-translate="appr_lawyer_1">محامي: الأستاذ عبد الحق زرقين</div>
+                                <div class="item-meta" data-translate="appr_lawyer_1_meta">الجزائر العاصمة • سجل تجاري مرفوع</div>
+                            </div>
+                            <div class="approval-actions">
+                                <button class="btn btn-sm" data-translate="accept">قبول</button>
+                                <button class="btn btn-sm btn-outline" data-translate="reject">رفض</button>
+                            </div>
+                        </div>
+                        <div class="approval-item">
+                            <div>
+                                <div class="item-title" data-translate="appr_investor_1">مستثمر: سفيان بلقاسم</div>
+                                <div class="item-meta" data-translate="appr_investor_1_meta">وهران • مطلوب وثائق إضافية</div>
+                            </div>
+                            <div class="approval-actions">
+                                <button class="btn btn-sm" data-translate="accept">قبول</button>
+                                <button class="btn btn-sm btn-outline" data-translate="reject">رفض</button>
+                            </div>
+                        </div>
+                        <div class="approval-item">
+                            <div>
+                                <div class="item-title" data-translate="appr_agency_1">وكالة عقارية: "دار المستقبل"</div>
+                                <div class="item-meta" data-translate="appr_agency_1_meta">سطيف • في انتظار التدقيق</div>
+                            </div>
+                            <div class="approval-actions">
+                                <button class="btn btn-sm" data-translate="accept">قبول</button>
+                                <button class="btn btn-sm btn-outline" data-translate="reject">رفض</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Admin Actions & Quick Stats -->
+            <div>
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title" data-translate="manager_admin_actions">🛡️ إجراءات إدارية سريعة</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="quick-actions">
+                            <a href="user-management.html" class="btn" style="width:100%;"
+                                data-translate="manager_users">👥 إدارة المستخدمين</a>
+                            <a href="lawyer-approval.html" class="btn btn-outline" style="width:100%;"
+                                data-translate="manager_lawyer_approval">⚖️ الموافقة على المحامين</a>
+                            <a href="investor-approval.html" class="btn btn-outline" style="width:100%;"
+                                data-translate="manager_investor_approval">💼 الموافقة على المستثمرين</a>
+                            <a href="executive-reports.html" class="btn btn-outline" style="width:100%;"
+                                data-translate="manager_reports">📊 التقارير التنفيذية</a>
+                            <a href="revenue-management.html" class="btn btn-outline" style="width:100%;"
+                                data-translate="manager_revenue">💰 إدارة الإيرادات</a>
+                            <a href="audit-log.html" class="btn btn-outline" style="width:100%;"
+                                data-translate="manager_audit">📝 سجل التدقيق</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title" data-translate="manager_stats_wilaya">📊 إحصائيات سريعة حسب الولاية</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="activity-item">
+                            <div>
+                                <div class="item-title" data-translate="wilaya_algiers">الجزائر العاصمة</div>
+                                <div class="item-meta" data-translate="wilaya_algiers_meta">45 عقار • 23 قضية</div>
+                            </div>
+                            <span>42%</span>
+                        </div>
+                        <div class="activity-item">
+                            <div>
+                                <div class="item-title" data-translate="loc_oran">وهران</div>
+                                <div class="item-meta" data-translate="wilaya_oran_meta">30 عقار • 15 قضية</div>
+                            </div>
+                            <span>28%</span>
+                        </div>
+                        <div class="activity-item">
+                            <div>
+                                <div class="item-title" data-translate="wilaya_constantine">قسنطينة</div>
+                                <div class="item-meta" data-translate="wilaya_const_meta">22 عقار • 10 قضايا</div>
+                            </div>
+                            <span>18%</span>
+                        </div>
+                        <div class="activity-item">
+                            <div>
+                                <div class="item-title" data-translate="wilaya_others">ولايات أخرى</div>
+                                <div class="item-meta" data-translate="wilaya_others_meta">56 عقار • 39 قضية</div>
+                            </div>
+                            <span>12%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title" data-translate="manager_alerts">🔔 تنبيهات النظام</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="activity-item">
+                            <div>
+                                <div class="item-title" data-translate="alert_backup">نسخ احتياطي تلقائي</div>
+                                <div class="item-meta" data-translate="alert_success_3am">تم بنجاح الساعة 03:00</div>
+                            </div>
+                            <span class="badge-status status-active" data-translate="status_success">نجاح</span>
+                        </div>
+                        <div class="activity-item">
+                            <div>
+                                <div class="item-title" data-translate="alert_ssl">شهادة SSL</div>
+                                <div class="item-meta" data-translate="alert_exp_45days">تنتهي في 45 يوم</div>
+                            </div>
+                            <span class="badge-status status-pending" data-translate="status_alert">تنبيه</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer" data-translate="footer">
+        © 2025 ورثك فاليد - الحل السريع. جميع الحقوق محفوظة. الجزائر.
+    </div>
+
+    <script src="js/translations.js?v=4"></script>
+    <script src="js/i18n.js"></script>
+    <script>
+        (function () {
+            const userDropdown = document.getElementById('userDropdown');
+            const dropdownMenu = document.getElementById('dropdownMenu');
+            let dropdownOpen = false;
+
+            userDropdown.addEventListener('click', function (e) {
+                e.stopPropagation();
+                dropdownOpen = !dropdownOpen;
+                dropdownMenu.style.display = dropdownOpen ? 'block' : 'none';
+            });
+            document.addEventListener('click', function () {
+                dropdownOpen = false;
+                dropdownMenu.style.display = 'none';
+            });
+
+            document.getElementById('notificationBell').addEventListener('click', function () {
+                window.location.href = 'notifications.html';
+            });
+
+            document.getElementById('logoutBtn').addEventListener('click', function (e) {
+                e.preventDefault();
+                if (confirm(t('confirm_logout'))) {
+                    alert(t('msg_logout_success'));
+                    localStorage.clear();
+                    sessionStorage.clear();
+                    window.location.href = 'index.html';
+                }
+            });
+
+            // Approve/Reject actions simulation
+            document.querySelectorAll('.approval-actions .btn').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const item = this.closest('.approval-item');
+                    const isAccept = !this.classList.contains('btn-outline');
+                    if (confirm(isAccept ? t('confirm_accept_request') : t('confirm_reject_request'))) {
+                        item.remove();
+                        const badge = document.querySelector('.card-header .status-pending');
+                        if (badge) {
+                            let count = parseInt(badge.textContent);
+                            if (!isNaN(count) && count > 0) {
+                                badge.textContent = (count - 1) + ' طلبات';
+                            }
+                        }
+                        alert(isAccept ? "تم قبول الطلب" : "تم رفض الطلب");
+                    }
+                });
+            });
+
+            console.log('لوحة تحكم المدير - عادل زعيم جاهزة');
+        })();
+    </script>
+
+</body>
+
+</html>
